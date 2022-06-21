@@ -1,0 +1,136 @@
+<template>
+  <SectionContainer>
+    <SectionTitle>" {{ category.name }} "</SectionTitle>
+    <SectionBody>
+      <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
+        <BookCard
+          v-for="book in booksByCategory"
+          :key="book.id"
+          :book="book"
+        ></BookCard>
+      </Grid>
+    </SectionBody>
+  </SectionContainer>
+
+  <SectionContainer>
+    <SectionBody>
+      <!-- <div class="pagination">
+        <div
+          class="pagination__item pagination__item--navigation"
+          @click="currPage = currPage - 1"
+        >
+          <i class="bx bx-chevron-left"></i>
+        </div>
+        
+          <div
+            class="pagination__item"
+            v-for="(page, idx) in currPagination"
+            :key="idx"
+            :class="[currPage == idx + 1 ? 'pagination__item--active' : '']"
+            @click="currPage = page"
+          >
+            {{ page }}
+          </div>
+
+        <div
+          class="pagination__item pagination__item--navigation"
+          @click="currPage = currPage + 1"
+        >
+          <i class="bx bx-chevron-right"></i>
+        </div>
+      </div> -->
+      <Pagination
+        :pagination="currPagination"
+      >
+      </Pagination>
+    </SectionBody>
+  </SectionContainer>
+</template>
+
+<script>
+import { ref, watch } from "vue";
+import { useRoute, useRouter } from 'vue-router';
+
+import Grid from "../components/Grid.vue";
+import SectionContainer from "../components/SectionContainer.vue";
+import SectionTitle from "../components/SectionTitle.vue";
+import SectionBody from "../components/SectionBody.vue";
+import BookCard from "../components/BookCard.vue";
+import Pagination from "../components/Pagination.vue";
+
+import { getPagination, getBooksPerPage } from "../utils/pagination";
+import useBook from '@/composables/useBook';
+
+export default {
+  name: "CategoryView",
+  components: {
+    Grid,
+    SectionContainer,
+    SectionTitle,
+    SectionBody,
+    BookCard,
+    Pagination,
+  },
+  setup() {
+    const route = useRoute()
+    const { getBooksByCategoryId } = useBook()
+
+    const category = ref({})
+    const books = ref([]);
+    const booksByCategory = ref([]);
+
+    const totalPages = ref(0);
+    const pageSize = ref(24);
+    const currPage = ref(1);
+    const currPagination = ref([]);
+    
+
+    const fetchData = async () => {
+      const categoryResponse = await fetch(`http://localhost:3000/categories/${route.query.id}`)
+      category.value = await categoryResponse.json()
+
+      const booksResponse = await fetch('http://localhost:3000/books')
+      books.value = await booksResponse.json()
+
+      booksByCategory.value = getBooksByCategoryId(books.value, category.value.id)
+
+      totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value);
+      currPagination.value = getPagination(currPage.value, totalPages.value);
+
+      // books.value = getProductsPerPage(
+      //   data.value,
+      //   currPage.value,
+      //   pageSize.value
+      // );
+    };
+
+    watch(route, (to, from) => {
+      if(to.name == 'category') fetchData()
+    })
+    // watch(currPage, (n, o) => {
+    //   if (n == "...") currPage.value = currPage.value;
+    //   if (n > totalPages.value) currPage.value = totalPages.value;
+    //   if (n < 1) currPage.value = 1;
+
+    //   books.value = getProductsPerPage(
+    //     data.value,
+    //     currPage.value,
+    //     pageSize.value
+    //   );
+    // });
+
+    fetchData();
+
+    return {
+      route,
+      booksByCategory,
+      currPagination,
+      currPage,
+      category,
+    };
+  },
+};
+</script>
+
+<style>
+</style>

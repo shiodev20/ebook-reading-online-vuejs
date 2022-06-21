@@ -1,0 +1,38 @@
+$desktop-width: 1200px;
+$laptop-width: 992px;
+$tablet-width: 768px;
+$mobile-width: 576px;
+
+$main-bg: #fefefe;
+$primary-color: #3da174;
+$white-color: #fff;
+$gray-color: #808080;
+$dark-color: #333;
+
+$title-size: 2.5rem;
+$subtitle-size: 1.8rem;
+$text-size: 1.4rem;
+$icon-size: 3.5rem;
+$subicon-size: 2rem;
+$large-size: 4rem;
+
+$box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 15px 0px;
+$radius: 1rem;
+$transition: all 0.3s ease-in;
+$opacity: .7;
+
+$header-z-index: 30;
+$sidenav-z-index: 50;
+$modal-z-index: 40;
+
+$colors: (
+  "orange": #fbb96b,
+  "pink": #fe7e73,
+  "white": #fff,
+  "black": #000,
+  "primary": $primary-color,
+);
+
+$header-height: 8rem;
+
+$numbers: (0, 1, 2, 3, 4, 5, 6, 7, 8);

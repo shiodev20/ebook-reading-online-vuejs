@@ -1,0 +1,37 @@
+.pagination {
+  @include flex(center, center);
+  font-size: $text-size;
+  font-weight: bold;
+  color: $gray-color;
+
+  &__item {
+    margin: 0 .25rem;
+    padding: .5rem 1rem;
+    border: 1px solid $primary-color;
+    border-radius: $radius;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white-color;
+    }
+
+    &--active {
+      background-color: $primary-color;
+      color: $white-color;
+    }
+
+    &--navigation {
+      position: relative;
+      padding: 1.3rem;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: $subtitle-size;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}

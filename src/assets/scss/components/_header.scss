@@ -1,0 +1,40 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: $header-z-index;
+
+  .nav {
+    @include flex(space-between, center);
+    height: $header-height;
+
+    &__brand {
+      img {
+        height: 40px;
+      }
+    }
+
+    &__menu {
+      display: flex;
+
+      &__item {
+        color: $primary-color;
+        cursor: pointer;
+
+        i {
+          font-size: $icon-size;
+        }
+
+        &--search {
+          margin-right: 2.5rem;
+
+          @include mobile {
+            margin-right: 1rem;
+          }
+        }
+      }
+    }
+
+  }
+}

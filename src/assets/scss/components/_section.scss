@@ -1,0 +1,16 @@
+.section {
+  position: relative;
+  margin-bottom: 5rem;
+
+  &__title {
+    margin: 2rem 0;
+    font-size: $title-size;
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  &__body {
+    padding: 2rem 0;
+  }
+
+}

@@ -1,0 +1,49 @@
+.slider {
+  position: relative;
+  padding: 1rem 1rem 4rem 1rem !important;
+
+  &__navigation {
+    position: absolute;
+    top: 45%;
+    padding: 1.5rem .5rem;
+    border: 1px solid $primary-color;
+    border-radius: .5rem;
+    transition: $transition;
+    z-index: 10;
+    cursor: pointer;
+    transform: translateY(-45%);
+
+    i {
+      font-size: $icon-size;
+      font-weight: bold;
+    }
+
+    &--prev {
+      left: 0;
+    }
+    &--next {
+      right: 0;
+    }
+  }
+
+  &__more {
+    position: absolute;
+    bottom: .5rem;
+    right: 0rem;
+    padding-bottom: .2rem;
+    font-size: $text-size;
+    font-weight: bold;
+    color: $primary-color;
+    z-index: 15;
+  }
+
+  .swiper-pagination {
+    @include mobile {
+      text-align: left;
+    }
+
+    &-bullet-active {
+      background: $primary-color;
+    }
+  }
+}
