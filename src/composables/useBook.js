@@ -40,6 +40,20 @@ const getBooksByCategory = (categoryId) => {
   return data
 }
 
+const getRandomBooks = (size) => {
+  const data = []
+  const randomIdx= []
+
+  for(let i = 0; i < size; i++) {
+
+    let randomNumber = Math.floor(Math.random * size)
+
+  }
+
+
+  return 
+}
+
 export default () => {
   return {
     getBookCover,
@@ -49,5 +63,6 @@ export default () => {
     getCustomBookTitle,
     getBookById,
     getBooksByCategory,
+    getRandomBooks,
   }
 }

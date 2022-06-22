@@ -133,7 +133,7 @@ export default {
     Quote,
   },
   setup() {
-    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks } = useBook();
+    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks, getRandomBooks } = useBook();
 
     const latestBooks = ref([]);
     const mostDownloadBooks = ref([]);
@@ -143,6 +143,8 @@ export default {
       latestBooks.value = getLatestBooks(18);
       mostDownloadBooks.value = getMostDownloadBooks(18);
       mostViewBooks.value = getMostViewBooks(18);
+
+      console.log(getRandomBooks(12));
     }
     
     fetchData();

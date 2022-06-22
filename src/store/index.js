@@ -8,6 +8,7 @@ export default createStore({
   getters: {
   },
   mutations: {
+    resetToggle: (state) => state.isMobile = false,
     toggleMobile: (state) => state.isMobile = !state.isMobile,
     onWindowWidthChange: (state, innerWidth) => state.windowWidth = innerWidth
   },

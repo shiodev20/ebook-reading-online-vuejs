@@ -6,7 +6,7 @@
 
 <script>
 import { computed, onMounted, watch } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 export default {
@@ -14,20 +14,27 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
+    const router = useRouter();
+
 
     const layout = computed(() => route.meta.layout + "-layout");
-
-    store.commit('onWindowWidthChange', window.innerWidth)
-
     const windowWidth = computed(() => store.state.windowWidth);
 
-    onMounted(() => window.addEventListener("resize", () => {
-      store.commit('onWindowWidthChange', window.innerWidth)
-    }));
+    store.commit("onWindowWidthChange", window.innerWidth);
 
+    router.beforeEach((to, from) => {
+      store.commit("resetToggle");
+    });
+    
     watch(windowWidth, (n, o) => {
       if (n <= 992) store.state.isMobile = false;
     });
+
+    onMounted(() =>
+      window.addEventListener("resize", () => {
+        store.commit("onWindowWidthChange", window.innerWidth);
+      })
+    );
 
     return {
       layout,
