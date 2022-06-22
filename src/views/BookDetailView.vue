@@ -189,12 +189,12 @@ import { useRoute } from 'vue-router';
 
 import useBook from '@/composables/useBook';
 
-import Grid from "../components/Grid.vue";
-import SectionContainer from "../components/SectionContainer.vue";
-import SectionBody from "../components/SectionBody.vue";
-import SectionTitle from "../components/SectionTitle.vue";
-import ProductCard from "../components/BookCard.vue";
-import Slider from "../components/Slider.vue";
+import Grid from "@/components/Grid.vue";
+import SectionContainer from "@/components/SectionContainer.vue";
+import SectionBody from "@/components/SectionBody.vue";
+import SectionTitle from "@/components/SectionTitle.vue";
+import ProductCard from "@/components/BookCard.vue";
+import Slider from "@/components/Slider.vue";
 import { SwiperSlide } from "swiper/vue";
 
 
@@ -211,14 +211,13 @@ export default {
   },
   setup() {
     const route = useRoute()
-    const { getBookCover } = useBook()
+    const { getBookById, getBookCover } = useBook()
 
     const book = ref({})
     const bookCover = ref('')
 
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:3000/books/${route.query.id}`)
-      book.value = await response.json()
+    const fetchData = () => {
+      book.value = getBookById(route.query.id)
       bookCover.value = getBookCover(book.value.cover)
     }
 

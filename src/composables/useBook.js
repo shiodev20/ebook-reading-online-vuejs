@@ -1,50 +1,53 @@
+import books from '@/assets/data/books'
 
-function useBook() {
+const getBookCover = (bookCoverUrl) => require(`../assets/img/${bookCoverUrl}`)
 
-  const getBookCover = (bookCoverUrl) => require(`../assets/img/${bookCoverUrl}`)
+const getMostDownloadBooks = (size) => {
+  const data = books.sort((a, b) => {
+    return b.downloads - a.downloads
+  })
 
-  const getMostDownloadBooks = (books, size) => {
-    const data = books.sort((a, b) => {
-      return b.downloads - a.downloads
-    })
+  return data.slice(0, size)
+}
 
-    return data.slice(0, size)
-  }
+const getMostViewBooks = (size) => {
+  const data = books.sort((a, b) => {
+    return b.views - a.views
+  })
 
-  const getMostViewBooks = (books, size) => {
-    const data = books.sort((a, b) => {
-      return b.views - a.views
-    })
+  return data.slice(0, size)
+}
 
-    return data.slice(0, size)
-  }
+const getLatestBooks = (size) => {
+  const data = books.sort((a, b) => {
+    return Date.parse(b.uploadedAt) - Date.parse(a.uploadedAt)
+  })
 
-  const getLatestBooks = (books, size) => {
-    const data = books.sort((a, b) => {
-      return Date.parse(b.uploadedAt) - Date.parse(a.uploadedAt)
-    })
+  return data.slice(0, size)
+}
 
-    return data.slice(0, size)
-  }
+const getCustomBookTitle = (title) => {
+  if (title.length > 25) return title.substring(0, 25) + '...'
+  return title
+}
 
-  const getCustomBookTitle = (title) => {
-    if(title.length > 25) return title.substring(0, 25) + '...'
-    return title
-  }
+const getBookById = (bookId) => {
+  return books.find(book => book.id == bookId)
+}
 
-  const getBooksByCategoryId = (books, categoryId) => {
-    const data = books.filter(book => book.categoryId === categoryId)
-    return data
-  }
+const getBooksByCategory = (categoryId) => {
+  const data = books.filter(book => book.categoryId === categoryId)
+  return data
+}
 
+export default () => {
   return {
     getBookCover,
     getMostDownloadBooks,
     getMostViewBooks,
     getLatestBooks,
     getCustomBookTitle,
-    getBooksByCategoryId,
+    getBookById,
+    getBooksByCategory,
   }
 }
-
-export default useBook

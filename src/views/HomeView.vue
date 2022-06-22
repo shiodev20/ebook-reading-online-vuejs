@@ -109,16 +109,16 @@
 
 <script>
 import { ref } from "vue";
+import useBook from "@/composables/useBook";
 
 import { SwiperSlide } from "swiper/vue";
-import Grid from "../components/Grid.vue";
-import BookCard from "../components/BookCard.vue";
-import Slider from "../components/Slider.vue";
-import Quote from "../components/Quote.vue";
-import SectionContainer from "../components/SectionContainer.vue";
-import SectionTitle from "../components/SectionTitle.vue";
-import SectionBody from "../components/SectionBody.vue";
-import useBook from "@/composables/useBook";
+import Grid from "@/components/Grid.vue";
+import BookCard from "@/components/BookCard.vue";
+import Slider from "@/components/Slider.vue";
+import Quote from "@/components/Quote.vue";
+import SectionContainer from "@/components/SectionContainer.vue";
+import SectionTitle from "@/components/SectionTitle.vue";
+import SectionBody from "@/components/SectionBody.vue";
 
 export default {
   name: "HomeView",
@@ -139,17 +139,12 @@ export default {
     const mostDownloadBooks = ref([]);
     const mostViewBooks = ref([]);
 
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:3000/books");
-      const data = await response.json();
-
-      // console.log(Date.parse(data[3].uploadedAt) - Date.parse(data[0].uploadedAt));
-      latestBooks.value = getLatestBooks(data, 18);
-      mostDownloadBooks.value = getMostDownloadBooks(data, 18);
-      mostViewBooks.value = getMostViewBooks(data, 18);
-      
-    };
-
+    const fetchData = () => {
+      latestBooks.value = getLatestBooks(18);
+      mostDownloadBooks.value = getMostDownloadBooks(18);
+      mostViewBooks.value = getMostViewBooks(18);
+    }
+    
     fetchData();
 
     return {

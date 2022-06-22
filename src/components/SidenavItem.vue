@@ -3,7 +3,7 @@
     :to="{
       name: 'category',
       params: {
-        category: slugPath,
+        category: categorySlug,
       },
       query: {
         id: category.id
@@ -32,10 +32,10 @@ export default {
     category: Object,
   },
   setup(props) {
-    const slugPath = ref(slugify(props.category.name, { lower: true }))
+    const categorySlug = ref(slugify(props.category.name, { lower: true }))
 
     return {
-      slugPath,
+      categorySlug,
     }
   },
 };

@@ -28,6 +28,7 @@
 <script>
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import useCategory from "@/composables/useCategory"
 
 import SidenavItem from "./SidenavItem.vue";
 import Backdrop from './Backdrop.vue'
@@ -40,6 +41,7 @@ export default {
   },
   setup() {
     const store = useStore();
+    const { getCategories } = useCategory()
 
     const categories = ref([])
     
@@ -47,9 +49,8 @@ export default {
 
     const toggleMobile = () => store.commit("toggleMobile");
 
-    const initCategories = async () => {
-      const response = await fetch('http://localhost:3000/categories')
-      categories.value = await response.json()
+    const initCategories = () => {
+      categories.value = getCategories()
     }
 
     initCategories()

@@ -49,17 +49,19 @@
 
 <script>
 import { ref, watch } from "vue";
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
-import Grid from "../components/Grid.vue";
-import SectionContainer from "../components/SectionContainer.vue";
-import SectionTitle from "../components/SectionTitle.vue";
-import SectionBody from "../components/SectionBody.vue";
-import BookCard from "../components/BookCard.vue";
-import Pagination from "../components/Pagination.vue";
-
-import { getPagination, getBooksPerPage } from "../utils/pagination";
 import useBook from '@/composables/useBook';
+import useCategory from '@/composables/useCategory';
+
+import Grid from "@/components/Grid.vue";
+import SectionContainer from "@/components/SectionContainer.vue";
+import SectionTitle from "@/components/SectionTitle.vue";
+import SectionBody from "@/components/SectionBody.vue";
+import BookCard from "@/components/BookCard.vue";
+import Pagination from "@/components/Pagination.vue";
+
+import { getPagination, getBooksPerPage } from "@/utils/pagination";
 
 export default {
   name: "CategoryView",
@@ -73,7 +75,8 @@ export default {
   },
   setup() {
     const route = useRoute()
-    const { getBooksByCategoryId } = useBook()
+    const { getBooksByCategory } = useBook()
+    const { getCategoryById } = useCategory()
 
     const category = ref({})
     const books = ref([]);
@@ -85,14 +88,9 @@ export default {
     const currPagination = ref([]);
     
 
-    const fetchData = async () => {
-      const categoryResponse = await fetch(`http://localhost:3000/categories/${route.query.id}`)
-      category.value = await categoryResponse.json()
-
-      const booksResponse = await fetch('http://localhost:3000/books')
-      books.value = await booksResponse.json()
-
-      booksByCategory.value = getBooksByCategoryId(books.value, category.value.id)
+    const fetchData = () => {
+      category.value = getCategoryById(route.query.id)
+      booksByCategory.value = getBooksByCategory(category.value.id)
 
       totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value);
       currPagination.value = getPagination(currPage.value, totalPages.value);
@@ -107,17 +105,6 @@ export default {
     watch(route, (to, from) => {
       if(to.name == 'category') fetchData()
     })
-    // watch(currPage, (n, o) => {
-    //   if (n == "...") currPage.value = currPage.value;
-    //   if (n > totalPages.value) currPage.value = totalPages.value;
-    //   if (n < 1) currPage.value = 1;
-
-    //   books.value = getProductsPerPage(
-    //     data.value,
-    //     currPage.value,
-    //     pageSize.value
-    //   );
-    // });
 
     fetchData();
 
