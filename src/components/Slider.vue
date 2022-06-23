@@ -50,6 +50,10 @@ export default {
           spaceBetween: 20,
         },
       }
+    },
+    seeMore: {
+      type: Boolean,
+      default: true,
     }
   },
   setup(props, ctx) {

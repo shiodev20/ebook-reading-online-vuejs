@@ -49,6 +49,28 @@ img {
   background-color: #333;
   opacity: $opacity;
 }
+
+.loading {
+  @include flex(center, center);
+  width: 100%;
+  height: 50vh;
+
+  &__content {
+    border: 10px solid #f3f3f3;
+    border-top: 10px solid $primary-color;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    animation: loading 2s linear infinite;
+  }
+}
+
+@keyframes loading {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+
 .main {
   margin-top: $header-height + 1rem;
 }

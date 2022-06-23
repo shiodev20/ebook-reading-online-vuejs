@@ -1,5 +1,8 @@
 import books from '@/assets/data/books'
 
+
+const getBooks = () => books
+
 const getBookCover = (bookCoverUrl) => require(`../assets/img/${bookCoverUrl}`)
 
 const getMostDownloadBooks = (size) => {
@@ -40,22 +43,30 @@ const getBooksByCategory = (categoryId) => {
   return data
 }
 
-const getRandomBooks = (size) => {
-  const data = []
-  const randomIdx= []
+const getRandomBooksByCategory = (size, bookId, categoryId) => {
+  let data = []
+  const books = getBooksByCategory(categoryId)
 
-  for(let i = 0; i < size; i++) {
+  let i = 0;
 
-    let randomNumber = Math.floor(Math.random * size)
+  while(true) {
+    if(i == size) break;
 
+    let randomNumber = Math.floor(Math.random() * size)
+
+    if(randomNumber == bookId) continue
+
+    data.push(books[randomNumber])
+    
+    i++
   }
 
-
-  return 
+  return data
 }
 
 export default () => {
   return {
+    getBooks,
     getBookCover,
     getMostDownloadBooks,
     getMostViewBooks,
@@ -63,6 +74,6 @@ export default () => {
     getCustomBookTitle,
     getBookById,
     getBooksByCategory,
-    getRandomBooks,
+    getRandomBooksByCategory,
   }
 }

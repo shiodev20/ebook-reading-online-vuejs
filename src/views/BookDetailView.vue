@@ -80,11 +80,11 @@
     </SectionBody>
   </SectionContainer>
 
-  <!-- <SectionContainer>
-    <SectionTitle>Sách cùng tác giả</SectionTitle>
+  <SectionContainer>
+    <SectionTitle>Có thể bạn sẽ thích</SectionTitle>
     <SectionBody>
       <Slider
-        id="same-author"
+        id="recommended-books"
         :navigation="{
           0: false,
           768: true,
@@ -115,14 +115,8 @@
           },
         }"
       >
-        <SwiperSlide v-for="book in books" :key="book.id">
-          <ProductCard
-            :title="book.title"
-            :author="book.author"
-            :views="book.views"
-            :downloads="book.downloads"
-            :bookImg="book.bookImg"
-          ></ProductCard>
+        <SwiperSlide v-for="book in recommendedBooks" :key="book.id">
+          <BookCard :book="book"></BookCard>
         </SwiperSlide>
         <router-link to="/a" class="slider__more"
           >Xem thêm <i class="bx bx-chevron-right"></i
@@ -166,25 +160,19 @@
           },
         }"
       >
-        <SwiperSlide v-for="book in books" :key="book.id">
-          <ProductCard
-            :title="book.title"
-            :author="book.author"
-            :views="book.views"
-            :downloads="book.downloads"
-            :bookImg="book.bookImg"
-          ></ProductCard>
+        <SwiperSlide v-for="book in booksByCategory" :key="book.id">
+          <BookCard :book="book"></BookCard>
         </SwiperSlide>
         <router-link to="/a" class="slider__more"
           >Xem thêm <i class="bx bx-chevron-right"></i
         ></router-link>
       </Slider>
     </SectionBody>
-  </SectionContainer> -->
+  </SectionContainer>
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from 'vue-router';
 
 import useBook from '@/composables/useBook';
@@ -193,7 +181,7 @@ import Grid from "@/components/Grid.vue";
 import SectionContainer from "@/components/SectionContainer.vue";
 import SectionBody from "@/components/SectionBody.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
-import ProductCard from "@/components/BookCard.vue";
+import BookCard from "@/components/BookCard.vue";
 import Slider from "@/components/Slider.vue";
 import { SwiperSlide } from "swiper/vue";
 
@@ -205,27 +193,37 @@ export default {
     SectionContainer,
     SectionTitle,
     SectionBody,
-    ProductCard,
+    BookCard,
     Slider,
     SwiperSlide,
   },
   setup() {
     const route = useRoute()
-    const { getBookById, getBookCover } = useBook()
+    const { getBooks, getBookById, getBookCover, getBooksByCategory } = useBook()
 
     const book = ref({})
     const bookCover = ref('')
+    const booksByCategory = ref([])
+    const recommendedBooks = ref([])
 
     const fetchData = () => {
       book.value = getBookById(route.query.id)
       bookCover.value = getBookCover(book.value.cover)
+      booksByCategory.value = getBooksByCategory(book.value.categoryId).slice(0, 12)
+      recommendedBooks.value = getBooks().slice(0, 12)
+      console.log(recommendedBooks.value);
     }
 
+    watch(route, (to, from) => {
+      if(to.name == 'book-detail') fetchData()
+    })
     fetchData()
 
     return {
       book,
       bookCover,
+      booksByCategory,
+      recommendedBooks,
     };
   },
 };

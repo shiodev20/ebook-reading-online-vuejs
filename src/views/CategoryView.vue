@@ -89,6 +89,7 @@ export default {
     
 
     const fetchData = () => {
+      console.log(route);
       category.value = getCategoryById(route.query.id)
       booksByCategory.value = getBooksByCategory(category.value.id)
 
