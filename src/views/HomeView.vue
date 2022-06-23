@@ -130,6 +130,7 @@ import SectionContainer from "@/components/SectionContainer.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
 import SectionBody from "@/components/SectionBody.vue";
 import Loading from "@/components/Loading.vue";
+
 export default {
   name: "HomeView",
   components: {
@@ -145,8 +146,7 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks } =
-      useBook();
+    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks } = useBook();
 
     const latestBooks = ref([]);
     const mostDownloadBooks = ref([]);
@@ -173,6 +173,7 @@ export default {
         latestBooks.value = data.latestBooks;
         mostDownloadBooks.value = data.mostDownloadBooks;
         mostViewBooks.value = data.mostViewBooks;
+        
         store.commit("toggleLoading", false);
       });
     };

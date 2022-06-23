@@ -2,19 +2,35 @@
 .book-detail {
 
   &__book-cover {
+    width: 100%;
+    height: 80%;
+    
+    @include tablet {
+      width: 90%;
+      height: 90%;
+      margin: 0 auto;
+    }
+
     img {
+      width: 100%;
+      height: 100%;
       box-shadow: $box-shadow;
       border-radius: $radius;
       cursor: pointer;
       
       @include tablet {
-        width: calc(100% - 5rem);
-        margin: 0 2.5rem;
+        // width: calc(100% - 5rem);
+        // margin: 0 2.5rem;
       }
     }
   }
 
   &__info {
+    margin-right: 3rem;
+
+    @include laptop {
+      margin-right: 0;
+    }
 
     &__title {
       font-size: $large-size;
@@ -87,7 +103,7 @@
     }
 
     hr {
-      margin: 5rem 0 3rem 0;
+      margin: 3rem 2rem 3rem 0;
       opacity: $opacity;
     }
   }

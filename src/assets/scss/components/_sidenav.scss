@@ -15,7 +15,7 @@
     background-color: $main-bg;
     transition: $transition;
 
-    @include custom-media(400px) {
+    @include media-down(400px) {
       width: 100%;
     }
 

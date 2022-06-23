@@ -34,7 +34,7 @@
   }
 }
 
-@mixin custom-media($screen-width) {
+@mixin media-down($screen-width) {
   @media screen and (max-width: $screen-width) {
     @content;
   }
