@@ -242,6 +242,8 @@ export default {
         bookCover.value = data.bookCover;
         booksByCategory.value = data.booksByCategory;
 
+        document.title = store.state.documentTitle + book.value.title
+
         store.commit("toggleLoading", false);
       });
     };

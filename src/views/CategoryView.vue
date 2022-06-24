@@ -19,34 +19,31 @@
     <SectionContainer>
       <SectionBody>
         <!-- <div class="pagination">
-          <div
-            class="pagination__item pagination__item--navigation"
-            @click="currPage = currPage - 1"
-          >
-            <i class="bx bx-chevron-left"></i>
-          </div>
-          
-            <div
-              class="pagination__item"
-              v-for="(page, idx) in currPagination"
-              :key="idx"
-              :class="[currPage == idx + 1 ? 'pagination__item--active' : '']"
-              @click="currPage = page"
-            >
-              {{ page }}
-            </div>
+              <div
+                class="pagination__item pagination__item--navigation"
+                @click="currPage = currPage - 1"
+              >
+                <i class="bx bx-chevron-left"></i>
+              </div>
+              
+                <div
+                  class="pagination__item"
+                  v-for="(page, idx) in currPagination"
+                  :key="idx"
+                  :class="[currPage == idx + 1 ? 'pagination__item--active' : '']"
+                  @click="currPage = page"
+                >
+                  {{ page }}
+                </div>
 
-          <div
-            class="pagination__item pagination__item--navigation"
-            @click="currPage = currPage + 1"
-          >
-            <i class="bx bx-chevron-right"></i>
-          </div>
-        </div> -->
-        <Pagination
-          :pagination="currPagination"
-        >
-        </Pagination>
+              <div
+                class="pagination__item pagination__item--navigation"
+                @click="currPage = currPage + 1"
+              >
+                <i class="bx bx-chevron-right"></i>
+              </div>
+            </div> -->
+        <Pagination :pagination="currPagination"> </Pagination>
       </SectionBody>
     </SectionContainer>
   </template>
@@ -54,25 +51,27 @@
 
 <script>
 import { computed, ref, watch } from "vue";
-import { useRoute } from 'vue-router';
-import { useStore } from 'vuex';
+import { useRoute } from "vue-router";
+import { useStore } from "vuex";
 
-import useBook from '@/composables/useBook';
-import useCategory from '@/composables/useCategory';
+import useBook from "@/composables/useBook";
+import useCategory from "@/composables/useCategory";
 
+import Helmet from "@/components/Helmet.vue";
 import Grid from "@/components/Grid.vue";
 import SectionContainer from "@/components/SectionContainer.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
 import SectionBody from "@/components/SectionBody.vue";
 import BookCard from "@/components/BookCard.vue";
 import Pagination from "@/components/Pagination.vue";
-import Loading from '@/components/Loading.vue';
+import Loading from "@/components/Loading.vue";
 
 import { getPagination, getBooksPerPage } from "@/utils/pagination";
 
 export default {
   name: "CategoryView",
   components: {
+    Helmet,
     Grid,
     SectionContainer,
     SectionTitle,
@@ -82,57 +81,55 @@ export default {
     Loading,
   },
   setup() {
-    const store = useStore()
-    const route = useRoute()
+    const store = useStore();
+    const route = useRoute();
 
-    const { getBooksByCategory } = useBook()
-    const { getCategoryById } = useCategory()
+    const { getBooksByCategory } = useBook();
+    const { getCategoryById } = useCategory();
 
-    const category = ref({})
+    const category = ref({});
     const booksByCategory = ref([]);
 
     const totalPages = ref(0);
     const pageSize = ref(24);
     const currPage = ref(1);
     const currPagination = ref([]);
-    
-    const isLoading = computed(() => store.state.isLoading)
+
+    const isLoading = computed(() => store.state.isLoading);
 
     const fetchData = () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const category = getCategoryById(route.query.id)
-            const booksByCategory = getBooksByCategory(category.id)
+          const category = getCategoryById(route.query.id);
+          const booksByCategory = getBooksByCategory(category.id);
 
-            resolve({
-              category,
-              booksByCategory
-            })
-        }, 1000)
-      })
-      // category.value = getCategoryById(route.query.id)
-      // booksByCategory.value = getBooksByCategory(category.value.id)
-
+          resolve({
+            category,
+            booksByCategory,
+          });
+        }, 1000);
+      });
       // totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value);
       // currPagination.value = getPagination(currPage.value, totalPages.value);
     };
 
     const initialPage = () => {
-      store.commit('toggleLoading', true)
+      store.commit("toggleLoading", true);
 
       fetchData().then((data) => {
-        category.value = data.category
-        booksByCategory.value = data.booksByCategory
+        category.value = data.category;
+        booksByCategory.value = data.booksByCategory;
 
-        store.commit('toggleLoading', false)
-      })
-    }
+        document.title = store.state.documentTitle + category.value.name
+        store.commit("toggleLoading", false);
+      });
+    };
 
     watch(route, (to, from) => {
-      if(to.name == 'category') initialPage()
-    })
+      if (to.name == "category") initialPage();
+    });
 
-    initialPage()
+    initialPage();
 
     return {
       route,

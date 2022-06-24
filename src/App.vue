@@ -16,7 +16,6 @@ export default {
     const route = useRoute();
     const router = useRouter();
 
-
     const layout = computed(() => route.meta.layout + "-layout");
     const windowWidth = computed(() => store.state.windowWidth);
 
@@ -29,6 +28,8 @@ export default {
     watch(windowWidth, (n, o) => {
       if (n <= 992) store.state.isMobile = false;
     });
+
+    document.title = store.state.documentTitle + 'Tải ebook miễn phí'
 
     onMounted(() =>
       window.addEventListener("resize", () => {

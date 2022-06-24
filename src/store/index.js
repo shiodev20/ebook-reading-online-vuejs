@@ -4,7 +4,8 @@ export default createStore({
   state: {
     isMobile: false,
     isLoading: false,
-    windowWidth: 0
+    windowWidth: 0,
+    documentTitle: 'ShioBook | '
   },
   getters: {
   },

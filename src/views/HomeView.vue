@@ -1,119 +1,119 @@
 <template>
-  <template v-if="isLoading">
-    <Loading></Loading>
-  </template>
-  <template v-else>
-    <!-- Latest update books -->
-    <SectionContainer>
-      <SectionTitle class="color-secondary">Sách mới cập nhật</SectionTitle>
+    <template v-if="isLoading">
+      <Loading></Loading>
+    </template>
+    <template v-else>
+      <!-- Latest update books -->
+      <SectionContainer>
+        <SectionTitle class="color-secondary">Sách mới cập nhật</SectionTitle>
 
-      <SectionBody>
-        <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
-          <BookCard
-            v-for="book in latestBooks"
-            :key="book.id"
-            :book="book"
-          ></BookCard>
-        </Grid>
-      </SectionBody>
-    </SectionContainer>
+        <SectionBody>
+          <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
+            <BookCard
+              v-for="book in latestBooks"
+              :key="book.id"
+              :book="book"
+            ></BookCard>
+          </Grid>
+        </SectionBody>
+      </SectionContainer>
 
-    <SectionContainer>
-      <SectionTitle class="color-secondary">Sách được tải nhiều</SectionTitle>
-      <SectionBody>
-        <Slider
-          id="most-download-slider"
-          :navigation="{
-            0: false,
-            768: true,
-          }"
-          :pagination="{
-            clickable: true,
-          }"
-          :breakpoints="{
-            0: {
-              slidesPerView: 2,
-              slidesPerGroup: 2,
-              spaceBetween: 20,
-            },
-            576: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              slidesPerGroup: 4,
-              spaceBetween: 20,
-            },
-            1000: {
-              slidesPerView: 6,
-              slidesPerGroup: 6,
-              spaceBetween: 20,
-            },
-          }"
-        >
-          <SwiperSlide v-for="book in mostDownloadBooks" :key="book.id">
-            <BookCard :book="book"></BookCard>
-          </SwiperSlide>
-          <router-link to="/" class="slider__more"
-            >Xem thêm <i class="bx bx-chevron-right"></i
-          ></router-link>
-        </Slider>
-      </SectionBody>
-    </SectionContainer>
+      <SectionContainer>
+        <SectionTitle class="color-secondary">Sách được tải nhiều</SectionTitle>
+        <SectionBody>
+          <Slider
+            id="most-download-slider"
+            :navigation="{
+              0: false,
+              768: true,
+            }"
+            :pagination="{
+              clickable: true,
+            }"
+            :breakpoints="{
+              0: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 20,
+              },
+              576: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+                spaceBetween: 20,
+              },
+              1000: {
+                slidesPerView: 6,
+                slidesPerGroup: 6,
+                spaceBetween: 20,
+              },
+            }"
+          >
+            <SwiperSlide v-for="book in mostDownloadBooks" :key="book.id">
+              <BookCard :book="book"></BookCard>
+            </SwiperSlide>
+            <router-link to="/" class="slider__more"
+              >Xem thêm <i class="bx bx-chevron-right"></i
+            ></router-link>
+          </Slider>
+        </SectionBody>
+      </SectionContainer>
 
-    <SectionContainer>
-      <SectionBody>
-        <Quote></Quote>
-      </SectionBody>
-    </SectionContainer>
+      <SectionContainer>
+        <SectionBody>
+          <Quote></Quote>
+        </SectionBody>
+      </SectionContainer>
 
-    <SectionContainer>
-      <SectionTitle class="color-secondary">Sách được xem nhiều</SectionTitle>
-      <SectionBody>
-        <Slider
-          id="most-view-slider"
-          :navigation="{
-            0: false,
-            768: true,
-          }"
-          :pagination="{
-            clickable: true,
-          }"
-          :breakpoints="{
-            0: {
-              slidesPerView: 2,
-              slidesPerGroup: 2,
-              spaceBetween: 20,
-            },
-            576: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              slidesPerGroup: 4,
-              spaceBetween: 20,
-            },
-            1000: {
-              slidesPerView: 6,
-              slidesPerGroup: 6,
-              spaceBetween: 20,
-            },
-          }"
-        >
-          <SwiperSlide v-for="book in mostViewBooks" :key="book.id">
-            <BookCard :book="book"></BookCard>
-          </SwiperSlide>
-          <router-link to="/" class="slider__more"
-            >Xem thêm <i class="bx bx-chevron-right"></i
-          ></router-link>
-        </Slider>
-      </SectionBody>
-    </SectionContainer>
-  </template>
+      <SectionContainer>
+        <SectionTitle class="color-secondary">Sách được xem nhiều</SectionTitle>
+        <SectionBody>
+          <Slider
+            id="most-view-slider"
+            :navigation="{
+              0: false,
+              768: true,
+            }"
+            :pagination="{
+              clickable: true,
+            }"
+            :breakpoints="{
+              0: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 20,
+              },
+              576: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+                spaceBetween: 20,
+              },
+              1000: {
+                slidesPerView: 6,
+                slidesPerGroup: 6,
+                spaceBetween: 20,
+              },
+            }"
+          >
+            <SwiperSlide v-for="book in mostViewBooks" :key="book.id">
+              <BookCard :book="book"></BookCard>
+            </SwiperSlide>
+            <router-link to="/" class="slider__more"
+              >Xem thêm <i class="bx bx-chevron-right"></i
+            ></router-link>
+          </Slider>
+        </SectionBody>
+      </SectionContainer>
+    </template>
 </template>
 
 <script>
@@ -122,6 +122,7 @@ import { useStore } from "vuex";
 import useBook from "@/composables/useBook";
 
 import { SwiperSlide } from "swiper/vue";
+import Helmet from "@/components/Helmet.vue";
 import Grid from "@/components/Grid.vue";
 import BookCard from "@/components/BookCard.vue";
 import Slider from "@/components/Slider.vue";
@@ -135,6 +136,7 @@ export default {
   name: "HomeView",
   components: {
     SwiperSlide,
+    Helmet,
     Grid,
     BookCard,
     SectionContainer,
@@ -153,7 +155,7 @@ export default {
     const mostViewBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
-
+    
     const fetchData = () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -174,6 +176,8 @@ export default {
         mostDownloadBooks.value = data.mostDownloadBooks;
         mostViewBooks.value = data.mostViewBooks;
         
+        document.title = store.state.documentTitle + 'Tải ebook miễn phí'
+
         store.commit("toggleLoading", false);
       });
     };
