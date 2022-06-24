@@ -56,9 +56,9 @@
             <SwiperSlide v-for="book in mostDownloadBooks" :key="book.id">
               <BookCard :book="book"></BookCard>
             </SwiperSlide>
-            <router-link to="/" class="slider__more"
+            <!-- <router-link to="/" class="slider__more"
               >Xem thêm <i class="bx bx-chevron-right"></i
-            ></router-link>
+            ></router-link> -->
           </Slider>
         </SectionBody>
       </SectionContainer>
@@ -107,9 +107,9 @@
             <SwiperSlide v-for="book in mostViewBooks" :key="book.id">
               <BookCard :book="book"></BookCard>
             </SwiperSlide>
-            <router-link to="/" class="slider__more"
+            <!-- <router-link to="/" class="slider__more"
               >Xem thêm <i class="bx bx-chevron-right"></i
-            ></router-link>
+            ></router-link> -->
           </Slider>
         </SectionBody>
       </SectionContainer>

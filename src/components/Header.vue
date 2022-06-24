@@ -4,7 +4,8 @@
 
       <div class="nav__brand">
         <router-link to="/">
-          <img src="../assets/logo.png" alt="" />
+          <!-- <img src="../assets/logo.png" alt="" /> -->
+          <div class="nav__brand__logo">Shio<span>Book</span></div>
         </router-link>
       </div>
 

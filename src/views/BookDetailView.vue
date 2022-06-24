@@ -23,7 +23,17 @@
                     </div>
                     <div class="book-detail__info__meta__item">
                       Thể loại:
-                      <span><router-link to="/">Văn học</router-link></span>
+                      <span>
+                        <router-link
+                          :to="{
+                            name: 'category',
+                            params: {
+                              category: categorySlug
+                            },
+                            query: { id: category.id },
+                          }"
+                        >{{ category.name }}</router-link>
+                      </span>
                     </div>
                   </div>
 
@@ -88,11 +98,12 @@
       </SectionBody>
     </SectionContainer>
 
-    <!-- <SectionContainer>
+    <SectionContainer>
       <SectionTitle>Có thể bạn sẽ thích</SectionTitle>
       <SectionBody>
         <Slider
           id="recommended-books"
+          :seeMore="false"
           :navigation="{
             0: false,
             768: true,
@@ -126,18 +137,16 @@
           <SwiperSlide v-for="book in recommendedBooks" :key="book.id">
             <BookCard :book="book"></BookCard>
           </SwiperSlide>
-          <router-link to="/a" class="slider__more"
-            >Xem thêm <i class="bx bx-chevron-right"></i
-          ></router-link>
         </Slider>
       </SectionBody>
-    </SectionContainer> -->
+    </SectionContainer>
 
-    <!-- <SectionContainer>
+    <SectionContainer>
       <SectionTitle>Sách cùng thể loại</SectionTitle>
       <SectionBody>
         <Slider
           id="same-category"
+          :seeMore="false"
           :navigation="{
             0: false,
             768: true,
@@ -168,15 +177,12 @@
             },
           }"
         >
-          <SwiperSlide v-for="book in booksByCategory" :key="book.id">
+          <SwiperSlide v-for="book in sameCategoryBooks" :key="book.id">
             <BookCard :book="book"></BookCard>
           </SwiperSlide>
-          <router-link to="/a" class="slider__more"
-            >Xem thêm <i class="bx bx-chevron-right"></i
-          ></router-link>
         </Slider>
       </SectionBody>
-    </SectionContainer> -->
+    </SectionContainer>
   </template>
 
 </template>
@@ -185,8 +191,10 @@
 import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import slugify from "slugify";
 
 import useBook from "@/composables/useBook";
+import useCategory from '@/composables/useCategory';
 
 import Grid from "@/components/Grid.vue";
 import SectionContainer from "@/components/SectionContainer.vue";
@@ -213,12 +221,16 @@ export default {
     const store = useStore();
     const route = useRoute();
 
-    const { getBookById, getBookCover, getBooksByCategory } = useBook();
+    const { getBookById, getBookCover, getBooksByCategory, getRandomBooks, getRandomBooksByCategory } = useBook();
+    const { getCategoryById } = useCategory()
 
+    const category = ref({})
+    const categorySlug = ref("");
     const book = ref({});
     const bookCover = ref("");
     const booksByCategory = ref([]);
     const recommendedBooks = ref([]);
+    const sameCategoryBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading)
 
@@ -226,10 +238,13 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const book = getBookById(route.query.id);
+          const category = getCategoryById(book.categoryId)
           const bookCover = getBookCover(book.cover);
           const booksByCategory = getBooksByCategory(book.categoryId).slice(0, 12);
+          const recommendedBooks = getRandomBooks(12, book.id);
+          const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
 
-          resolve({ book, bookCover, booksByCategory });
+          resolve({ book, bookCover, booksByCategory, recommendedBooks, category, sameCategoryBooks });
         }, 1000);
       });
     };
@@ -238,9 +253,13 @@ export default {
       store.commit("toggleLoading", true);
 
       fetchData().then((data) => {
+        category.value = data.category
+        categorySlug.value = slugify(category.value.name, { lower: true, locale: 'vi' })
         book.value = data.book;
         bookCover.value = data.bookCover;
         booksByCategory.value = data.booksByCategory;
+        recommendedBooks.value = data.recommendedBooks;
+        sameCategoryBooks.value = data.sameCategoryBooks;
 
         document.title = store.state.documentTitle + book.value.title
 
@@ -249,17 +268,20 @@ export default {
     };
 
     watch(route, (to, from) => {
-      if (to.name == "book-detail") fetchData();
+      if (to.name == "book-detail") initialPage();
     });
 
     initialPage();
 
     return {
       isLoading,
+      category,
+      categorySlug,
       book,
       bookCover,
       booksByCategory,
       recommendedBooks,
+      sameCategoryBooks,
     };
   },
 };

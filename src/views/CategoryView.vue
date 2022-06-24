@@ -126,7 +126,7 @@ export default {
     };
 
     watch(route, (to, from) => {
-      if (to.name == "category") initialPage();
+      if (to.name === "category") initialPage();
     });
 
     initialPage();

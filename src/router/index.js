@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   
   {
-    path: '/:category',
+    path: '/category/:category',
     name: 'category',
     meta: {
       layout: 'default',
@@ -11,7 +11,7 @@ const routes = [
     component: () => import('../views/CategoryView.vue')
   },
   {
-    path: '/:slug',
+    path: '/book/:slug',
     name: 'book-detail',
     meta: {
       layout: 'default',

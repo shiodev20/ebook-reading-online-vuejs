@@ -32,7 +32,7 @@ export default {
     category: Object,
   },
   setup(props) {
-    const categorySlug = ref(slugify(props.category.name, { lower: true }))
+    const categorySlug = ref(slugify(props.category.name, { lower: true, locale: 'vi' }))
 
     return {
       categorySlug,
