@@ -2,16 +2,21 @@
   position: relative;
   padding: 1rem 1rem 4rem 1rem !important;
 
+  &:hover &__navigation {
+    opacity: 1;
+  }
+
   &__navigation {
     position: absolute;
     top: 45%;
     padding: 1.5rem .5rem;
     border: 1px solid $primary-color;
     border-radius: .5rem;
-    transition: $transition;
+    opacity: 0;
+    transition: $transition, opacity .1s ease-in;
+    transform: translateY(-45%);
     z-index: 10;
     cursor: pointer;
-    transform: translateY(-45%);
 
     i {
       font-size: $icon-size;

@@ -32,7 +32,7 @@
 
         <div
           class="nav__menu__item nav__menu__item--toggle"
-          @click="toggleMobile"
+          @click="toggleSidenav"
         >
           <div class="nav__toggle__btn">
             <i class="bx bx-menu"></i>
@@ -64,10 +64,10 @@ export default {
 
     const isShowModal = ref(false);
 
-    const toggleMobile = () => store.commit("toggleMobile");
+    const toggleSidenav = () => store.commit("toggleSidenav");
 
     return {
-      toggleMobile,
+      toggleSidenav,
       isShowModal,
     };
   },

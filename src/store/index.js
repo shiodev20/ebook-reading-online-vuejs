@@ -2,17 +2,21 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    isMobile: false,
+    isSidenav: false,
     isLoading: false,
+    activeCategoryItem: 0,
     windowWidth: 0,
     documentTitle: 'ShioBook | '
   },
   getters: {
   },
   mutations: {
+    resetToggle: (state) => {
+      state.isSidenav = false
+    },
     toggleLoading: (state, status) => state.isLoading = status,
-    resetToggle: (state) => state.isMobile = false,
-    toggleMobile: (state) => state.isMobile = !state.isMobile,
+    toggleSidenav: (state) => state.isSidenav = !state.isSidenav,
+    setActiveCategoryItem: (state, categoryId) => state.activeCategoryItem = categoryId,
     onWindowWidthChange: (state, innerWidth) => state.windowWidth = innerWidth
   },
   actions: {

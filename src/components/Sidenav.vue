@@ -1,16 +1,16 @@
 <template>
   <aside class="sidenav">
-    <div class="sidenav__bg" v-if="isMobile" @click="toggleMobile">
+    <div class="sidenav__bg" v-if="isSidenav" @click="toggleSidenav">
       <Backdrop></Backdrop>
     </div>
-    <div class="sidenav__container" :class="{ active: isMobile }">
+    <div class="sidenav__container" :class="{ active: isSidenav }">
       <div class="sidenav__header">
         <div class="sidenav__header__title">
           <span><i class="bx bxs-grid-alt"></i> Danh mục</span>
         </div>
 
         <div class="sidenav__header__close">
-          <span><i class="bx bx-x" @click="toggleMobile"></i></span>
+          <span><i class="bx bx-x" @click="toggleSidenav"></i></span>
         </div>
       </div>
 
@@ -19,6 +19,8 @@
           v-for="category in categories"
           :key="category.id"
           :category="category"
+          :active="category.id == activeCategoryItem"
+          @active-sidenav="activeSidenav"
         />
       </div>
     </div>
@@ -28,6 +30,8 @@
 <script>
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from 'vue-router';
+
 import useCategory from "@/composables/useCategory"
 
 import SidenavItem from "./SidenavItem.vue";
@@ -41,24 +45,27 @@ export default {
   },
   setup() {
     const store = useStore();
+    const route = useRoute();
+
     const { getCategories } = useCategory()
 
     const categories = ref([])
-    
-    const isMobile = computed(() => store.state.isMobile);
 
-    const toggleMobile = () => store.commit("toggleMobile");
+    const isSidenav = computed(() => store.state.isSidenav);
+    const activeCategoryItem = computed(() => store.state.activeCategoryItem)
 
-    const initCategories = () => {
-      categories.value = getCategories()
-    }
+    const initCategories = () => categories.value = getCategories()
+    const toggleSidenav = () => store.commit("toggleSidenav");
+    const activeSidenav = (categoryId) => store.commit('setActiveCategoryItem', categoryId)
 
     initCategories()
 
     return {
       categories,
-      isMobile,
-      toggleMobile,
+      isSidenav,
+      activeSidenav,
+      activeCategoryItem,
+      toggleSidenav,
     };
   },
 };

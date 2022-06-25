@@ -64,9 +64,7 @@
     .sidenav__body {
       .sidenav__item {
         @include flex(space-between, center);
-
         padding: 1.5rem 0;
-
         font-size: $subtitle-size;
         font-weight: 500;
         cursor: pointer;
@@ -76,6 +74,22 @@
         }
 
         &:hover .sidenav__item__badge {
+          &__quantity {
+            background-color: $primary-color;
+          }
+
+          &__icon {
+            i {
+              color: $primary-color;
+            }
+          }
+        }
+
+        &.active .sidenav__item__title {
+          color: $primary-color;
+        }
+
+        &.active .sidenav__item__badge {
           &__quantity {
             background-color: $primary-color;
           }
