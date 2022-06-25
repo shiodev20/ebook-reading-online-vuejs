@@ -122,7 +122,6 @@ import { useStore } from "vuex";
 import useBook from "@/composables/useBook";
 
 import { SwiperSlide } from "swiper/vue";
-import Helmet from "@/components/Helmet.vue";
 import Grid from "@/components/Grid.vue";
 import BookCard from "@/components/BookCard.vue";
 import Slider from "@/components/Slider.vue";
@@ -136,7 +135,6 @@ export default {
   name: "HomeView",
   components: {
     SwiperSlide,
-    Helmet,
     Grid,
     BookCard,
     SectionContainer,

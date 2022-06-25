@@ -57,7 +57,6 @@ import { useStore } from "vuex";
 import useBook from "@/composables/useBook";
 import useCategory from "@/composables/useCategory";
 
-import Helmet from "@/components/Helmet.vue";
 import Grid from "@/components/Grid.vue";
 import SectionContainer from "@/components/SectionContainer.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
@@ -71,7 +70,6 @@ import { getPagination, getBooksPerPage } from "@/utils/pagination";
 export default {
   name: "CategoryView",
   components: {
-    Helmet,
     Grid,
     SectionContainer,
     SectionTitle,
