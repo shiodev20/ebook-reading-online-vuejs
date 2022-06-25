@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { computed, onMounted, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
@@ -25,6 +25,11 @@ export default {
       store.commit("resetToggle");
     });
     
+    watch(route, (to, from) => {
+      if(to.name == 'category') store.commit('setActiveCategoryItem', to.query.id)
+      else store.commit('setActiveCategoryItem', 0)
+    })
+
     watch(windowWidth, (n, o) => {
       if (n <= 992) store.state.isMobile = false;
     });

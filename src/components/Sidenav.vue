@@ -20,7 +20,6 @@
           :key="category.id"
           :category="category"
           :active="category.id == activeCategoryItem"
-          @active-sidenav="activeSidenav"
         />
       </div>
     </div>
@@ -28,7 +27,7 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from 'vue-router';
 
@@ -56,16 +55,14 @@ export default {
 
     const initCategories = () => categories.value = getCategories()
     const toggleSidenav = () => store.commit("toggleSidenav");
-    const activeSidenav = (categoryId) => store.commit('setActiveCategoryItem', categoryId)
 
     initCategories()
 
     return {
       categories,
       isSidenav,
-      activeSidenav,
-      activeCategoryItem,
       toggleSidenav,
+      activeCategoryItem,
     };
   },
 };

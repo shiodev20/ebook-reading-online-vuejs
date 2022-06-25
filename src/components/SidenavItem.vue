@@ -5,7 +5,6 @@
       params: { category: categorySlug },
       query: { id: category.id },
     }"
-    @click="$emit('active-sidenav', category.id)"
   >
     <div 
       class="sidenav__item"
