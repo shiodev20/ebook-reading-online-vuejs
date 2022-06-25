@@ -1,5 +1,5 @@
 <template>
-  <header class="header">
+  <header class="header" ref="headerRef">
     <nav class="container nav">
 
       <div class="nav__brand">
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
 import BaseModal from "./Modal.vue";
@@ -63,12 +63,22 @@ export default {
     const store = useStore();
 
     const isShowModal = ref(false);
+    const headerRef = ref(null)
 
     const toggleSidenav = () => store.commit("toggleSidenav");
 
+    onMounted(() => {
+      window.addEventListener('scroll', () => {
+        if(headerRef.value) {
+          if(window.scrollY > 80) headerRef.value.style.boxShadow = 'rgba(99, 99, 99, 0.2) 0px 2px 15px 0px'
+          else headerRef.value.style.boxShadow = ''
+        }
+      })
+    })
     return {
-      toggleSidenav,
       isShowModal,
+      headerRef,
+      toggleSidenav,
     };
   },
 };

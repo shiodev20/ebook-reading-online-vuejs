@@ -1,8 +1,9 @@
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  background-color: $white-color;
   z-index: $header-z-index;
 
   .nav {
