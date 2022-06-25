@@ -37,7 +37,7 @@
                     </div>
                   </div>
 
-                  <div>
+                  <!-- <div>
                     <div class="book-detail__info__meta__item">
                       <i class="bx bx-show"></i> 
                       <span>{{ book.views }}</span>
@@ -46,7 +46,7 @@
                       <i class="bx bx-download"></i>
                       <span>{{ book.downloads }}</span>
                     </div>
-                  </div>
+                  </div> -->
                 </Grid>
               </div>
 
@@ -80,17 +80,21 @@
               </div>
 
               <div class="book-detail__info__download">
-                <div class="book-detail__info__download__item">
-                  <span><i class="bx bx-download"></i>PDF</span>
+                <div class="book-detail__info__download__item bg-pink">
+                  <!-- <span><i class="bx bx-heart"></i>Yêu thích</span> -->
+                  <span><i class="bx bx-heart"></i></span>
                 </div>
-                <div
-                  class="
-                    book-detail__info__download__item
-                    book-detail__info__download__item--disabled
-                  "
-                >
-                  <span><i class="bx bx-download"></i>EPUB</span>
+
+                <div class="book-detail__info__download__item bg-primary">
+                  <!-- <span><i class="bx bx-download"></i>Tải sách</span> -->
+                  <span><i class="bx bx-download"></i></span>
                 </div>
+
+                <div class="book-detail__info__download__item bg-orange">
+                  <!-- <span><i class="bx bx-show"></i>Đọc online</span> -->
+                  <span><i class="bx bx-show"></i></span>
+                </div>
+
               </div>
             </div>
           </Grid>

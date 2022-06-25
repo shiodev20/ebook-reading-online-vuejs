@@ -9,7 +9,7 @@
   .nav {
     @include flex(space-between, center);
     height: $header-height;
-
+    
     &__brand {
       // img {
       //   height: 40px;

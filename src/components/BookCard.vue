@@ -20,12 +20,13 @@
         </div>
         <div class="book-card__info__author">{{ book.author }}</div>
         <div class="book-card__info__footer">
-          <span class="book-card__info__footer__views"
+          <!-- <span class="book-card__info__footer__views"
             >{{ book.views }}<i class="bx bx-show"></i
-          ></span>
-          <span class="book-card__info__footer__download"
-            >{{ book.downloads }}<i class="bx bx-download"></i
-          ></span>
+          ></span> -->
+          <span class="book-card__info__footer__download">
+            <!-- {{ book.downloads }} lượt tải -->
+            <!-- <i class="bx bx-download"></i> -->
+            </span>
         </div>
       </div>
     </router-link>
