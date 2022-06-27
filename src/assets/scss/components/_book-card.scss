@@ -16,8 +16,6 @@
   }
   
   &__info {
-    padding: 0 5px;
-
     &__title {
       margin-top: 5px;
       font-size: $subtitle-size;
@@ -27,23 +25,9 @@
   
     &__author {
       margin-top: 3px;
-      font-size: $text-size;
-    }
-    
-    &__footer {
-
-      &__download, &__views {
-        margin-right: 1rem;
-        font-size: $text-size;
-        
-        i {
-          position: relative;
-          left: 0;
-          top: 2px;
-          margin-left: 2px;
-          font-size: $subtitle-size;
-        }
-      }
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: $gray-color;
     }
   }
   &:hover img {

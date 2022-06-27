@@ -19,6 +19,7 @@ export default {
     const layout = computed(() => route.meta.layout + "-layout");
     const windowWidth = computed(() => store.state.windowWidth);
 
+    store.commit("initializeStore")
     store.commit("onWindowWidthChange", window.innerWidth);
 
     router.beforeEach((to, from) => {

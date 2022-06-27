@@ -7,7 +7,7 @@
     <SectionContainer>
       <SectionBody>
         <div class="book-detail" v-if="book">
-          <Grid class="book-detail-layout" :gap="40">
+          <Grid class="book-detail-layout" :gap="30">
             <div class="book-detail__book-cover">
               <img :src="bookCover" :alt="book.title" />
             </div>
@@ -27,26 +27,14 @@
                         <router-link
                           :to="{
                             name: 'category',
-                            params: {
-                              category: categorySlug
-                            },
+                            params: { category: categorySlug },
                             query: { id: category.id },
                           }"
-                        >{{ category.name }}</router-link>
+                          >{{ category.name }}</router-link
+                        >
                       </span>
                     </div>
                   </div>
-
-                  <!-- <div>
-                    <div class="book-detail__info__meta__item">
-                      <i class="bx bx-show"></i> 
-                      <span>{{ book.views }}</span>
-                    </div>
-                    <div class="book-detail__info__meta__item">
-                      <i class="bx bx-download"></i>
-                      <span>{{ book.downloads }}</span>
-                    </div>
-                  </div> -->
                 </Grid>
               </div>
 
@@ -57,18 +45,18 @@
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Id
                   placeat blanditiis voluptas qui, harum error quas facere?
                   Recusandae cumque cum harum natus officiis quisquam provident
-                  repellendus, velit labore cupiditate dolorum, sint consequuntur
-                  error nihil dicta vero asperiores libero hic nemo quia omnis
-                  tempore distinctio, itaque neque! Distinctio, accusantium? Vel,
-                  id.
+                  repellendus, velit labore cupiditate dolorum, sint
+                  consequuntur error nihil dicta vero asperiores libero hic nemo
+                  quia omnis tempore distinctio, itaque neque! Distinctio,
+                  accusantium? Vel, id.
                 </p>
 
                 <p>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aspernatur quia enim placeat sapiente debitis vel hic temporibus
-                  sint cum nostrum, a error sed illo quaerat cupiditate totam,
-                  ullam similique dicta laborum ad assumenda suscipit molestiae
-                  optio! Vel eligendi perspiciatis placeat.
+                  Aspernatur quia enim placeat sapiente debitis vel hic
+                  temporibus sint cum nostrum, a error sed illo quaerat
+                  cupiditate totam, ullam similique dicta laborum ad assumenda
+                  suscipit molestiae optio! Vel eligendi perspiciatis placeat.
                 </p>
 
                 <p>
@@ -79,23 +67,32 @@
                 </p>
               </div>
 
-              <div class="book-detail__info__download">
-                <div class="book-detail__info__download__item bg-pink">
-                  <!-- <span><i class="bx bx-heart"></i>Yêu thích</span> -->
-                  <span><i class="bx bx-heart"></i></span>
+              <!-- <div class="book-detail__info__options">
+                <div 
+                  class="book-detail__info__options__item bg-pink"
+                  @click="addToLovedBooks"
+                >
+                  <i class="bx bx-like"></i>
+                  <span>Yêu thích</span>
                 </div>
 
-                <div class="book-detail__info__download__item bg-primary">
-                  <!-- <span><i class="bx bx-download"></i>Tải sách</span> -->
-                  <span><i class="bx bx-download"></i></span>
+                <div class="book-detail__info__options__item bg-gray">
+                  <i class="bx bx-dislike"></i>
+                  <span>Bỏ thích</span>
                 </div>
 
-                <div class="book-detail__info__download__item bg-orange">
-                  <!-- <span><i class="bx bx-show"></i>Đọc online</span> -->
-                  <span><i class="bx bx-show"></i></span>
+                <div class="book-detail__info__options__item bg-primary">
+                  <i class="bx bx-download"></i>
+                  <span> Tải sách</span>
                 </div>
 
-              </div>
+                <div class="book-detail__info__options__item bg-orange">
+                  <i class="bx bx-show"></i>
+                  <span>Đọc online</span>
+                </div>
+              </div> -->
+              
+              <BookDetailOptions :bookId="book.id"></BookDetailOptions>
             </div>
           </Grid>
         </div>
@@ -188,7 +185,6 @@
       </SectionBody>
     </SectionContainer>
   </template>
-
 </template>
 
 <script>
@@ -198,8 +194,9 @@ import { useStore } from "vuex";
 import slugify from "slugify";
 
 import useBook from "@/composables/useBook";
-import useCategory from '@/composables/useCategory';
+import useCategory from "@/composables/useCategory";
 
+import BookDetailOptions from "@/components/BookDetailOptions.vue";
 import Grid from "@/components/Grid.vue";
 import SectionContainer from "@/components/SectionContainer.vue";
 import SectionBody from "@/components/SectionBody.vue";
@@ -220,15 +217,22 @@ export default {
     Slider,
     SwiperSlide,
     Loading,
+    BookDetailOptions,
   },
   setup() {
     const store = useStore();
     const route = useRoute();
 
-    const { getBookById, getBookCover, getBooksByCategory, getRandomBooks, getRandomBooksByCategory } = useBook();
-    const { getCategoryById } = useCategory()
+    const {
+      getBookById,
+      getBookCover,
+      getBooksByCategory,
+      getRandomBooks,
+      getRandomBooksByCategory,
+    } = useBook();
+    const { getCategoryById } = useCategory();
 
-    const category = ref({})
+    const category = ref({});
     const categorySlug = ref("");
     const book = ref({});
     const bookCover = ref("");
@@ -236,19 +240,26 @@ export default {
     const recommendedBooks = ref([]);
     const sameCategoryBooks = ref([]);
 
-    const isLoading = computed(() => store.state.isLoading)
+    const isLoading = computed(() => store.state.isLoading);
 
     const fetchData = () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           const book = getBookById(route.query.id);
-          const category = getCategoryById(book.categoryId)
+          const category = getCategoryById(book.categoryId);
           const bookCover = getBookCover(book.cover);
           const booksByCategory = getBooksByCategory(book.categoryId).slice(0, 12);
           const recommendedBooks = getRandomBooks(12, book.id);
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
 
-          resolve({ book, bookCover, booksByCategory, recommendedBooks, category, sameCategoryBooks });
+          resolve({
+            book,
+            bookCover,
+            booksByCategory,
+            recommendedBooks,
+            category,
+            sameCategoryBooks,
+          });
         }, 1000);
       });
     };
@@ -257,15 +268,18 @@ export default {
       store.commit("toggleLoading", true);
 
       fetchData().then((data) => {
-        category.value = data.category
-        categorySlug.value = slugify(category.value.name, { lower: true, locale: 'vi' })
+        category.value = data.category;
+        categorySlug.value = slugify(category.value.name, {
+          lower: true,
+          locale: "vi",
+        });
         book.value = data.book;
         bookCover.value = data.bookCover;
         booksByCategory.value = data.booksByCategory;
         recommendedBooks.value = data.recommendedBooks;
         sameCategoryBooks.value = data.sameCategoryBooks;
 
-        document.title = store.state.documentTitle + book.value.title
+        document.title = store.state.documentTitle + book.value.title;
 
         store.commit("toggleLoading", false);
       });
