@@ -94,7 +94,7 @@
               
               <BookDetailOptions 
                 :bookId="book.id"
-                :pdf="pdfFile"
+                :pdf="book.pdf"
               ></BookDetailOptions>
             </div>
           </Grid>
@@ -229,7 +229,6 @@ export default {
     const {
       getBookById,
       getBookCover,
-      getPDFFile,
       getBooksByCategory,
       getRandomBooks,
       getRandomBooksByCategory,
@@ -240,7 +239,6 @@ export default {
     const categorySlug = ref("");
     const book = ref({});
     const bookCover = ref("");
-    const pdfFile = ref("");
     const booksByCategory = ref([]);
     const recommendedBooks = ref([]);
     const sameCategoryBooks = ref([]);
@@ -253,7 +251,6 @@ export default {
           const book = getBookById(route.query.id);
           const category = getCategoryById(book.categoryId);
           const bookCover = getBookCover(book.cover);
-          const pdfFile = getPDFFile(book.pdf);
           const booksByCategory = getBooksByCategory(book.categoryId).slice(0, 12);
           const recommendedBooks = getRandomBooks(12, book.id);
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
@@ -261,7 +258,6 @@ export default {
           resolve({
             book,
             bookCover,
-            pdfFile,
             booksByCategory,
             recommendedBooks,
             category,
@@ -282,7 +278,6 @@ export default {
         });
         book.value = data.book;
         bookCover.value = data.bookCover;
-        pdfFile.value = data.pdfFile;
         booksByCategory.value = data.booksByCategory;
         recommendedBooks.value = data.recommendedBooks;
         sameCategoryBooks.value = data.sameCategoryBooks;
@@ -305,7 +300,6 @@ export default {
       categorySlug,
       book,
       bookCover,
-      pdfFile,
       booksByCategory,
       recommendedBooks,
       sameCategoryBooks,

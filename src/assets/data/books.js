@@ -14,6 +14,7 @@ export default [
     author: "Minato Kanae",
     uploadedAt: "2022-06-15T18:00:00",
     cover: "02-thu-toi.png",
+    pdf: "02-thu-toi.pdf",
     categoryId: 4
   },
   {

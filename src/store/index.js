@@ -11,7 +11,7 @@ export default createStore({
     viewedBooks: [],
   },
   getters: {
-    isBookLoved: (state) => (id) => state.lovedBooks.some(book => book.id === id)
+    isBookLoved: (state) => (id) => state.lovedBooks.some(book => book.id === id),
   },
   mutations: {
     resetToggle: (state) => {
