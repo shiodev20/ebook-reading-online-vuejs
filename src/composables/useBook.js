@@ -4,7 +4,8 @@ const getBooks = () => books
 
 const getBookCover = (bookCoverUrl) => require(`../assets/img/${bookCoverUrl}`)
 
-const getPDFFile = (PDFUrl) => `../data/`
+const getPDFFile = (PDFUrl) => `../assets/file/${PDFUrl}`
+
 const getMostDownloadBooks = (size) => {
   const data = books.sort((a, b) => {
     return b.downloads - a.downloads
@@ -71,6 +72,7 @@ export default () => {
   return {
     getBooks,
     getBookCover,
+    getPDFFile,
     getMostDownloadBooks,
     getMostViewBooks,
     getLatestBooks,

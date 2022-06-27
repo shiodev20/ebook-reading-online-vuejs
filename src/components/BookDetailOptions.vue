@@ -19,10 +19,12 @@
     </div>
     
 
-    <div class="book-detail__info__options__item bg-primary">
-      <i class="bx bx-download"></i>
-      <span> Tải sách</span>
-    </div>
+    <a :href="pdf" download>
+      <div class="book-detail__info__options__item bg-primary">
+        <i class="bx bx-download"></i>
+        <span> Tải sách</span>
+      </div>
+    </a>
 
     <div class="book-detail__info__options__item bg-orange">
       <i class="bx bx-show"></i>
@@ -40,6 +42,7 @@ import useBook from '@/composables/useBook';
 export default {
   props: {
     bookId: Number,
+    pdf: String,
   },
   setup(props) {
     const store = useStore();

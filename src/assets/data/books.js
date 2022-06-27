@@ -30,6 +30,7 @@ export default [
     author: "Hamanaka Aki",
     uploadedAt: "2022-06-19T18:00:00",
     cover: "04-tieng-thet.png",
+    pdf: "04-tieng-thet.pdf",
     categoryId: 4
   },
   {
