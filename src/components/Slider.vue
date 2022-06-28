@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { computed, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { useStore } from 'vuex';
 
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -92,7 +92,6 @@ export default {
         if(n >= breakpoint) hasNavigation.value = props.navigation[breakpoint]
       }
     })
-
 
     return {
       hasNavigation,

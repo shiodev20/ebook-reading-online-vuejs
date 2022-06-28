@@ -67,7 +67,7 @@ img {
 .loading {
   @include flex(center, center);
   width: 100%;
-  height: 50vh;
+  height: 75vh;
 
   &__content {
     border: 10px solid #f3f3f3;

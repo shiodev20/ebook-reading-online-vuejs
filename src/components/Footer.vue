@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer bg-primary color-white">
+  <footer v-if="!isLoading" class="footer bg-primary color-white">
     <div class="container">
       <grid :mdCol="1" :col="3" :gap="20">
 
@@ -81,13 +81,16 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import Grid from "./Grid.vue";
+import { useStore } from 'vuex';
 
 export default {
   name: "Footer",
   components: { Grid },
   setup() {
+    const store = useStore()
+
     const categoriesLink = ref([
       {
         display: "Tâm lý - Kỹ năng sống",
@@ -199,12 +202,15 @@ export default {
       },
     ])
     
+    const isLoading = computed(() => store.state.isLoading)
+
     return {
       categoriesLink,
       authorsLink,
       bookSeriesLink,
       socialsLink,
       policiesLink,
+      isLoading,
     }
   },
 };

@@ -1,7 +1,7 @@
 <template>
-  <component :is="layout">
-    <router-view></router-view>
-  </component>
+      <component :is="layout">
+        <router-view></router-view>
+      </component>
 </template>
 
 <script>
@@ -9,14 +9,18 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
+import Loading from '@/components/Loading.vue';
+
 export default {
   name: "App",
+  components: { Loading },
   setup() {
     const store = useStore();
     const route = useRoute();
     const router = useRouter();
 
     const layout = computed(() => route.meta.layout + "-layout");
+    const isLoading = computed(() => store.state.isLoading);
     const windowWidth = computed(() => store.state.windowWidth);
 
     store.commit("initializeStore")
@@ -45,6 +49,7 @@ export default {
 
     return {
       layout,
+      isLoading,
     };
   },
 };

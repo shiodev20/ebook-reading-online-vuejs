@@ -1,5 +1,5 @@
 <template>
-  <header class="header" ref="headerRef">
+  <header v-if="!isLoading" class="header" ref="headerRef">
     <nav class="container nav">
 
       <div class="nav__brand">
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
 import BaseModal from "./Modal.vue";
@@ -65,6 +65,8 @@ export default {
     const isShowModal = ref(false);
     const headerRef = ref(null)
 
+    const isLoading = computed(() => store.state.isLoading)
+
     const toggleSidenav = () => store.commit("toggleSidenav");
 
     onMounted(() => {
@@ -76,6 +78,7 @@ export default {
       })
     })
     return {
+      isLoading,
       isShowModal,
       headerRef,
       toggleSidenav,
