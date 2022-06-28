@@ -226,7 +226,6 @@ export default {
     const {
       getBookById,
       getBookCover,
-      getBooksByCategory,
       getRandomBooks,
       getRandomBooksByCategory,
     } = useBook();
@@ -236,7 +235,6 @@ export default {
     const categorySlug = ref("");
     const book = ref({});
     const bookCover = ref("");
-    const booksByCategory = ref([]);
     const recommendedBooks = ref([]);
     const sameCategoryBooks = ref([]);
 
@@ -248,14 +246,12 @@ export default {
           const book = getBookById(route.query.id);
           const category = getCategoryById(book.categoryId);
           const bookCover = getBookCover(book.title);
-          const booksByCategory = getBooksByCategory(book.categoryId).slice(0, 12);
           const recommendedBooks = getRandomBooks(12, book.id);
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
 
           resolve({
             book,
             bookCover,
-            booksByCategory,
             recommendedBooks,
             category,
             sameCategoryBooks,
@@ -275,7 +271,6 @@ export default {
         });
         book.value = data.book;
         bookCover.value = data.bookCover;
-        booksByCategory.value = data.booksByCategory;
         recommendedBooks.value = data.recommendedBooks;
         sameCategoryBooks.value = data.sameCategoryBooks;
         document.title = store.state.documentTitle + book.value.title;
@@ -286,7 +281,10 @@ export default {
 
   
     watch(route, (to, from) => {
-      if (to.name == "book-detail") initialPage();
+      if (to.name == "book-detail") {
+        initialPage();
+        store.commit('addViewedBook', { id: to.query.id })
+      }
     });
 
     initialPage();
@@ -297,7 +295,6 @@ export default {
       categorySlug,
       book,
       bookCover,
-      booksByCategory,
       recommendedBooks,
       sameCategoryBooks,
     };

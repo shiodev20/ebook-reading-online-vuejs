@@ -3,10 +3,6 @@ import slugify from 'slugify'
 
 const getBooks = () => books
 
-// const getBookCover = (bookCoverUrl) => {
-//   require(`../assets/img/${bookCoverUrl}`)
-// }
-
 const getBookCover = (bookTitle) => {
   const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
   return require(`@/assets/img/${slugTitle}.png`)
@@ -15,22 +11,6 @@ const getBookCover = (bookTitle) => {
 const getPDFFile = (bookTitle) => {
   const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
   return require (`@/assets/file/${slugTitle}.pdf`)
-}
-
-const getMostDownloadBooks = (size) => {
-  const data = books.sort((a, b) => {
-    return b.downloads - a.downloads
-  })
-
-  return data.slice(0, size)
-}
-
-const getMostViewBooks = (size) => {
-  const data = books.sort((a, b) => {
-    return b.views - a.views
-  })
-
-  return data.slice(0, size)
 }
 
 const getLatestBooks = (size) => {
@@ -48,6 +28,10 @@ const getCustomBookTitle = (title) => {
 
 const getBookById = (bookId) => {
   return books.find(book => book.id == bookId)
+}
+
+const getBooksById = (booksId) => {
+  return booksId.map(id => getBookById(id))
 }
 
 const getBooksByCategory = (categoryId) => {
@@ -84,11 +68,10 @@ export default () => {
     getBooks,
     getBookCover,
     getPDFFile,
-    getMostDownloadBooks,
-    getMostViewBooks,
     getLatestBooks,
     getCustomBookTitle,
     getBookById,
+    getBooksById,
     getBooksByCategory,
     getRandomBooks,
     getRandomBooksByCategory,

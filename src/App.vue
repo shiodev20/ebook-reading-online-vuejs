@@ -31,6 +31,8 @@ export default {
     });
     
     watch(route, (to, from) => {
+      if(to.name == 'book-detail') store.commit('addViewedBook', { id: Number(to.query.id) })
+
       if(to.name == 'category') store.commit('setActiveCategoryItem', to.query.id)
       else store.commit('setActiveCategoryItem', 0)
     })

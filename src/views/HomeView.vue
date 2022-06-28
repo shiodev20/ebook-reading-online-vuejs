@@ -21,7 +21,7 @@
 
     <!-- Recommended books -->
     <SectionContainer>
-      <SectionTitle>Sách nổi bật</SectionTitle>
+      <SectionTitle>Sách hay nên đọc</SectionTitle>
       <SectionBody>
         <Slider
           id="recommended-books"
@@ -154,13 +154,14 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { getLatestBooks, getRandomBooks } = useBook();
+    const { getLatestBooks, getRandomBooks, getBooksById } = useBook();
 
     const latestBooks = ref([]);
     const recommendedBooks = ref([]);
+    const lovedBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
-    const lovedBooks = computed(() => store.getters.getLovedBooks(18));
+    const lovedBooksId = computed(() => store.getters.getLovedBooks(18));
 
     const fetchData = () => {
       return new Promise((resolve, reject) => {
@@ -168,6 +169,7 @@ export default {
           resolve({
             latestBooks: getLatestBooks(12),
             recommendedBooks: getRandomBooks(18),
+            lovedBooks: getBooksById(lovedBooksId.value)
           });
         }, 1000);
       });
@@ -179,6 +181,7 @@ export default {
       fetchData().then((data) => {
         latestBooks.value = data.latestBooks;
         recommendedBooks.value = data.recommendedBooks;
+        lovedBooks.value = data.lovedBooks;
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
 

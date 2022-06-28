@@ -51,7 +51,7 @@ export default {
     const isBookLoved = computed(() => store.getters.isBookLoved(props.book.id));
  
     const customPDFFilename = () => 'ShioBook-' + slugify(props.book.title, { locale: 'vi'})
-    const addLovedBook = () => store.commit("addLovedBook", { book: props.book });
+    const addLovedBook = () => store.commit("addLovedBook", { id: props.book.id });
     const removeLovedBook = () => store.commit("removeLovedBook", { id: props.book.id });
 
 

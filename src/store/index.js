@@ -11,17 +11,10 @@ export default createStore({
     viewedBooks: [],
   },
   getters: {
-    isBookLoved: (state) => (id) => state.lovedBooks.some(book => book.id === id),
+    isBookLoved: (state) => (id) => state.lovedBooks.some(item => item === id),
     getLovedBooks: (state) => (size = state.lovedBooks.length) => state.lovedBooks.slice(0, size)
   },
   mutations: {
-    resetToggle: (state) => {
-      state.isSidenav = false
-    },
-    toggleLoading: (state, status) => state.isLoading = status,
-    toggleSidenav: (state) => state.isSidenav = !state.isSidenav,
-    setActiveCategoryItem: (state, categoryId) => state.activeCategoryItem = categoryId,
-    onWindowWidthChange: (state, innerWidth) => state.windowWidth = innerWidth,
     initializeStore: (state) => {
       if (localStorage.getItem('lovedBooks')) {
         state.lovedBooks = JSON.parse(localStorage.getItem('lovedBooks'))
@@ -30,24 +23,40 @@ export default createStore({
         localStorage.setItem('lovedBooks', JSON.stringify(state.lovedBooks))
       }
 
-      // if (localStorage.getItem('viewedBooks')) {
-      //   state.lovedBooks = JSON.parse(localStorage.getItem('viewedBooks'))
-      // }
-      // else {
-      //   localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
-      // }
+      if (localStorage.getItem('viewedBooks')) {
+        state.lovedBooks = JSON.parse(localStorage.getItem('viewedBooks'))
+      }
+      else {
+        localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
+      }
     },
-    addLovedBook: (state, { book }) => {
-      const isContain = state.lovedBooks.some(item => item.id == book.id)
+    resetToggle: (state) => {
+      state.isSidenav = false
+    },
+    toggleLoading: (state, status) => state.isLoading = status,
+    toggleSidenav: (state) => state.isSidenav = !state.isSidenav,
+    setActiveCategoryItem: (state, categoryId) => state.activeCategoryItem = categoryId,
+    onWindowWidthChange: (state, innerWidth) => state.windowWidth = innerWidth,
+    addLovedBook: (state, { id }) => {
+      const isContain = state.lovedBooks.some(item => item == id)
 
       if(!isContain) {
-        state.lovedBooks.push(book)
+        state.lovedBooks.push(id)
         localStorage.setItem('lovedBooks', JSON.stringify(state.lovedBooks))
       }
     },
     removeLovedBook: (state, { id }) => {
-      state.lovedBooks = state.lovedBooks.filter(book => book.id != id)
+      state.lovedBooks = state.lovedBooks.filter(item => item != id)
       localStorage.setItem('lovedBooks', JSON.stringify(state.lovedBooks))
+    },
+    addViewedBook: (state, { id }) => {
+      const isContain = state.viewedBooks.some(item => item == id)
+
+      if(!isContain) {
+        if(state.viewedBooks.length == 12) state.viewedBooks.pop(state.viewedBooks[11])
+        state.viewedBooks.unshift(id)
+        localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
+      }
     }
   },
   actions: {
