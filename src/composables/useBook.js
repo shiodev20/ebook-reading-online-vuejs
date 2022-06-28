@@ -1,10 +1,21 @@
 import books from '@/assets/data/books'
+import slugify from 'slugify'
 
 const getBooks = () => books
 
-const getBookCover = (bookCoverUrl) => require(`../assets/img/${bookCoverUrl}`)
+// const getBookCover = (bookCoverUrl) => {
+//   require(`../assets/img/${bookCoverUrl}`)
+// }
 
-const getPDFFile = (PDFUrl) => require(`../assets/file/${PDFUrl}`)
+const getBookCover = (bookTitle) => {
+  const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
+  return require(`@/assets/img/${slugTitle}.png`)
+}
+
+const getPDFFile = (bookTitle) => {
+  const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
+  return require (`@/assets/file/${slugTitle}.pdf`)
+}
 
 const getMostDownloadBooks = (size) => {
   const data = books.sort((a, b) => {

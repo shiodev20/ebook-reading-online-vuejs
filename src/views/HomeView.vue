@@ -20,10 +20,10 @@
     </SectionContainer>
 
     <SectionContainer>
-      <SectionTitle class="color-secondary">Sách được tải nhiều</SectionTitle>
+      <SectionTitle class="color-secondary">Sách yêu thích</SectionTitle>
       <SectionBody>
         <Slider
-          id="most-download-slider"
+          id="loved-book-slider"
           :navigation="{
             0: false,
             768: true,
@@ -54,7 +54,7 @@
             },
           }"
         >
-          <SwiperSlide v-for="book in mostDownloadBooks" :key="book.id">
+          <SwiperSlide v-for="book in lovedBooks" :key="book.id">
             <BookCard :book="book"></BookCard>
           </SwiperSlide>
         </Slider>
@@ -141,14 +141,13 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks } =
-      useBook();
+    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks } = useBook();
 
     const latestBooks = ref([]);
-    const mostDownloadBooks = ref([]);
     const mostViewBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
+    const lovedBooks = computed(() => store.getters.getLovedBooks(18));
 
     const fetchData = () => {
       return new Promise((resolve, reject) => {
@@ -167,7 +166,7 @@ export default {
 
       fetchData().then((data) => {
         latestBooks.value = data.latestBooks;
-        mostDownloadBooks.value = data.mostDownloadBooks;
+        // mostDownloadBooks.value = data.mostDownloadBooks;
         mostViewBooks.value = data.mostViewBooks;
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
@@ -181,7 +180,7 @@ export default {
     return {
       isLoading,
       latestBooks,
-      mostDownloadBooks,
+      lovedBooks,
       mostViewBooks,
     };
   },

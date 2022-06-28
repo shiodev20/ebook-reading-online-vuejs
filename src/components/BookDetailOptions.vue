@@ -40,25 +40,22 @@ import useBook from "@/composables/useBook";
 
 export default {
   props: {
-    bookId: Number,
-    pdf: String,
+    book: Object,
   },
   setup(props) {
     const store = useStore();
-    const { getBookById, getPDFFile } = useBook();
+    const { getPDFFile } = useBook();
 
-    const book = ref(getBookById(props.bookId));
-    const PDFFile = ref(getPDFFile(props.pdf));
+    const PDFFile = ref(getPDFFile(props.book.title));
 
-    const isBookLoved = computed(() => store.getters.isBookLoved(props.bookId));
+    const isBookLoved = computed(() => store.getters.isBookLoved(props.book.id));
  
-    const customPDFFilename = () => 'ShioBook-' + slugify(book.value.title, { locale: 'vi'})
-    const addLovedBook = () => store.commit("addLovedBook", { book: book.value });
-    const removeLovedBook = () => store.commit("removeLovedBook", { id: props.bookId });
+    const customPDFFilename = () => 'ShioBook-' + slugify(props.book.title, { locale: 'vi'})
+    const addLovedBook = () => store.commit("addLovedBook", { book: props.book });
+    const removeLovedBook = () => store.commit("removeLovedBook", { id: props.book.id });
 
 
     return {
-      book,
       PDFFile,
       isBookLoved,
       addLovedBook,

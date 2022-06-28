@@ -12,6 +12,7 @@ export default createStore({
   },
   getters: {
     isBookLoved: (state) => (id) => state.lovedBooks.some(book => book.id === id),
+    getLovedBooks: (state) => (size = state.lovedBooks.length) => state.lovedBooks.slice(0, size)
   },
   mutations: {
     resetToggle: (state) => {

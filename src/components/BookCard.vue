@@ -36,7 +36,8 @@ export default {
   setup(props) {
     const { getBookCover, getCustomBookTitle } = useBook();
 
-    const bookCover = ref(getBookCover(props.book.cover));
+    // const bookCover = ref(getBookCover(props.book.cover));
+    const bookCover = ref(getBookCover(props.book.title))
     const bookSlug = ref(slugify(props.book.title, { lower: true, locale: 'vi' }))
     const bookTitle = ref(getCustomBookTitle(props.book.title))
 

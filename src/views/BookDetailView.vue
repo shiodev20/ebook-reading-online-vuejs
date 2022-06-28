@@ -92,10 +92,7 @@
                   </div>
                 </div> -->
                 
-                <BookDetailOptions 
-                  :bookId="book.id"
-                  :pdf="book.pdf"
-                ></BookDetailOptions>
+                <BookDetailOptions :book="book"></BookDetailOptions>
               </div>
             </Grid>
           </div>
@@ -250,7 +247,7 @@ export default {
         setTimeout(() => {
           const book = getBookById(route.query.id);
           const category = getCategoryById(book.categoryId);
-          const bookCover = getBookCover(book.cover);
+          const bookCover = getBookCover(book.title);
           const booksByCategory = getBooksByCategory(book.categoryId).slice(0, 12);
           const recommendedBooks = getRandomBooks(12, book.id);
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
