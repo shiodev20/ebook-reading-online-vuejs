@@ -48,7 +48,7 @@ export default [
     author: "Fukuzawa Yukichi",
     uploadedAt: "2022-06-15T18:00:00",
     cover: "06-khuyen-hoc.png",
-    categoryId: 8
+    categoryId: 7
   },
   {
     id: 7,

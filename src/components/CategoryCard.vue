@@ -8,8 +8,7 @@
   >
     <div class="category-card">
       <div class="category-card__image">
-        <!-- <img :src="" :alt="" /> -->
-        <img src="../assets/img/categories/the-loai.png" alt="">
+        <img :src="categoryCover" :alt="category.name" />
       </div>
       <div class="category-card__title">{{ category.name }}</div>
     </div>
@@ -19,6 +18,7 @@
 <script>
 import slugify from 'slugify'
 import { ref } from '@vue/reactivity'
+import useCategory from '@/composables/useCategory'
 
 export default {
   name: 'CategoryCard',
@@ -26,10 +26,14 @@ export default {
     category: Object
   },
   setup(props) {
+    const { getCategoryCover } = useCategory()
+
     const categorySlug = ref(slugify(props.category.name, { lower: true, locale: 'vi' }))
+    const categoryCover = ref(getCategoryCover(props.category.name))
 
     return {
       categorySlug,
+      categoryCover
     }
   }
 }

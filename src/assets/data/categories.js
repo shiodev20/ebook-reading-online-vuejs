@@ -31,26 +31,21 @@ export default [
   },
   {
     id: 7,
-    name: "Tâm lý",
-    quantity: 0
-  },
-  {
-    id: 8,
     name: "Giáo dục",
     quantity: 1
   },
   {
-    id: 9,
+    id: 8,
     name: "Công nghệ thông tin",
     quantity: 0
   },
   {
-    id: 10,
+    id: 9,
     name: "Ngoại ngữ",
     quantity: 0
   },
   {
-    id: 11,
+    id: 10,
     name: "Truyện tranh",
     quantity: 0
   }

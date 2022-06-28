@@ -20,8 +20,8 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba($color: $dark-color, $alpha: .8);
-  border-radius: $radius;
+  height: 50px;
+  background-color: rgba($color: $dark-color, $alpha: .2);
 }
 
 body {
