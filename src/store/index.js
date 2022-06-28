@@ -30,12 +30,12 @@ export default createStore({
         localStorage.setItem('lovedBooks', JSON.stringify(state.lovedBooks))
       }
 
-      if (localStorage.getItem('viewedBooks')) {
-        state.lovedBooks = JSON.parse(localStorage.getItem('viewedBooks'))
-      }
-      else {
-        localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
-      }
+      // if (localStorage.getItem('viewedBooks')) {
+      //   state.lovedBooks = JSON.parse(localStorage.getItem('viewedBooks'))
+      // }
+      // else {
+      //   localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
+      // }
     },
     addLovedBook: (state, { book }) => {
       const isContain = state.lovedBooks.some(item => item.id == book.id)

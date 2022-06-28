@@ -10,8 +10,8 @@
       </div>
 
       <div class="nav__menu">
-
-        <div class="nav__menu__item nav__menu__item--search">
+        
+        <div class="nav__menu__item">
 
           <Teleport to="body">
             <base-modal 
@@ -30,8 +30,7 @@
           </div>
         </div>
 
-        <div
-          class="nav__menu__item nav__menu__item--toggle"
+        <div class="nav__menu__item"
           @click="toggleSidenav"
         >
           <div class="nav__toggle__btn">

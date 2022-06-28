@@ -19,10 +19,70 @@
       </SectionBody>
     </SectionContainer>
 
+    <!-- Recommended books -->
+    <SectionContainer>
+      <SectionTitle>Sách nổi bật</SectionTitle>
+      <SectionBody>
+        <Slider
+          id="recommended-books"
+          :seeMore="false"
+          :navigation="{
+            0: false,
+            768: true,
+          }"
+          :pagination="{
+            clickable: true,
+          }"
+          :breakpoints="{
+            0: {
+              slidesPerView: 2,
+              slidesPerGroup: 2,
+              spaceBetween: 20,
+            },
+            576: {
+              slidesPerView: 3,
+              slidesPerGroup: 3,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 4,
+              slidesPerGroup: 4,
+              spaceBetween: 20,
+            },
+            1000: {
+              slidesPerView: 6,
+              slidesPerGroup: 6,
+              spaceBetween: 20,
+            },
+          }"
+        >
+          <SwiperSlide v-for="book in recommendedBooks" :key="book.id">
+            <BookCard :book="book"></BookCard>
+          </SwiperSlide>
+        </Slider>
+      </SectionBody>
+    </SectionContainer>
+
+    <!-- Recommended Category -->
+    <SectionContainer>
+      <SectionTitle class="color-secondary">Thể loại nổi bật</SectionTitle>
+      <SectionBody>
+      </SectionBody>
+    </SectionContainer>
+
+    <!-- Quote -->
+    <SectionContainer>
+      <SectionBody>
+        <Quote></Quote>
+      </SectionBody>
+    </SectionContainer>
+
+    <!-- Loved books -->
     <SectionContainer>
       <SectionTitle class="color-secondary">Sách yêu thích</SectionTitle>
       <SectionBody>
         <Slider
+          v-if="lovedBooks.length"
           id="loved-book-slider"
           :navigation="{
             0: false,
@@ -58,54 +118,7 @@
             <BookCard :book="book"></BookCard>
           </SwiperSlide>
         </Slider>
-      </SectionBody>
-    </SectionContainer>
-
-    <SectionContainer>
-      <SectionBody>
-        <Quote></Quote>
-      </SectionBody>
-    </SectionContainer>
-
-    <SectionContainer>
-      <SectionTitle class="color-secondary">Sách được xem nhiều</SectionTitle>
-      <SectionBody>
-        <Slider
-          id="most-view-slider"
-          :navigation="{
-            0: false,
-            768: true,
-          }"
-          :pagination="{
-            clickable: true,
-          }"
-          :breakpoints="{
-            0: {
-              slidesPerView: 2,
-              slidesPerGroup: 2,
-              spaceBetween: 20,
-            },
-            576: {
-              slidesPerView: 3,
-              slidesPerGroup: 3,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 4,
-              slidesPerGroup: 4,
-              spaceBetween: 20,
-            },
-            1000: {
-              slidesPerView: 6,
-              slidesPerGroup: 6,
-              spaceBetween: 20,
-            },
-          }"
-        >
-          <SwiperSlide v-for="book in mostViewBooks" :key="book.id">
-            <BookCard :book="book"></BookCard>
-          </SwiperSlide>
-        </Slider>
+        <div v-else>None</div>
       </SectionBody>
     </SectionContainer>
   </template>
@@ -141,10 +154,10 @@ export default {
   },
   setup() {
     const store = useStore();
-    const { getMostDownloadBooks, getMostViewBooks, getLatestBooks } = useBook();
+    const { getLatestBooks, getRandomBooks } = useBook();
 
     const latestBooks = ref([]);
-    const mostViewBooks = ref([]);
+    const recommendedBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
     const lovedBooks = computed(() => store.getters.getLovedBooks(18));
@@ -153,9 +166,8 @@ export default {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve({
-            latestBooks: getLatestBooks(18),
-            mostDownloadBooks: getMostDownloadBooks(18),
-            mostViewBooks: getMostViewBooks(18),
+            latestBooks: getLatestBooks(12),
+            recommendedBooks: getRandomBooks(18),
           });
         }, 1000);
       });
@@ -166,8 +178,7 @@ export default {
 
       fetchData().then((data) => {
         latestBooks.value = data.latestBooks;
-        // mostDownloadBooks.value = data.mostDownloadBooks;
-        mostViewBooks.value = data.mostViewBooks;
+        recommendedBooks.value = data.recommendedBooks;
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
 
@@ -181,7 +192,7 @@ export default {
       isLoading,
       latestBooks,
       lovedBooks,
-      mostViewBooks,
+      recommendedBooks,
     };
   },
 };

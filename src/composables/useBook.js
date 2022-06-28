@@ -55,7 +55,7 @@ const getBooksByCategory = (categoryId) => {
   return data
 }
 
-const getRandomBooks = (size, bookId, books = []) => {
+const getRandomBooks = (size, bookId = null, books = []) => {
   let data = books.length ? books : getBooks()
 
    data = data.filter(book => {

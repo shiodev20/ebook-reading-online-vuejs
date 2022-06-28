@@ -11,9 +11,6 @@
     height: $header-height;
     
     &__brand {
-      // img {
-      //   height: 40px;
-      // }
       &__logo {
         font-size: $icon-size;
         font-weight: 900;
@@ -34,16 +31,17 @@
       &__item {
         color: $primary-color;
         cursor: pointer;
+        margin-left: 2.5rem;
+
+        @include mobile {
+          margin-left: 1.5rem;
+        }
 
         i {
           font-size: $icon-size;
-        }
-
-        &--search {
-          margin-right: 2.5rem;
 
           @include mobile {
-            margin-right: 1rem;
+            font-size: $subicon-size;
           }
         }
       }
