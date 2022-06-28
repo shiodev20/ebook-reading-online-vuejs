@@ -67,6 +67,13 @@
     <SectionContainer>
       <SectionTitle class="color-secondary">Thể loại nổi bật</SectionTitle>
       <SectionBody>
+        <Grid :smCol="2" :lgCol="3" :col="6" :gap="20">
+          <CategoryCard
+            v-for="category in sortedCategory"
+            :key="category.id"
+            :category="category"
+          ></CategoryCard>
+        </Grid>
       </SectionBody>
     </SectionContainer>
 
@@ -118,7 +125,10 @@
             <BookCard :book="book"></BookCard>
           </SwiperSlide>
         </Slider>
-        <div v-else>None</div>
+        <div v-else class="empty-box">
+          <p class="empty-box__title">Hãy đặt sách mà bạn yêu thích lên kệ nhé!</p>
+          <img class="empty-box__image" src="../assets/empty.svg">
+        </div>
       </SectionBody>
     </SectionContainer>
   </template>
@@ -128,10 +138,12 @@
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import useBook from "@/composables/useBook";
+import useCategory from '@/composables/useCategory';
 
 import { SwiperSlide } from "swiper/vue";
 import Grid from "@/components/Grid.vue";
 import BookCard from "@/components/BookCard.vue";
+import CategoryCard from "@/components/CategoryCard.vue";
 import Slider from "@/components/Slider.vue";
 import Quote from "@/components/Quote.vue";
 import SectionContainer from "@/components/SectionContainer.vue";
@@ -145,6 +157,7 @@ export default {
     SwiperSlide,
     Grid,
     BookCard,
+    CategoryCard,
     SectionContainer,
     SectionTitle,
     SectionBody,
@@ -155,10 +168,12 @@ export default {
   setup() {
     const store = useStore();
     const { getLatestBooks, getRandomBooks, getBooksById } = useBook();
+    const { getSortCategory } = useCategory()
 
     const latestBooks = ref([]);
     const recommendedBooks = ref([]);
     const lovedBooks = ref([]);
+    const sortedCategory = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
     const lovedBooksId = computed(() => store.getters.getLovedBooks(18));
@@ -169,7 +184,8 @@ export default {
           resolve({
             latestBooks: getLatestBooks(12),
             recommendedBooks: getRandomBooks(18),
-            lovedBooks: getBooksById(lovedBooksId.value)
+            lovedBooks: getBooksById(lovedBooksId.value),
+            sortedCategory: getSortCategory()
           });
         }, 1000);
       });
@@ -182,6 +198,7 @@ export default {
         latestBooks.value = data.latestBooks;
         recommendedBooks.value = data.recommendedBooks;
         lovedBooks.value = data.lovedBooks;
+        sortedCategory.value = data.sortedCategory.slice(0, 6);
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
 
@@ -196,6 +213,7 @@ export default {
       latestBooks,
       lovedBooks,
       recommendedBooks,
+      sortedCategory,
     };
   },
 };

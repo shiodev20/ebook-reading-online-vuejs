@@ -1,25 +1,25 @@
 <template>
-  <div class="book-card">
-    <router-link
-      :to="{
-        name: 'book-detail',
-        params: {
-          slug: bookSlug,
-        },
-        query: {
-          id: book.id,
-        },
-      }"
-    >
-      <div class="book-card__image">
-        <img :src="bookCover" :alt="book.title" />
-      </div>
-      <div class="book-card__info">
-        <div class="book-card__info__title">{{ bookTitle }}</div>
-        <div class="book-card__info__author">{{ book.author }}</div>
-      </div>
-    </router-link>
-  </div>
+  <router-link
+    :to="{
+      name: 'book-detail',
+      params: {
+        slug: bookSlug,
+      },
+      query: {
+        id: book.id,
+      },
+    }"
+  >
+    <div class="book-card">
+        <div class="book-card__image">
+          <img :src="bookCover" :alt="book.title" />
+        </div>
+        <div class="book-card__info">
+          <div class="book-card__info__title">{{ bookTitle }}</div>
+          <div class="book-card__info__author">{{ book.author }}</div>
+        </div>
+    </div>
+  </router-link>
 </template>
 
 <script>

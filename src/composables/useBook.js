@@ -5,7 +5,7 @@ const getBooks = () => books
 
 const getBookCover = (bookTitle) => {
   const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
-  return require(`@/assets/img/${slugTitle}.png`)
+  return require(`@/assets/img/books/${slugTitle}.png`)
 }
 
 const getPDFFile = (bookTitle) => {

@@ -33,8 +33,6 @@ export default {
     active: Boolean,
   },
   setup(props) {
-    const store = useStore()
-
     const categorySlug = ref(slugify(props.category.name, { lower: true, locale: 'vi' }))
     
     return {

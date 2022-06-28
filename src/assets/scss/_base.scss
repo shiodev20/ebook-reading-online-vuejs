@@ -64,10 +64,28 @@ img {
   opacity: $opacity;
 }
 
+.empty-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: .5;
+  &__title {
+    margin-bottom: 1rem;
+    font-size: $subtitle-size;
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  &__image {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 .loading {
   @include flex(center, center);
   width: 100%;
-  height: 75vh;
+  height: 60vh;
 
   &__content {
     border: 10px solid #f3f3f3;

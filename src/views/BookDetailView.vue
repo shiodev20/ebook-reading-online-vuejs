@@ -6,7 +6,7 @@
     <template v-else>
       <SectionContainer>
         <SectionBody>
-          <div class="book-detail" v-if="book">
+          <div class="book-detail">
             <Grid class="book-detail-layout" :gap="30">
               <div class="book-detail__book-cover">
                 <img :src="bookCover" :alt="book.title" />
@@ -66,32 +66,6 @@
                     optio deserunt.
                   </p>
                 </div>
-
-                <!-- <div class="book-detail__info__options">
-                  <div 
-                    class="book-detail__info__options__item bg-pink"
-                    @click="addToLovedBooks"
-                  >
-                    <i class="bx bx-like"></i>
-                    <span>Yêu thích</span>
-                  </div>
-
-                  <div class="book-detail__info__options__item bg-gray">
-                    <i class="bx bx-dislike"></i>
-                    <span>Bỏ thích</span>
-                  </div>
-
-                  <div class="book-detail__info__options__item bg-primary">
-                    <i class="bx bx-download"></i>
-                    <span> Tải sách</span>
-                  </div>
-
-                  <div class="book-detail__info__options__item bg-orange">
-                    <i class="bx bx-show"></i>
-                    <span>Đọc online</span>
-                  </div>
-                </div> -->
-                
                 <BookDetailOptions :book="book"></BookDetailOptions>
               </div>
             </Grid>
@@ -99,49 +73,7 @@
         </SectionBody>
       </SectionContainer>
 
-      <SectionContainer>
-        <SectionTitle>Có thể bạn sẽ thích</SectionTitle>
-        <SectionBody>
-          <Slider
-            id="recommended-books"
-            :seeMore="false"
-            :navigation="{
-              0: false,
-              768: true,
-            }"
-            :pagination="{
-              clickable: true,
-            }"
-            :breakpoints="{
-              0: {
-                slidesPerView: 2,
-                slidesPerGroup: 2,
-                spaceBetween: 20,
-              },
-              576: {
-                slidesPerView: 3,
-                slidesPerGroup: 3,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 4,
-                slidesPerGroup: 4,
-                spaceBetween: 20,
-              },
-              1000: {
-                slidesPerView: 6,
-                slidesPerGroup: 6,
-                spaceBetween: 20,
-              },
-            }"
-          >
-            <SwiperSlide v-for="book in recommendedBooks" :key="book.id">
-              <BookCard :book="book"></BookCard>
-            </SwiperSlide>
-          </Slider>
-        </SectionBody>
-      </SectionContainer>
-
+      <!-- Same category -->
       <SectionContainer>
         <SectionTitle>Sách cùng thể loại</SectionTitle>
         <SectionBody>
@@ -179,6 +111,50 @@
             }"
           >
             <SwiperSlide v-for="book in sameCategoryBooks" :key="book.id">
+              <BookCard :book="book"></BookCard>
+            </SwiperSlide>
+          </Slider>
+        </SectionBody>
+      </SectionContainer>
+
+      <SectionContainer>
+        <SectionTitle>Sách đã xem</SectionTitle>
+        <SectionBody>
+          <Slider
+            id="viewed-book"
+            :seeMore="false"
+            :navigation="{
+              0: false,
+              768: true,
+            }"
+            :pagination="{ clickable: true }"
+            :breakpoints="{
+              0: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 20,
+              },
+              576: {
+                slidesPerView: 3,
+                slidesPerGroup: 3,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+                spaceBetween: 20,
+              },
+              1000: {
+                slidesPerView: 6,
+                slidesPerGroup: 6,
+                spaceBetween: 20,
+              },
+            }"
+          >
+            <SwiperSlide
+              v-for="book in viewedBooks"
+              :key="book.id"
+            >
               <BookCard :book="book"></BookCard>
             </SwiperSlide>
           </Slider>
@@ -226,7 +202,7 @@ export default {
     const {
       getBookById,
       getBookCover,
-      getRandomBooks,
+      getBooksById,
       getRandomBooksByCategory,
     } = useBook();
     const { getCategoryById } = useCategory();
@@ -235,10 +211,12 @@ export default {
     const categorySlug = ref("");
     const book = ref({});
     const bookCover = ref("");
-    const recommendedBooks = ref([]);
     const sameCategoryBooks = ref([]);
+    const viewedBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
+    const viewedBooksId = computed(() => store.state.viewedBooks)
+
 
     const fetchData = () => {
       return new Promise((resolve, reject) => {
@@ -246,15 +224,15 @@ export default {
           const book = getBookById(route.query.id);
           const category = getCategoryById(book.categoryId);
           const bookCover = getBookCover(book.title);
-          const recommendedBooks = getRandomBooks(12, book.id);
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
+          const viewedBooks = getBooksById(viewedBooksId.value)
 
           resolve({
             book,
             bookCover,
-            recommendedBooks,
             category,
             sameCategoryBooks,
+            viewedBooks,
           });
         }, 1000);
       });
@@ -271,7 +249,7 @@ export default {
         });
         book.value = data.book;
         bookCover.value = data.bookCover;
-        recommendedBooks.value = data.recommendedBooks;
+        viewedBooks.value = data.viewedBooks;
         sameCategoryBooks.value = data.sameCategoryBooks;
         document.title = store.state.documentTitle + book.value.title;
 
@@ -295,8 +273,8 @@ export default {
       categorySlug,
       book,
       bookCover,
-      recommendedBooks,
       sameCategoryBooks,
+      viewedBooks,
     };
   },
 };

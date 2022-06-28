@@ -54,7 +54,6 @@ export default {
     const addLovedBook = () => store.commit("addLovedBook", { id: props.book.id });
     const removeLovedBook = () => store.commit("removeLovedBook", { id: props.book.id });
 
-
     return {
       PDFFile,
       isBookLoved,
