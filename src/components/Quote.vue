@@ -2,11 +2,9 @@
   <div class="quote">
     <hr class="quote__divider quote__divider--top">
     
-    <p class="quote__content">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quibusdam neque qui natus suscipit ducimus. Temporibus magnam recusandae fugiat explicabo eaque?
-    </p>
+    <p class="quote__content">{{ quote.content }}</p>
 
-    <p class="quote__author">Shio Nguyen</p>
+    <p class="quote__author">{{ quote.author }}</p>
 
     <hr class="quote__divider quote__divider--bottom">
 
@@ -14,8 +12,26 @@
 </template>
 
 <script>
+import { ref } from 'vue';
+import quotes from "@/assets/data/quotes";
+
 export default {
   name: 'Quote',
+  setup() {
+
+    const quote = ref({})
+
+    const randomQoute = () => {
+      const randomIdx = Math.floor((Math.random() * quotes.length))
+      quote.value = quotes[randomIdx]
+    }
+
+    randomQoute()
+
+    return {
+      quote,
+    }
+  }
 }
 </script>
 

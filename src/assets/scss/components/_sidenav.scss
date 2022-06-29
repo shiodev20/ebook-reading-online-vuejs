@@ -109,6 +109,8 @@
         }
 
         &__badge {
+          @include flex(center, center);
+
           &__quantity {
             padding: 0.2rem 0.6rem;
 
@@ -117,14 +119,14 @@
             background-color: $gray-color;
             color: $white-color;
 
-            border-radius: $radius;
+            border-radius: 50%;
             transition: $transition;
           }
 
           &__icon {
             i {
               position: relative;
-              top: 4px;
+              top: 1px;
               font-size: $subicon-size;
               color: $gray-color;
               transition: $transition;

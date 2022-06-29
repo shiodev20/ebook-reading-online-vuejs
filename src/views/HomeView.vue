@@ -65,15 +65,17 @@
 
     <!-- Recommended Category -->
     <SectionContainer>
-      <SectionTitle class="color-secondary">Thể loại nổi bật</SectionTitle>
+      <SectionTitle>Thể loại nổi bật</SectionTitle>
       <SectionBody>
-        <Grid :smCol="2" :lgCol="3" :col="6" :gap="20">
+        <div id="category-list">
           <CategoryCard
             v-for="category in sortedCategory"
             :key="category.id"
             :category="category"
           ></CategoryCard>
-        </Grid>
+        </div>
+        <!-- <Grid :smCol="2" :lgCol="3" :col="6" :gap="20">
+        </Grid> -->
       </SectionBody>
     </SectionContainer>
 
@@ -168,7 +170,7 @@ export default {
   setup() {
     const store = useStore();
     const { getLatestBooks, getRandomBooks, getBooksById } = useBook();
-    const { getSortCategory } = useCategory()
+    const { getSortCategory, getCategories } = useCategory()
 
     const latestBooks = ref([]);
     const recommendedBooks = ref([]);
@@ -185,7 +187,8 @@ export default {
             latestBooks: getLatestBooks(12),
             recommendedBooks: getRandomBooks(18),
             lovedBooks: getBooksById(lovedBooksId.value),
-            sortedCategory: getSortCategory()
+            // sortedCategory: getSortCategory()
+            sortedCategory: getCategories()
           });
         }, 1000);
       });
@@ -198,7 +201,8 @@ export default {
         latestBooks.value = data.latestBooks;
         recommendedBooks.value = data.recommendedBooks;
         lovedBooks.value = data.lovedBooks;
-        sortedCategory.value = data.sortedCategory.slice(0, 6);
+        // sortedCategory.value = data.sortedCategory.slice(0, 6);
+        sortedCategory.value = data.sortedCategory;
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
 

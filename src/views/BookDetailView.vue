@@ -8,34 +8,36 @@
         <SectionBody>
           <div class="book-detail">
             <Grid class="book-detail-layout" :gap="30">
-              <div class="book-detail__book-cover">
-                <img :src="bookCover" :alt="book.title" />
-              </div>
+                <img
+                  class="book-detail__cover"
+                  :src="bookCover" 
+                  :alt="book.title" 
+                />
+
 
               <div class="book-detail__info">
                 <h1 class="book-detail__info__title">{{ book.title }}</h1>
 
                 <div class="book-detail__info__meta">
-                  <Grid :col="2" :smCol="1">
-                    <div>
-                      <div class="book-detail__info__meta__item">
-                        Tác giả: <span>{{ book.author }}</span>
-                      </div>
-                      <div class="book-detail__info__meta__item">
-                        Thể loại:
-                        <span>
-                          <router-link
-                            :to="{
-                              name: 'category',
-                              params: { category: categorySlug },
-                              query: { id: category.id },
-                            }"
-                            >{{ category.name }}</router-link
-                          >
-                        </span>
-                      </div>
-                    </div>
-                  </Grid>
+                  <div class="book-detail__info__meta__item">
+                    Tác giả: <span>{{ book.author }}</span>
+                  </div>
+                  <div class="book-detail__info__meta__item">
+                    Thể loại:
+                      <span>
+                        <router-link
+                          :to="{
+                            name: 'category',
+                            params: { category: categorySlug },
+                            query: { id: category.id },
+                          }"
+                          >{{ category.name }}</router-link
+                        >
+                      </span>
+                  </div>
+                   <div class="book-detail__info__meta__item">
+                    Ngày tải lên: <span>{{ bookUploadTime }}</span>
+                  </div>
                 </div>
 
                 <hr />
@@ -168,6 +170,7 @@ import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import slugify from "slugify";
+import moment from "moment";
 
 import useBook from "@/composables/useBook";
 import useCategory from "@/composables/useCategory";
@@ -211,6 +214,7 @@ export default {
     const categorySlug = ref("");
     const book = ref({});
     const bookCover = ref("");
+    const bookUploadTime = ref("");
     const sameCategoryBooks = ref([]);
     const viewedBooks = ref([]);
 
@@ -221,15 +225,18 @@ export default {
     const fetchData = () => {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
+          moment.locale('vi')
           const book = getBookById(route.query.id);
           const category = getCategoryById(book.categoryId);
           const bookCover = getBookCover(book.title);
+          const bookUploadTime = moment(book.uploadedAt).fromNow();
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
           const viewedBooks = getBooksById(viewedBooksId.value)
 
           resolve({
             book,
             bookCover,
+            bookUploadTime,
             category,
             sameCategoryBooks,
             viewedBooks,
@@ -243,12 +250,10 @@ export default {
 
       fetchData().then((data) => {
         category.value = data.category;
-        categorySlug.value = slugify(category.value.name, {
-          lower: true,
-          locale: "vi",
-        });
+        categorySlug.value = slugify(category.value.name, { lower: true, locale: "vi", });
         book.value = data.book;
         bookCover.value = data.bookCover;
+        bookUploadTime.value = data.bookUploadTime;
         viewedBooks.value = data.viewedBooks;
         sameCategoryBooks.value = data.sameCategoryBooks;
         document.title = store.state.documentTitle + book.value.title;
@@ -273,6 +278,7 @@ export default {
       categorySlug,
       book,
       bookCover,
+      bookUploadTime,
       sameCategoryBooks,
       viewedBooks,
     };

@@ -9,6 +9,7 @@
   "dependencies": {
     "boxicons": "^2.1.2",
     "core-js": "^3.8.3",
+    "moment": "^2.29.3",
     "slugify": "^1.6.5",
     "swiper": "^8.2.3",
     "vue": "^3.2.13",

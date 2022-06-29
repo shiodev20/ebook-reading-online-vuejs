@@ -26,26 +26,31 @@ export default [
   },
   {
     id: 6,
-    name: "Văn học - Địa lý - Tôn giáo",
-    quantity: 4
+    name: "Văn học",
+    quantity: 3,
   },
   {
     id: 7,
+    name: "Địa lý - Tôn giáo",
+    quantity: 2
+  },
+  {
+    id: 8,
     name: "Giáo dục",
     quantity: 1
   },
   {
-    id: 8,
+    id: 9,
     name: "Công nghệ thông tin",
     quantity: 0
   },
   {
-    id: 9,
+    id: 10,
     name: "Ngoại ngữ",
     quantity: 0
   },
   {
-    id: 10,
+    id: 11,
     name: "Truyện tranh",
     quantity: 0
   }

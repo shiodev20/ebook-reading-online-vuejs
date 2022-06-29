@@ -24,7 +24,7 @@ export default createStore({
       }
 
       if (localStorage.getItem('viewedBooks')) {
-        state.lovedBooks = JSON.parse(localStorage.getItem('viewedBooks'))
+        state.viewedBooks = JSON.parse(localStorage.getItem('viewedBooks'))
       }
       else {
         localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))

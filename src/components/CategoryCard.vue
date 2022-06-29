@@ -1,23 +1,22 @@
 <template>
-  <router-link
-    :to="{
-      name: 'category',
-      params: { category: categorySlug },
-      query: { id: category.id }
-    }"
-  >
-    <div class="category-card">
-      <div class="category-card__image">
-        <img :src="categoryCover" :alt="category.name" />
-      </div>
+  <div class="category-card">
+    <router-link
+      :to="{
+        name: 'category',
+        params: { category: categorySlug },
+        query: { id: category.id }
+      }"
+    >
+        <img class="category-card__image" :src="categoryCover" :alt="category.name" />
       <div class="category-card__title">{{ category.name }}</div>
-    </div>
-  </router-link>
+    </router-link>
+  </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 import slugify from 'slugify'
-import { ref } from '@vue/reactivity'
+
 import useCategory from '@/composables/useCategory'
 
 export default {

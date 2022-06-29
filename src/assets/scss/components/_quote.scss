@@ -21,6 +21,11 @@
     text-align: center;
     color: $primary-color;
 
+    @include mobile {
+      text-align: left;
+      font-size: $subtitle-size;
+    }
+
   }
 
   &__author {
@@ -30,5 +35,9 @@
     font-weight: 500;
     text-align: right;
     color: $gray-color;
+
+    @include mobile {
+      font-size: $text-size;
+    }
   }
 }

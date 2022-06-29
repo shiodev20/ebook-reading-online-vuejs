@@ -40,7 +40,7 @@ export default [
     author: "Nguyễn Phong",
     uploadedAt: "2022-06-15T18:00:00",
     cover: "05-muon-kiep-nhan-sinh.png",
-    categoryId: 6
+    categoryId: 7
   },
   {
     id: 6,
@@ -48,7 +48,7 @@ export default [
     author: "Fukuzawa Yukichi",
     uploadedAt: "2022-06-15T18:00:00",
     cover: "06-khuyen-hoc.png",
-    categoryId: 7
+    categoryId: 8
   },
   {
     id: 7,
@@ -128,7 +128,7 @@ export default [
     author: "Tim Marshall",
     uploadedAt: "2022-06-15T18:00:00",
     cover: "16-nhung-tu-nhan-cua-dia-ly.png",
-    categoryId: 6
+    categoryId: 7
   },
   {
     id: 17,
