@@ -1,7 +1,7 @@
 <template>
-      <component :is="layout">
-        <router-view></router-view>
-      </component>
+  <component :is="layout">
+    <router-view></router-view>
+  </component>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
-import Loading from '@/components/Loading.vue';
+import Loading from "@/components/Loading.vue";
 
 export default {
   name: "App",
@@ -23,25 +23,27 @@ export default {
     const isLoading = computed(() => store.state.isLoading);
     const windowWidth = computed(() => store.state.windowWidth);
 
-    store.commit("initializeStore")
+    store.commit("initializeStore");
     store.commit("onWindowWidthChange", window.innerWidth);
 
     router.beforeEach((to, from) => {
       store.commit("resetToggle");
     });
-    
-    watch(route, (to, from) => {
-      if(to.name == 'book-detail') store.commit('addViewedBook', { id: Number(to.query.id) })
 
-      if(to.name == 'category') store.commit('setActiveCategoryItem', to.query.id)
-      else store.commit('setActiveCategoryItem', 0)
-    })
+    watch(route, (to, from) => {
+      if (to.name == "book-detail")
+        store.commit("addViewedBook", { id: Number(to.query.id) });
+
+      if (to.name == "category")
+        store.commit("setActiveCategoryItem", to.query.id);
+      else store.commit("setActiveCategoryItem", 0);
+    });
 
     watch(windowWidth, (n, o) => {
       if (n <= 992) store.state.isMobile = false;
     });
 
-    document.title = store.state.documentTitle + 'Tải ebook miễn phí'
+    document.title = store.state.documentTitle + "Tải ebook miễn phí";
 
     onMounted(() =>
       window.addEventListener("resize", () => {

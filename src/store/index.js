@@ -4,6 +4,7 @@ export default createStore({
   state: {
     isSidenav: false,
     isLoading: false,
+    toast: false,
     activeCategoryItem: 0,
     windowWidth: 0,
     documentTitle: 'ShioBook | ',
@@ -32,11 +33,14 @@ export default createStore({
     },
     resetToggle: (state) => {
       state.isSidenav = false
+      state.toast = false
     },
     toggleLoading: (state, status) => state.isLoading = status,
     toggleSidenav: (state) => state.isSidenav = !state.isSidenav,
     setActiveCategoryItem: (state, categoryId) => state.activeCategoryItem = categoryId,
     onWindowWidthChange: (state, innerWidth) => state.windowWidth = innerWidth,
+    showToast: (state) => state.toast = true,
+    closeToast: (state) => state.toast = false,
     addLovedBook: (state, { id }) => {
       const isContain = state.lovedBooks.some(item => item == id)
 

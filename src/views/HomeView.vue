@@ -6,7 +6,7 @@
   <template v-else>
     <!-- Latest update books -->
     <SectionContainer>
-      <SectionTitle class="color-secondary">Sách mới cập nhật</SectionTitle>
+      <SectionTitle>Sách mới cập nhật</SectionTitle>
 
       <SectionBody>
         <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
@@ -19,6 +19,20 @@
       </SectionBody>
     </SectionContainer>
 
+    <!-- Recommended Category -->
+    <SectionContainer>
+      <SectionTitle>Thể loại nổi bật</SectionTitle>
+      <SectionBody>
+        <div id="category-list">
+          <CategoryCard
+            v-for="category in sortedCategory"
+            :key="category.id"
+            :category="category"
+          ></CategoryCard>
+        </div>
+      </SectionBody>
+    </SectionContainer>
+    
     <!-- Recommended books -->
     <SectionContainer>
       <SectionTitle>Sách hay nên đọc</SectionTitle>
@@ -63,21 +77,7 @@
       </SectionBody>
     </SectionContainer>
 
-    <!-- Recommended Category -->
-    <SectionContainer>
-      <SectionTitle>Thể loại nổi bật</SectionTitle>
-      <SectionBody>
-        <div id="category-list">
-          <CategoryCard
-            v-for="category in sortedCategory"
-            :key="category.id"
-            :category="category"
-          ></CategoryCard>
-        </div>
-        <!-- <Grid :smCol="2" :lgCol="3" :col="6" :gap="20">
-        </Grid> -->
-      </SectionBody>
-    </SectionContainer>
+    
 
     <!-- Quote -->
     <SectionContainer>
