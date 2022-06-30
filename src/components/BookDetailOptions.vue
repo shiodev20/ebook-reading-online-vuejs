@@ -18,7 +18,11 @@
       <span>Yêu thích</span>
     </div>
 
-    <a :href="PDFFile.default" :download="customPDFFilename()">
+    <a 
+      :href="PDFFile.default" 
+      :download="PDFFilename"
+      @click="downloadBook"
+    >
       <div class="book-detail__info__options__item bg-primary">
         <i class="bx bx-download"></i>
         <span> Tải sách</span>
@@ -30,10 +34,12 @@
       <span>Đọc online</span>
     </div>
   </div>
+
   <Toast
     :timeout="false"
   >
-    <div class="toast__title">- Bạn đã thích sách "{{ book.title }}"</div>
+    <div class="toast__title">- Bạn đã tải sách <span>" {{ book.title }} "</span></div>
+    <div class="toast__desc">Nếu Bạn có điều kiện, Hãy mua sách giấy để ủng hộ Tác giả và Nhà xuất bản nhé!</div>
   </Toast>
 </template>
 
@@ -56,23 +62,21 @@ export default {
     const { getPDFFile } = useBook();
 
     const PDFFile = ref(getPDFFile(props.book.title));
+    const PDFFilename = ref('ShioBook-' + slugify(props.book.title, { locale: 'vi'}))
 
     const isBookLoved = computed(() => store.getters.isBookLoved(props.book.id));
 
-    const customPDFFilename = () => 'ShioBook-' + slugify(props.book.title, { locale: 'vi'})
-
-    const addLovedBook = () => {
-      store.commit("addLovedBook", { id: props.book.id });
-      store.commit("showToast")
-    }
+    const addLovedBook = () => store.commit("addLovedBook", { id: props.book.id });
     const removeLovedBook = () => store.commit("removeLovedBook", { id: props.book.id });
+    const downloadBook = () => store.commit("showToast")
 
     return {
       PDFFile,
+      PDFFilename,
       isBookLoved,
       addLovedBook,
       removeLovedBook,
-      customPDFFilename,
+      downloadBook,
     };
   },
 };
@@ -80,9 +84,27 @@ export default {
 
 <style lang="scss" scoped>
   @import '../assets/scss/variable';
+  @import '../assets/scss/mixin';
 
   .toast__title {
+    margin: 1rem 0;
     font-size: $subtitle-size;
     color: $primary-color;
+
+    span {
+      color: $secondary-color;
+      font-weight: bold;
+    }
+  }
+
+  .toast__desc {
+    line-height: 2.5rem;
+    font-size: $subtitle-size;
+    font-style: italic;
+    color: $gray-color;
+
+    @include mobile {
+      font-size: $text-size;
+    }
   }
 </style>

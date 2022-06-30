@@ -4,7 +4,7 @@
   left: 2rem;
   max-width: 500px;
   width: 90%;
-  padding: 3rem 4rem 2rem 2rem;
+  padding: 3rem 2rem 2rem 2rem;
   background: $white-color;
   border-top: 4px solid $primary-color;
   border-radius: $radius;
@@ -19,24 +19,5 @@
     color: $gray-color;
     cursor: pointer;
   }
-  // &__title {
-  //   margin-bottom: 1rem;
-  //   font-size: $title-size;
-  //   font-weight: bold;
-  //   color: $primary-color;
-
-  //   @include mobile {
-  //     font-size: $subtitle-size;
-  //   }
-  // }
-
-  // &__desc {
-  //   font-size: $subtitle-size;
-  //   font-style: italic;
-  //   opacity: $opacity;
-
-  //   @include mobile {
-  //     font-size: $text-size;
-  //   }
-  // }
+  
 }

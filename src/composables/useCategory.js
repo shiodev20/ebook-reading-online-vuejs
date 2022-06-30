@@ -12,17 +12,10 @@ const getCategoryCover = (categoryName) => {
   return require(`@/assets/img/categories/${categorySlug}.png`)
 }
 
-const getSortCategory = () => {
-  return categories.sort((a, b) => {
-    return b.quantity - a.quantity
-  })
-}
-
 export default () => {
   return {
     getCategories,
     getCategoryById,
-    getSortCategory,
     getCategoryCover,
   }
 }

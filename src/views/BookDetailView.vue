@@ -8,12 +8,11 @@
         <SectionBody>
           <div class="book-detail">
             <Grid class="book-detail-layout" :gap="30">
-                <img
-                  class="book-detail__cover"
-                  :src="bookCover" 
-                  :alt="book.title" 
-                />
-
+              <img
+                class="book-detail__cover"
+                :src="bookCover" 
+                :alt="book.title" 
+              />
 
               <div class="book-detail__info">
                 <h1 class="book-detail__info__title">{{ book.title }}</h1>
@@ -205,6 +204,7 @@ export default {
     const {
       getBookById,
       getBookCover,
+      getBookUploadTime,
       getBooksById,
       getRandomBooksByCategory,
     } = useBook();
@@ -229,7 +229,7 @@ export default {
           const book = getBookById(route.query.id);
           const category = getCategoryById(book.categoryId);
           const bookCover = getBookCover(book.title);
-          const bookUploadTime = moment(book.uploadedAt).fromNow();
+          const bookUploadTime = getBookUploadTime(book.uploadedAt);
           const sameCategoryBooks = getRandomBooksByCategory(12, book.id, category.id);
           const viewedBooks = getBooksById(viewedBooksId.value)
 

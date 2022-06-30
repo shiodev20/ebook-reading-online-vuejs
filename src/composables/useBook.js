@@ -1,5 +1,8 @@
 import books from '@/assets/data/books'
 import slugify from 'slugify'
+import moment from 'moment'
+
+moment.locale('vi')
 
 const getBooks = () => books
 
@@ -8,9 +11,11 @@ const getBookCover = (bookTitle) => {
   return require(`@/assets/img/books/${slugTitle}.png`)
 }
 
+const getBookUploadTime = (time) => moment(time).fromNow()
+
 const getPDFFile = (bookTitle) => {
   const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
-  return require (`@/assets/file/${slugTitle}.pdf`)
+  return require(`@/assets/file/${slugTitle}.pdf`)
 }
 
 const getLatestBooks = (size) => {
@@ -39,14 +44,19 @@ const getBooksByCategory = (categoryId) => {
   return data
 }
 
+const getRandomBook = () => {
+  const randomIdx = Math.floor(Math.random() * books.length)
+  return books[randomIdx]
+}
+
 const getRandomBooks = (size, bookId = null, books = []) => {
   let data = books.length ? books : getBooks()
 
-   data = data.filter(book => {
-    if(book.id !== bookId) return book
+  data = data.filter(book => {
+    if (book.id !== bookId) return book
   })
 
-  for(let i = data.length - 1; i > 0; i--) {
+  for (let i = data.length - 1; i > 0; i--) {
     let randomIdx = Math.floor(Math.random() * (i + 1))
 
     let temp = data[randomIdx]
@@ -67,12 +77,14 @@ export default () => {
   return {
     getBooks,
     getBookCover,
+    getBookUploadTime,
     getPDFFile,
     getLatestBooks,
     getCustomBookTitle,
     getBookById,
     getBooksById,
     getBooksByCategory,
+    getRandomBook,
     getRandomBooks,
     getRandomBooksByCategory,
   }

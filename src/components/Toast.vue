@@ -32,6 +32,7 @@ export default {
     const store = useStore();
 
     const toastRef = ref(null);
+
     const toast = computed(() => store.state.toast);
 
     const closeToast = () => store.commit('closeToast')
@@ -43,6 +44,7 @@ export default {
         }, props.timeout)
       }
     })
+    
     return {
       toastRef,
       toast,

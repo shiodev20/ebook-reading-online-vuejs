@@ -25,7 +25,7 @@
       <SectionBody>
         <div id="category-list">
           <CategoryCard
-            v-for="category in sortedCategory"
+            v-for="category in categories"
             :key="category.id"
             :category="category"
           ></CategoryCard>
@@ -76,8 +76,6 @@
         </Slider>
       </SectionBody>
     </SectionContainer>
-
-    
 
     <!-- Quote -->
     <SectionContainer>
@@ -133,12 +131,41 @@
         </div>
       </SectionBody>
     </SectionContainer>
+
+    <Toast
+      :timeout="false"
+    >
+      <router-link :to="{
+        name: 'book-detail',
+        params: { slug: todayBookSlug },
+        query: { id: todayBook.id },
+      }">
+        <div class="today-book">
+          <h1 class="today-book__title">Sách cho ngày mới</h1>
+          <div class="today-book__info">
+              <img 
+                class="today-book__info__image"
+                :src="getBookCover(todayBook.title)" 
+                :alt="todayBook.title" 
+              >
+              <div class="today-book__info__meta">
+                <div class="today-book__info__meta__item">Tên sách: <span>{{  todayBook.title }}</span></div>
+                <div class="today-book__info__meta__item">Tác giả: <span>{{  todayBook.author }}</span></div>
+                <div class="today-book__info__meta__item">Ngày tải lên: <span>{{ getBookUploadTime(todayBook.uploadedAt) }}</span></div>
+              </div>
+          </div>
+        </div>
+      </router-link>
+    </Toast>
   </template>
+
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
+import slugify from "slugify";
+
 import useBook from "@/composables/useBook";
 import useCategory from '@/composables/useCategory';
 
@@ -152,6 +179,7 @@ import SectionContainer from "@/components/SectionContainer.vue";
 import SectionTitle from "@/components/SectionTitle.vue";
 import SectionBody from "@/components/SectionBody.vue";
 import Loading from "@/components/Loading.vue";
+import Toast from "@/components/Toast.vue";
 
 export default {
   name: "HomeView",
@@ -166,16 +194,26 @@ export default {
     Loading,
     Slider,
     Quote,
+    Toast,
   },
   setup() {
     const store = useStore();
-    const { getLatestBooks, getRandomBooks, getBooksById } = useBook();
-    const { getSortCategory, getCategories } = useCategory()
+    const {
+      getBookCover,
+      getLatestBooks, 
+      getRandomBook, 
+      getRandomBooks, 
+      getBooksById,
+      getBookUploadTime,
+    } = useBook();
+    const { getCategories } = useCategory()
 
     const latestBooks = ref([]);
     const recommendedBooks = ref([]);
     const lovedBooks = ref([]);
-    const sortedCategory = ref([]);
+    const categories = ref([]);
+    const todayBook = ref(null);
+    const todayBookSlug = ref('');
 
     const isLoading = computed(() => store.state.isLoading);
     const lovedBooksId = computed(() => store.getters.getLovedBooks(18));
@@ -187,8 +225,8 @@ export default {
             latestBooks: getLatestBooks(12),
             recommendedBooks: getRandomBooks(18),
             lovedBooks: getBooksById(lovedBooksId.value),
-            // sortedCategory: getSortCategory()
-            sortedCategory: getCategories()
+            categories: getCategories(),
+            todayBook: getRandomBook()
           });
         }, 1000);
       });
@@ -201,8 +239,9 @@ export default {
         latestBooks.value = data.latestBooks;
         recommendedBooks.value = data.recommendedBooks;
         lovedBooks.value = data.lovedBooks;
-        // sortedCategory.value = data.sortedCategory.slice(0, 6);
-        sortedCategory.value = data.sortedCategory;
+        categories.value = data.categories;
+        todayBook.value = data.todayBook;
+        todayBookSlug.value = slugify(data.todayBook.title, { lower: true, locale: 'vi' })
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
 
@@ -212,16 +251,81 @@ export default {
 
     initialPage();
 
+    onMounted(() => {
+      setTimeout(() => {
+        store.commit('showToast')
+      }, 2000)
+    })
+
     return {
       isLoading,
       latestBooks,
       lovedBooks,
       recommendedBooks,
-      sortedCategory,
+      categories,
+      todayBook,
+      getBookCover,
+      getBookUploadTime,
+      todayBookSlug,
     };
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '../assets/scss/variable';
+@import '../assets/scss/mixin';
+
+  .today-book {
+    &__title {
+      margin-bottom: 1.5rem;
+      font-size: $title-size;
+      font-style: italic;
+      color: $secondary-color;
+      text-decoration: underline;
+
+      @include mobile {
+        font-size: $subtitle-size;
+      }
+    }
+
+    &__info {
+      display: flex;
+
+      &__image {
+        flex-basis: 30%;
+        max-width: 120px;
+        max-height: 140px;
+        width: 100%;
+        height: 100%;
+        border-radius: $radius;
+
+        @include mobile {
+          max-width: 80px;
+          max-height: 100px;
+        }
+      }
+
+      &__meta {
+        flex-basis: 70%;
+        margin-left: 2rem;
+
+        &__item {
+          margin: 1rem 0;
+          font-size: $subtitle-size;
+          font-weight: bold;
+          color: $gray-color;
+
+          @include mobile {
+            font-size: $text-size;
+
+          }
+          span {
+            color: $primary-color;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
 </style>
