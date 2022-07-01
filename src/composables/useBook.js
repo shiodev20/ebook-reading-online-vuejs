@@ -8,14 +8,16 @@ const getBooks = () => books
 
 const getBookCover = (bookTitle) => {
   const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
-  return require(`@/assets/img/books/${slugTitle}.png`)
+  // return require(`@/assets/img/books/${slugTitle}.png`)
+  return `/img/books/${slugTitle}.png`
 }
 
 const getBookUploadTime = (time) => moment(time).fromNow()
 
 const getPDFFile = (bookTitle) => {
   const slugTitle = slugify(bookTitle, { lower: true, locale: 'vi' })
-  return require(`@/assets/file/${slugTitle}.pdf`)
+  // return require(`@/assets/file/${slugTitle}.pdf`)
+  return `/file/${slugTitle}.pdf`
 }
 
 const getLatestBooks = (size) => {

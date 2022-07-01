@@ -19,7 +19,7 @@
     </div>
 
     <a 
-      :href="PDFFile.default" 
+      :href="PDFFile" 
       :download="PDFFilename"
       @click="downloadBook"
     >
@@ -29,10 +29,17 @@
       </div>
     </a>
 
-    <div class="book-detail__info__options__item bg-orange">
-      <i class="bx bx-show"></i>
-      <span>Đọc online</span>
-    </div>
+    <router-link
+      :to="{
+        name: 'read-book',
+        params: { slug: bookSlug }
+      }"
+    >
+      <div class="book-detail__info__options__item bg-orange">
+        <i class="bx bx-show"></i>
+        <span>Đọc online</span>
+      </div>
+    </router-link>
   </div>
 
   <Toast
@@ -63,7 +70,7 @@ export default {
 
     const PDFFile = ref(getPDFFile(props.book.title));
     const PDFFilename = ref('ShioBook-' + slugify(props.book.title, { locale: 'vi'}))
-
+    const bookSlug = ref(slugify(props.book.title, { lower: true, locale: 'vi'}))
     const isBookLoved = computed(() => store.getters.isBookLoved(props.book.id));
 
     const addLovedBook = () => store.commit("addLovedBook", { id: props.book.id });
@@ -71,6 +78,7 @@ export default {
     const downloadBook = () => store.commit("showToast")
 
     return {
+      bookSlug,
       PDFFile,
       PDFFilename,
       isBookLoved,
