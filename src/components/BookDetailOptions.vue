@@ -32,7 +32,8 @@
     <router-link
       :to="{
         name: 'read-book',
-        params: { slug: bookSlug }
+        params: { slug: bookSlug },
+        query: { id: book.id }
       }"
     >
       <div class="book-detail__info__options__item bg-orange">

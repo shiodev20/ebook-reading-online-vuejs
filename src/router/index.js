@@ -20,7 +20,9 @@ const routes = [
   {
     path: '/doc-sach/:slug',
     name: 'read-book',
-    meta: { layout: 'default' },
+    meta: { 
+      layout: 'default',
+    },
     component: () => import('../views/PDFView.vue')
   },
   {

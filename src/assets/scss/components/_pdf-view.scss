@@ -1,0 +1,70 @@
+
+.pdf-viewer {
+
+  &__meta {
+    margin: 2rem 0;
+    text-align: center;
+    font-size: $title-size;
+    font-weight: bold;
+    color: $secondary-color;
+
+    @include tablet {
+      font-size: $subtitle-size;
+    }
+  }
+
+  &__navigation {
+    @include flex(center, center);
+
+    margin: 2rem 0;
+    font-size: $subtitle-size;
+
+    &__btn {
+      position: relative;
+      margin: 0 1rem;
+      padding: 1.3rem;
+      background-color: $primary-color;
+      color: $white-color;
+      border: none;
+      cursor: pointer;
+
+      i {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        font-size: $subtitle-size;
+        transform: translate(-50%, -50%);
+      }
+
+    }
+
+    &__page {
+      input {
+        padding: 1px 5px;
+        width: 50px;
+        border: 1px solid $primary-color;
+        font-size: $subtitle-size;
+
+        &:focus {
+          outline: none;
+          border: 1px solid $primary-color;
+        }
+        
+        @include tablet {
+          font-size: $text-size;
+          width: 40px;
+        }
+      }
+
+    }
+    
+    @include tablet {
+      font-size: $text-size;
+    }
+  }
+
+  &__render {
+    width: 100%;
+  }
+
+}
