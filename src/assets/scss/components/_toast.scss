@@ -9,7 +9,7 @@
   border-top: 4px solid $primary-color;
   border-radius: $radius;
   box-shadow: $box-shadow;
-  z-index: 60;
+  z-index: $toast-z-index;
 
   &__close {
     position: absolute;

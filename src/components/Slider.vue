@@ -5,6 +5,7 @@
     :navigation="sliderNavigation"
     :pagination="sliderPagination"
     :breakpoints="sliderBreakpoints"
+    :autoplay="sliderAutoplay"
   >
     <template v-if="hasNavigation">
       <div class="slider__navigation slider__navigation--prev bg-primary">
@@ -30,7 +31,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useStore } from 'vuex';
 
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 import ProductCard from "./BookCard.vue";
 
 import "swiper/css";
@@ -60,6 +61,15 @@ export default {
     seeMore: {
       type: Boolean,
       default: true,
+    },
+    auto: {
+      type: [Boolean, Object],
+      default: {
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        }
+      }
     }
   },
   setup(props, ctx) {
@@ -71,9 +81,11 @@ export default {
     const windowWidth = computed(() => store.state.windowWidth);
 
     // Swiper setup
-    const sliperModules = ref([Navigation, Pagination]);
+    const sliperModules = ref([Navigation, Pagination, Autoplay]);
+
     const sliderPagination = ref(props.pagination);
     const sliderBreakpoints = ref(props.breakpoints);
+    const sliderAutoplay = ref(props.auto);
     const sliderNavigation = ref({
       prevEl: `#${sliderId.value} .slider__navigation--prev`,
       nextEl: `#${sliderId.value} .slider__navigation--next`,
@@ -99,6 +111,7 @@ export default {
       sliderNavigation,
       sliderPagination,
       sliderBreakpoints,
+      sliderAutoplay,
     };
   },
 };

@@ -13,7 +13,7 @@
     <input
       type="text"
       class="search-form__input"
-      placeholder="Nhập tên sách hoặc tác giả"
+      placeholder="Nhập tên sách"
       v-model="searchInput"
     />
   </div>

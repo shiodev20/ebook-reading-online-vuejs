@@ -1,15 +1,24 @@
 .pagination {
   @include flex(center, center);
+  flex-wrap: wrap;
   font-size: $text-size;
   font-weight: bold;
   color: $gray-color;
 
+  @include tablet {
+    font-size: 1rem;
+  }
+
   &__item {
-    margin: 0 .25rem;
-    padding: .5rem 1rem;
+    margin: .25rem;
+    padding: .3rem .7rem;
     border: 1px solid $primary-color;
-    border-radius: $radius;
+    border-radius: 5px;
     cursor: pointer;
+
+    @include tablet {
+      padding: .3rem .5rem;
+    }
 
     &:hover {
       background-color: $primary-color;
@@ -23,8 +32,8 @@
 
     &--navigation {
       position: relative;
-      padding: 1.3rem;
-
+      padding: 1.2rem;
+      
       i {
         position: absolute;
         top: 50%;
@@ -32,6 +41,11 @@
         font-size: $subtitle-size;
         transform: translate(-50%, -50%);
       }
+
+      @include tablet {
+        padding: .9rem;
+      }
+
     }
   }
 }

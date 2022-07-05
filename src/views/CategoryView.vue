@@ -4,7 +4,7 @@
   </template>
   <template v-else>
     <SectionContainer>
-      <SectionTitle>" {{ category.name }} "</SectionTitle>
+      <SectionTitle>{{ category.name }}</SectionTitle>
       <SectionBody>
         <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
           <BookCard

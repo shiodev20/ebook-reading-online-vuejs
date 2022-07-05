@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { computed, onMounted, reactive, ref, watch } from "vue";
+import { computed, onMounted, onUpdated, reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
@@ -133,7 +133,7 @@ export default {
       queueRenderPage(specificNum)
     })
 
-    onMounted(async () => {
+    onUpdated(async () => {
       const canvasEl = document.querySelector('.pdf-viewer__render');
 
       if(canvasEl) {

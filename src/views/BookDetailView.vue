@@ -81,6 +81,7 @@
           <Slider
             id="same-category"
             :seeMore="false"
+            :auto="false"
             :navigation="{
               0: false,
               768: true,
@@ -124,6 +125,7 @@
           <Slider
             id="viewed-book"
             :seeMore="false"
+            :auto="false"
             :navigation="{
               0: false,
               768: true,

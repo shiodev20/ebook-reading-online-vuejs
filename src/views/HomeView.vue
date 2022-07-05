@@ -4,6 +4,25 @@
   </template>
 
   <template v-else>
+    <!-- Banner slider  -->
+    <SectionContainer>
+      <SectionBody>
+        <Slider
+          id="banner-slider"
+          :seeMore="false"
+          :pagination="{ clickable: true }"
+        >
+          <SwiperSlide
+            v-for="banner in banners"
+            :key="banner.id"
+          >
+            <img :src="banner.image" alt="">
+          </SwiperSlide>
+        </Slider>
+      </SectionBody>
+    </SectionContainer>
+
+
     <!-- Latest update books -->
     <SectionContainer>
       <SectionTitle>Sách mới cập nhật</SectionTitle>
@@ -40,6 +59,7 @@
         <Slider
           id="recommended-books"
           :seeMore="false"
+          :auto="false"
           :navigation="{
             0: false,
             768: true,
@@ -91,6 +111,7 @@
         <Slider
           v-if="lovedBooks.length"
           id="loved-book-slider"
+          :auto="false"
           :navigation="{
             0: false,
             768: true,
@@ -125,10 +146,12 @@
             <BookCard :book="book"></BookCard>
           </SwiperSlide>
         </Slider>
+
         <div v-else class="empty-box">
           <p class="empty-box__title">Hãy đặt sách mà bạn yêu thích lên kệ nhé!</p>
           <img class="empty-box__image" src="../assets/empty.svg">
         </div>
+
       </SectionBody>
     </SectionContainer>
 
@@ -181,6 +204,7 @@ import SectionBody from "@/components/SectionBody.vue";
 import Loading from "@/components/Loading.vue";
 import Toast from "@/components/Toast.vue";
 
+import banners from "@/assets/data/banner"
 export default {
   name: "HomeView",
   components: {
@@ -267,6 +291,7 @@ export default {
       getBookCover,
       getBookUploadTime,
       todayBookSlug,
+      banners,
     };
   },
 };
@@ -299,6 +324,7 @@ export default {
         width: 100%;
         height: 100%;
         border-radius: $radius;
+        box-shadow: $box-shadow;
 
         @include mobile {
           max-width: 80px;
