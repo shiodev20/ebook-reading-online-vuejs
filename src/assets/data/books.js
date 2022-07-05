@@ -5,7 +5,6 @@ export default [
     title: "Bố già",
     author: "Mario Puzo",
     uploadedAt: "2022-06-16T18:00:00",
-    cover: "01-bo-gia.png",
     categoryId: 1
   },
   {
@@ -13,7 +12,6 @@ export default [
     title: "Thú Tội",
     author: "Minato Kanae",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "02-thu-toi.png",
     pdf: "02-thu-toi.pdf",
     categoryId: 4
   },
@@ -22,7 +20,6 @@ export default [
     title: "Nghĩ Lớn Để Thành Công",
     author: "Donald J. Trump",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "03-nghi-lon-de-thanh-cong.png",
     categoryId: 3
   },
   {
@@ -30,7 +27,6 @@ export default [
     title: "Tiếng Thét",
     author: "Hamanaka Aki",
     uploadedAt: "2022-06-19T18:00:00",
-    cover: "04-tieng-thet.png",
     pdf: "04-tieng-thet.pdf",
     categoryId: 4
   },
@@ -39,7 +35,6 @@ export default [
     title: "Muôn Kiếp Nhân Sinh",
     author: "Nguyễn Phong",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "05-muon-kiep-nhan-sinh.png",
     categoryId: 7
   },
   {
@@ -47,7 +42,6 @@ export default [
     title: "Khuyến Học",
     author: "Fukuzawa Yukichi",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "06-khuyen-hoc.png",
     categoryId: 8
   },
   {
@@ -55,7 +49,6 @@ export default [
     title: "Đắc Nhân Tâm",
     author: "Dale Carnegie",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "07-dac-nhan-tam.png",
     categoryId: 2
   },
   {
@@ -63,7 +56,6 @@ export default [
     title: "Giới Hạn Của Bạn Chỉ Là Xuất Phát Điểm Của Tôi",
     author: "Mèo Maverick",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "08-gioi-han-cua-ban-chi-la-xuat-phat-diem-cua-toi.png",
     categoryId: 2
   },
   {
@@ -71,7 +63,6 @@ export default [
     title: "Lối Sống Tối Giản Của Người Nhật",
     author: "Sasaki Fumio",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "09-loi-song-toi-gian-cua-nguoi-nhat.png",
     categoryId: 2
   },
   {
@@ -79,7 +70,6 @@ export default [
     title: "Hai Số Phận",
     author: "Mario Puzo",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "10-hai-so-phan.png",
     categoryId: 1
   },
   {
@@ -87,7 +77,6 @@ export default [
     title: "Quốc Gia Khởi Nghiệp",
     author: "Dan Senor, Saul Singer",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "11-quoc-gia-khoi-nghiep.png",
     categoryId: 3
   },
   {
@@ -95,7 +84,6 @@ export default [
     title: "Sự Trỗi Dậy Và Suy Tàn Của Đế Chế Thứ Ba - Lịch Sử Đức Quốc Xã",
     author: "William L. Shirer",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "12-su-troi-day-va-suy-tan-cua-de-che-thu-ba-lich-su-duc-quoc-xa.png",
     categoryId: 5
   },
   {
@@ -103,7 +91,6 @@ export default [
     title: "Chuộc Tội",
     author: "Minato Kanae",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "13-chuoc-toi.png",
     categoryId: 4
   },
   {
@@ -111,7 +98,6 @@ export default [
     title: "13 Nguyên Tắc Nghĩ Giàu Làm Giàu",
     author: "Napoleon Hill",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "14-13-nguyen-tac-nghi-giau-lam-giau.png",
     categoryId: 3
   },
   {
@@ -119,7 +105,6 @@ export default [
     title: "Tư Duy Nhanh Và Chậm",
     author: "Daniel Kahneman",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "15-tu-duy-nhanh-va-cham.png",
     categoryId: 2
   },
   {
@@ -127,7 +112,6 @@ export default [
     title: "Những Tù Nhân Của Địa Lý",
     author: "Tim Marshall",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "16-nhung-tu-nhan-cua-dia-ly.png",
     categoryId: 7
   },
   {
@@ -135,7 +119,6 @@ export default [
     title: "Bố Con Cá Gai",
     author: "Cho Chang-In",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "17-bo-con-ca-gai.png",
     categoryId: 1
   },
   {
@@ -143,7 +126,6 @@ export default [
     title: "Giết Con Chim Nhại",
     author: "Harper Lee",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "18-giet-con-chim-nhai.png",
     categoryId: 6
   },
   {
@@ -151,7 +133,6 @@ export default [
     title: "Điều Kỳ Diệu Của Tiệm Tạp Hóa Namiya",
     author: "Higashino Keigo",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "19-dieu-ky-dieu-cua-tiem-tap-hoa-namiya.png",
     categoryId: 1
   },
   {
@@ -159,7 +140,6 @@ export default [
     title: "Những Giấc Mơ Ở Hiệu Sách Morisaki",
     author: "Yogisawa Satoshi",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "20-nhung-giac-mo-o-hieu-sach-morisaki.png",
     categoryId: 1
   },
   {
@@ -167,7 +147,6 @@ export default [
     title: "Tuổi Trẻ Đáng Giá Bao Nhiêu?",
     author: "Rosie Nguyễn",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "21-tuoi-tre-dang-gia-bao-nhieu.png",
     categoryId: 2
   },
   {
@@ -175,7 +154,6 @@ export default [
     title: "Dám Bị Ghét",
     author: "Kishimi Ichiro, Koga Fumitake",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "22-dam-bi-ghet.png",
     categoryId: 2
   },
   {
@@ -183,7 +161,6 @@ export default [
     title: "Không Gia Đình",
     author: "Hector Malot",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "23-khong-gia-dinh.png",
     categoryId: 6
   },
   {
@@ -191,8 +168,76 @@ export default [
     title: "Trong Gia Đình",
     author: "Hector Malot",
     uploadedAt: "2022-06-15T18:00:00",
-    cover: "24-trong-gia-dinh.png",
     categoryId: 6
   },
-  
+  {
+    id: 25,
+    title: "Learning Vuejs",
+    author: "Stack Overflow contributors",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 9
+  },
+  {
+    id: 26,
+    title: "Thiên Tài Bên Trái, Kẻ Điên Bên Phải",
+    author: "Cao Minh",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 1,
+  },
+  {
+    id: 27,
+    title: "Ngôi Nhà Quái Dị",
+    author: "Agatha Christie",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 4,
+  },
+  {
+    id: 28,
+    title: "Án Mạng Trên Sân Golf",
+    author: "Agatha Christie",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 4,
+  },
+  {
+    id: 29,
+    title: "Mười Người Da Đen Nhỏ",
+    author: "Agatha Christie",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 4,
+  },
+  {
+    id: 30,
+    title: "Án Mạng Trên Sông Nile",
+    author: "Agatha Christie",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 4,
+  },
+  {
+    id: 31,
+    title: "Essential Grammar In Use",
+    author: "Raymond Murphy",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 10,
+  },
+  {
+    id: 32,
+    title: "English Grammar In Use",
+    author: "Raymond Murphy",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 10,
+  },
+  {
+    id: 33,
+    title: "Advanced Grammar In Use",
+    author: "Raymond Murphy",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 10,
+  },
+  {
+    id: 34,
+    title: "Nhật Hoàng Hirohito Và Công Cuộc Kiến Thiết Nước Nhật",
+    author: "Herpert P. Bix",
+    uploadedAt: "2022-07-05T18:00:00",
+    categoryId: 5,
+  },
 ]

@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     name: "Tiểu thuyết",
-    quantity: 5
+    quantity: 6
   },
   {
     id: 2,
@@ -17,12 +17,12 @@ export default [
   {
     id: 4,
     name: "Trinh thám - Hình sự",
-    quantity: 3
+    quantity: 7
   },
   {
     id: 5,
     name: "Lịch sử - Nhân vật",
-    quantity: 1
+    quantity: 2
   },
   {
     id: 6,
@@ -42,16 +42,11 @@ export default [
   {
     id: 9,
     name: "Công nghệ thông tin",
-    quantity: 0
+    quantity: 1
   },
   {
     id: 10,
     name: "Ngoại ngữ",
-    quantity: 0
+    quantity: 3
   },
-  {
-    id: 11,
-    name: "Truyện tranh",
-    quantity: 0
-  }
 ]

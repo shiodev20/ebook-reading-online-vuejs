@@ -9,7 +9,7 @@ const getCategoryById = (categoryId) => {
 
 const getCategoryCover = (categoryName) => {
   const categorySlug = slugify(categoryName, { lower: true, locale: 'vi' })
-  return require(`@/assets/img/categories/${categorySlug}.png`)
+  return `/img/categories/${categorySlug}.png`
 }
 
 export default () => {
