@@ -11,6 +11,10 @@
           id="banner-slider"
           :seeMore="false"
           :pagination="{ clickable: true }"
+          :navigation="{
+            0: false,
+            768: true,          
+          }"
         >
           <SwiperSlide
             v-for="banner in banners"
@@ -174,7 +178,8 @@
               <div class="today-book__info__meta">
                 <div class="today-book__info__meta__item">Tên sách: <span>{{  todayBook.title }}</span></div>
                 <div class="today-book__info__meta__item">Tác giả: <span>{{  todayBook.author }}</span></div>
-                <div class="today-book__info__meta__item">Ngày tải lên: <span>{{ getBookUploadTime(todayBook.uploadedAt) }}</span></div>
+                <div class="today-book__info__meta__item">Thể loại: <span>{{  todayBookCategory.name }}</span></div>
+
               </div>
           </div>
         </div>
@@ -228,9 +233,8 @@ export default {
       getRandomBook, 
       getRandomBooks, 
       getBooksById,
-      getBookUploadTime,
     } = useBook();
-    const { getCategories } = useCategory()
+    const { getCategories, getCategoryById } = useCategory()
 
     const latestBooks = ref([]);
     const recommendedBooks = ref([]);
@@ -238,6 +242,7 @@ export default {
     const categories = ref([]);
     const todayBook = ref(null);
     const todayBookSlug = ref('');
+    const todayBookCategory = ref('');
 
     const isLoading = computed(() => store.state.isLoading);
     const lovedBooksId = computed(() => store.getters.getLovedBooks(18));
@@ -266,6 +271,7 @@ export default {
         categories.value = data.categories;
         todayBook.value = data.todayBook;
         todayBookSlug.value = slugify(data.todayBook.title, { lower: true, locale: 'vi' })
+        todayBookCategory.value = getCategoryById(data.todayBook.categoryId)
 
         document.title = store.state.documentTitle + "Tải ebook miễn phí";
 
@@ -289,8 +295,8 @@ export default {
       categories,
       todayBook,
       getBookCover,
-      getBookUploadTime,
       todayBookSlug,
+      todayBookCategory,
       banners,
     };
   },

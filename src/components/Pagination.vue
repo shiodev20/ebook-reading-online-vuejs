@@ -7,16 +7,9 @@
       <i class="bx bx-chevron-left"></i>
     </div>
 
-    <!-- <div 
+    <div 
       class="pagination__item"
       v-for="(page, idx) in pagination"
-      :key="idx"
-      @click="currPage = page"
-    >{{ page }}</div> -->
-
-     <div 
-      class="pagination__item"
-      v-for="(page, idx) in testPage"
       :key="idx"
       @click="currPage = page"
     >{{ page }}</div>
@@ -40,21 +33,19 @@ export default {
   },
   setup(props) {
     const currPage = ref(1)
-    const testPage = ref([1, 2, 3, 4, '...', 18, 19, 20])
     
     watch(currPage, (n, o) => {
       // if(n < 1) currPage.value = 1
       // if(n > props.pagination[props.pagination.length - 1]) 
       //   currPage.value = props.pagination[props.pagination.length - 1]
 
-      if(n < 1) currPage.value = 1
-      if(n > testPage.value[testPage.value.length - 1]) 
-        currPage.value = testPage.value[testPage.value.length - 1]
+      // if(n < 1) currPage.value = 1
+      // if(n > testPage.value[testPage.value.length - 1]) 
+      //   currPage.value = testPage.value[testPage.value.length - 1]
         
     })
     return {
       currPage,
-      testPage,
     }
   }
 };

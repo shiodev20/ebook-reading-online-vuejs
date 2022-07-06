@@ -107,8 +107,6 @@ export default {
           });
         }, 1000);
       });
-      // totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value);
-      // currPagination.value = getPagination(currPage.value, totalPages.value);
     };
 
     const initialPage = () => {
@@ -117,8 +115,12 @@ export default {
       fetchData().then((data) => {
         category.value = data.category;
         booksByCategory.value = data.booksByCategory;
+        
+        totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value)
+        currPagination.value = getPagination(currPage.value, totalPages.value)
 
         document.title = store.state.documentTitle + category.value.name
+
         store.commit("toggleLoading", false);
       });
     };
