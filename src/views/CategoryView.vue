@@ -94,7 +94,7 @@ export default {
     const booksPerPage = ref([]);
 
     const totalPages = ref(0);
-    const pageSize = ref(1);
+    const pageSize = ref(2);
     const currPage = ref(1);
     const currPagination = ref([]);
 

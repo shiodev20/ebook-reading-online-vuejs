@@ -2,13 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/pagination',
-    meta: {
-      layout: 'default',
-    },
-    component: () => import('../views/PaginationView.vue')
-  },
-  {
     path: '/the-loai/:category',
     name: 'category',
     meta: {
