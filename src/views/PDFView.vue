@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { computed, onMounted, onUpdated, reactive, ref, watch } from "vue";
+import { computed, onUpdated, reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 
@@ -70,7 +70,7 @@ export default {
 
     const book = ref({});
     const pdfUrl = ref(`/file/${route.params.slug}.pdf`);
-    let pdfDoc = reactive(null);
+    let pdfDoc = reactive({});
     const pageNumInput = ref(1);
     const pageNum = ref(1);
     const pageCount = ref(0);

@@ -85,7 +85,7 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
-
+    
     const { getBooksByCategory } = useBook();
     const { getCategoryById } = useCategory();
 
@@ -94,7 +94,7 @@ export default {
     const booksPerPage = ref([]);
 
     const totalPages = ref(0);
-    const pageSize = ref(3);
+    const pageSize = ref(1);
     const currPage = ref(1);
     const currPagination = ref([]);
 
@@ -124,7 +124,7 @@ export default {
         totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value)
         currPagination.value = getPagination(currPage.value, totalPages.value)
         booksPerPage.value = getBooksPerPage(booksByCategory.value, currPage.value, pageSize.value)
-        
+
         document.title = store.state.documentTitle + category.value.name
 
         store.commit("toggleLoading", false);
@@ -133,9 +133,11 @@ export default {
 
     watch(route, (to, from) => {
       if (to.name === "category") {
-        initialPage();
+        currPage.value = route.query.page ? Number(route.query.page) : 1
+        initialPage()
       }
     });
+
 
     initialPage();
 

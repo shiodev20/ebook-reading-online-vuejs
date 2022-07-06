@@ -37,17 +37,34 @@ export default {
   setup(props) {
     const route = useRoute()
     const router = useRouter()
+
     const currPage = ref(props.page)
     
     watch(currPage, (n, o) => {
-      if(n === '...') currPage.value = props.page
-      if(n > props.pagination[props.pagination.length - 1]) currPage.value = props.pagination[props.pagination.length - 1]
+      if(n === '...') currPage.value = o
       if(n < 1) currPage.value = 1
+      if(n > props.pagination[props.pagination.length - 1])
+        currPage.value = props.pagination[props.pagination.length - 1]
+      
+      console.log(currPage.value);
+
+      if(currPage.value === props.pagination.length) {
+        return router.push({
+          path: route.path,
+          query: {
+            ...route.query,
+          }
+        })
+      }
 
       router.push({
-        path: route.fullPath,
-        query: { page: n }
-      })
+          path: route.path,
+          query: {
+            ...route.query,
+            page: n,
+          }
+        })
+
     })
     return {
       currPage,
