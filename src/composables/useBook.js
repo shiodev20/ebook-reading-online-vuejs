@@ -51,8 +51,9 @@ const getRandomBook = () => {
   return books[randomIdx]
 }
 
-const getRandomBooks = (size, bookId = null, books = []) => {
+const getRandomBooks = (size = null, bookId = null, books = []) => {
   let data = books.length ? books : getBooks()
+  let dataSize = size ? size : data.length
 
   data = data.filter(book => {
     if (book.id !== bookId) return book
@@ -66,7 +67,7 @@ const getRandomBooks = (size, bookId = null, books = []) => {
     data[i] = temp
   }
 
-  return data.slice(0, size)
+  return data.slice(0, dataSize)
 }
 
 const getRandomBooksByCategory = (size, bookId, categoryId) => {

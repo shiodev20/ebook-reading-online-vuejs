@@ -13,7 +13,7 @@
           :pagination="{ clickable: true }"
           :navigation="{
             0: false,
-            768: true,          
+            768: true,
           }"
         >
           <SwiperSlide
@@ -25,7 +25,6 @@
         </Slider>
       </SectionBody>
     </SectionContainer>
-
 
     <!-- Latest update books -->
     <SectionContainer>
@@ -62,7 +61,6 @@
       <SectionBody>
         <Slider
           id="recommended-books"
-          :seeMore="false"
           :auto="false"
           :navigation="{
             0: false,

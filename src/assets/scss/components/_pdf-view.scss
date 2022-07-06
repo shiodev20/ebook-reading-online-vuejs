@@ -6,7 +6,11 @@
     text-align: center;
     font-size: $title-size;
     font-weight: bold;
-    color: $secondary-color;
+    color: $gray-color;
+
+    span {
+      color: $primary-color;
+    }
 
     @include tablet {
       font-size: $subtitle-size;

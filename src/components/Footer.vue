@@ -2,6 +2,20 @@
   <footer v-if="!isLoading" class="footer bg-primary color-white">
     <div class="container">
       <grid :mdCol="1" :col="3" :gap="20">
+        
+        <div class="footer__item">
+          <div class="footer__item__title"><i class='bx bxs-purchase-tag'></i>Lối Tắt</div>
+          <div class="footer__item__content">
+            <div 
+              class="footer__item__content__link"
+              v-for="(item, idx) in collectionsLink"
+              :key="idx"
+            >
+              <i class='bx bx-chevrons-right'></i>
+              <router-link :to="item.path">{{ item.display }}</router-link>
+            </div>
+          </div>
+        </div>
 
         <div class="footer__item">
           <div class="footer__item__title"><i class='bx bxs-purchase-tag'></i>Thể loại nổi bật</div>
@@ -23,20 +37,6 @@
             <div 
               class="footer__item__content__link"
               v-for="(item, idx) in authorsLink"
-              :key="idx"
-            >
-              <i class='bx bx-chevrons-right'></i>
-              <router-link :to="item.path">{{ item.display }}</router-link>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer__item">
-          <div class="footer__item__title"><i class='bx bxs-purchase-tag'></i>Series hay</div>
-          <div class="footer__item__content">
-            <div 
-              class="footer__item__content__link"
-              v-for="(item, idx) in bookSeriesLink"
               :key="idx"
             >
               <i class='bx bx-chevrons-right'></i>
@@ -93,24 +93,44 @@ export default {
 
     const categoriesLink = ref([
       {
-        display: "Tâm lý - Kỹ năng sống",
-        path: "/",
+        display: "Kỹ năng sống",
+        path: {
+          name: 'category',
+          params: { category: 'ky-nang-song' },
+          query: { id: 2, page: 1 }
+        },
       },
       {
         display: "Kinh tế - quản lý",
-        path: "/",
+        path: {
+          name: 'category',
+          params: { category: 'kinh-te-quan-ly' },
+          query: { id: 3, page: 1 }
+        },
       },
       {
-        display: "Tiểu thuyết nước ngoài",
-        path: "/",
+        display: "Tiểu thuyết",
+        path: {
+          name: 'category',
+          params: { category: 'tieu-thuyet' },
+          query: { id: 1, page: 1 }
+        },
       },
       {
         display: "Trinh thám - hình sự",
-        path: "/",
+        path: {
+          name: 'category',
+          params: { category: 'trinh-tham-hinh-su' },
+          query: { id: 7, page: 1 }
+        },
       },
       {
         display: "Công nghệ thông tin",
-        path: "/",
+        path: {
+          name: 'category',
+          params: { category: 'cong-nghe-thong-tin' },
+          query: { id: 9, page: 1 }
+        },
       },
     ]);
 
@@ -120,43 +140,55 @@ export default {
         path: "/",
       },
       {
-        display: "Nguyễn Nhật Ánh",
+        display: "Agatha Christie",
         path: "/",
       },
       {
-        display: "Nguyễn Nhật Ánh",
+        display: "Higashino Keigo",
         path: "/",
       },
       {
-        display: "Nguyễn Nhật Ánh",
+        display: "Minato Kanae",
         path: "/",
       },
       {
-        display: "Nguyễn Nhật Ánh",
+        display: "Brian Tracy",
         path: "/",
       },
     ]);
   
-    const bookSeriesLink = ref([
+    const collectionsLink = ref([
       {
-        display: 'Harry Poster',
+        display: 'Trang Chủ',
         path: '/'
       },
       {
-        display: 'Harry Poster',
-        path: '/'
+        display: 'Về ShioBook',
+        path: '/about'
       },
       {
-        display: 'Harry Poster',
-        path: '/'
+        display: 'Sách Hay Nên Đọc',
+        path: {
+          name: 'collection',
+          params: { collection: 'sach-hay-nen-doc' },
+          query: { page: 1 },
+        }
       },
       {
-        display: 'Harry Poster',
-        path: '/'
+        display: 'Sách Yêu thích',
+        path: {
+          name: 'collection',
+          params: { collection: 'sach-yeu-thich' },
+          query: { page: 1 },
+        }
       },
       {
-        display: 'Harry Poster',
-        path: '/'
+        display: 'Sách Đã Xem',
+        path: {
+          name: 'collection',
+          params: { collection: 'sach-da-xem' },
+          query: { page: 1 },
+        }
       },
     ])
 
@@ -207,7 +239,7 @@ export default {
     return {
       categoriesLink,
       authorsLink,
-      bookSeriesLink,
+      collectionsLink,
       socialsLink,
       policiesLink,
       isLoading,

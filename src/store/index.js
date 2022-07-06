@@ -57,7 +57,7 @@ export default createStore({
       const isContain = state.viewedBooks.some(item => item == id)
 
       if(!isContain) {
-        if(state.viewedBooks.length == 12) state.viewedBooks.pop(state.viewedBooks[11])
+        if(state.viewedBooks.length == 48) state.viewedBooks.pop(state.viewedBooks[47])
         state.viewedBooks.unshift(id)
         localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
       }

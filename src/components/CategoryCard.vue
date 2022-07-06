@@ -4,7 +4,7 @@
       :to="{
         name: 'category',
         params: { category: categorySlug },
-        query: { id: category.id }
+        query: { id: category.id, page: 1 }
       }"
     >
         <img class="category-card__image" :src="categoryCover" :alt="category.name" />

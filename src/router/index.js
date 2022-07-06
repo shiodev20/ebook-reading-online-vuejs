@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
+ 
   {
     path: '/the-loai/:category',
     name: 'category',
@@ -24,6 +25,14 @@ const routes = [
       layout: 'default',
     },
     component: () => import('../views/PDFView.vue')
+  },
+  {
+    path: '/tap-hop/:collection',
+    name: 'collection',
+    meta: {
+      layout: 'default',
+    },
+    component: () => import('../views/CollectionView.vue')
   },
   {
     path: '/about',

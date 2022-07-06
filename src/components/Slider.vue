@@ -16,11 +16,11 @@
       </div>
     </template>
 
-    <template v-if="seeMore">
+    <!-- <template v-if="seeMore">
       <router-link to="/" class="slider__more">
         Xem thêm <i class="bx bx-chevron-right"></i>
       </router-link>
-    </template>
+    </template> -->
 
     <slot></slot>
   </Swiper>

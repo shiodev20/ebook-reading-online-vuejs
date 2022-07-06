@@ -8,8 +8,8 @@
       <div class="pdf-viewer">
         
         <div class="pdf-viewer__meta">
-          <div class="pdf-viewer__meta__title">Sách: {{ book.title }}</div>
-          <div class="pdf-viewer__meta__author">Tác giả: {{ book.author }}</div>
+          <div class="pdf-viewer__meta__title">Sách: <span>{{ book.title }}</span></div>
+          <div class="pdf-viewer__meta__author">Tác giả: <span>{{ book.author }}</span></div>
         </div>
 
         <div class="pdf-viewer__navigation">

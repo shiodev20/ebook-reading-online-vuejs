@@ -68,7 +68,7 @@ export default [
   {
     id: 10,
     title: "Hai Số Phận",
-    author: "Mario Puzo",
+    author: "Jeffrey Archer",
     uploadedAt: "2022-06-15T18:00:00",
     categoryId: 1
   },
