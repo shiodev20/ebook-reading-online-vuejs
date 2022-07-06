@@ -9,10 +9,11 @@
 
     <div 
       class="pagination__item"
-      v-for="(page, idx) in pagination"
+      :class="[currPage == item ? 'pagination__item--active' : '']"
+      v-for="(item, idx) in pagination"
       :key="idx"
-      @click="currPage = page"
-    >{{ page }}</div>
+      @click="currPage = item"
+    >{{ item }}</div>
 
     <div 
       class="pagination__item pagination__item--navigation"
@@ -25,24 +26,28 @@
 
 <script>
 import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router';
 
 export default {
   name: 'Pagination',
   props: {
     pagination: Array,
-  },
+    page: Number,
+},
   setup(props) {
-    const currPage = ref(1)
+    const route = useRoute()
+    const router = useRouter()
+    const currPage = ref(props.page)
     
     watch(currPage, (n, o) => {
-      // if(n < 1) currPage.value = 1
-      // if(n > props.pagination[props.pagination.length - 1]) 
-      //   currPage.value = props.pagination[props.pagination.length - 1]
+      if(n === '...') currPage.value = props.page
+      if(n > props.pagination[props.pagination.length - 1]) currPage.value = props.pagination[props.pagination.length - 1]
+      if(n < 1) currPage.value = 1
 
-      // if(n < 1) currPage.value = 1
-      // if(n > testPage.value[testPage.value.length - 1]) 
-      //   currPage.value = testPage.value[testPage.value.length - 1]
-        
+      router.push({
+        path: route.fullPath,
+        query: { page: n }
+      })
     })
     return {
       currPage,

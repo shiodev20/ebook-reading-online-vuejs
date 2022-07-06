@@ -2,13 +2,14 @@
   <template v-if="isLoading">
     <Loading></Loading>
   </template>
+
   <template v-else>
     <SectionContainer>
       <SectionTitle>{{ category.name }}</SectionTitle>
       <SectionBody>
         <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
           <BookCard
-            v-for="book in booksByCategory"
+            v-for="book in booksPerPage"
             :key="book.id"
             :book="book"
           ></BookCard>
@@ -43,7 +44,10 @@
                 <i class="bx bx-chevron-right"></i>
               </div>
             </div> -->
-        <Pagination :pagination="currPagination"> </Pagination>
+        <Pagination 
+          :pagination="currPagination"
+          :page="currPage"
+        ></Pagination>
       </SectionBody>
     </SectionContainer>
   </template>
@@ -87,9 +91,10 @@ export default {
 
     const category = ref({});
     const booksByCategory = ref([]);
+    const booksPerPage = ref([]);
 
     const totalPages = ref(0);
-    const pageSize = ref(24);
+    const pageSize = ref(3);
     const currPage = ref(1);
     const currPagination = ref([]);
 
@@ -118,7 +123,8 @@ export default {
         
         totalPages.value = Math.ceil(booksByCategory.value.length / pageSize.value)
         currPagination.value = getPagination(currPage.value, totalPages.value)
-
+        booksPerPage.value = getBooksPerPage(booksByCategory.value, currPage.value, pageSize.value)
+        
         document.title = store.state.documentTitle + category.value.name
 
         store.commit("toggleLoading", false);
@@ -126,7 +132,9 @@ export default {
     };
 
     watch(route, (to, from) => {
-      if (to.name === "category") initialPage();
+      if (to.name === "category") {
+        initialPage();
+      }
     });
 
     initialPage();
@@ -134,10 +142,10 @@ export default {
     return {
       route,
       isLoading,
-      booksByCategory,
+      booksPerPage,
+      category,
       currPagination,
       currPage,
-      category,
     };
   },
 };

@@ -47,7 +47,7 @@
     :timeout="false"
   >
     <div class="toast__title">- Bạn đã tải sách <span>" {{ book.title }} "</span></div>
-    <div class="toast__desc">Nếu Bạn có điều kiện, Hãy mua sách giấy để ủng hộ Tác giả và Nhà xuất bản nhé!</div>
+    <div class="toast__desc">Nếu bạn có điều kiện, hãy mua sách giấy để ủng hộ Tác giả và Nhà xuất bản nhé!</div>
   </Toast>
 </template>
 
