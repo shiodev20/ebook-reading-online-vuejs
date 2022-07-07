@@ -65,12 +65,13 @@ export default {
   setup() {
     const store = useStore();
     const route = useRoute();
- 
+
     const { getBookById } = useBook();
+
+    let pdfDoc = reactive({});
 
     const book = ref({});
     const pdfUrl = ref(`/file/${route.params.slug}.pdf`);
-    let pdfDoc = reactive({});
     const pageNumInput = ref(1);
     const pageNum = ref(1);
     const pageCount = ref(0);
@@ -79,8 +80,9 @@ export default {
     const canvas = ref(null);
     const ctx = ref(null);
 
+    const isBookViewed = computed(() => store.getters.isBookViewed(route.query.id))
     const isLoading = computed(() => store.state.isLoading)
-
+  
     const renderPage = (num) => {
       pageIsRendering.value = true;
 
@@ -125,12 +127,44 @@ export default {
       queueRenderPage(pageNum.value);
     };
 
+    const fetchData = () => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const book = getBookById(route.query.id)
+  
+          resolve({ book })
+        }, 1000)
+      })
+    }
+ 
+    const initialPage = () => {
+      store.commit("toggleLoading", true)
+
+      fetchData().then(data => {
+        book.value = data.book
+
+        if(isBookViewed.value) {
+          const viewedBook = store.getters.getViewedBook(route.query.id)
+          pageNum.value = viewedBook.page
+        }
+        else {
+          store.commit("addViewedBook", {
+            id: book.value.id,
+            page: pageNum.value 
+          })
+        }
+
+        store.commit("toggleLoading", false)
+      })
+    }
+
     watch(pageNum, (n, o) => {
       const specificNum = Number(n)
 
       if(specificNum < 1 || isNaN(specificNum) || specificNum > pageCount.value) return
 
       queueRenderPage(specificNum)
+      store.commit('updatePage', {id: book.value.id, page: specificNum})
     })
 
     onUpdated(async () => {
@@ -154,27 +188,6 @@ export default {
           .catch((err) => console.log(err));
       }
     });
-
-    const fetchData = () => {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          const book = getBookById(route.query.id)
-  
-          resolve({ book })
-        }, 1000)
-      })
-    }
- 
-    const initialPage = () => {
-      store.commit("toggleLoading", true)
-
-
-      fetchData().then(data => {
-        book.value = data.book
-
-        store.commit("toggleLoading", false)
-      })
-    }
 
     initialPage()
 

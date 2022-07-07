@@ -12,8 +12,10 @@ export default createStore({
     viewedBooks: [],
   },
   getters: {
-    isBookLoved: (state) => (id) => state.lovedBooks.some(item => item === id),
-    getLovedBooks: (state) => (size = state.lovedBooks.length) => state.lovedBooks.slice(0, size)
+    isBookLoved: (state) => (id) => state.lovedBooks.some(book => book === id),
+    isBookViewed: (state) => (id) => state.viewedBooks.some(book => book.id == id),
+    getLovedBooks: (state) => (size = state.lovedBooks.length) => state.lovedBooks.slice(0, size),
+    getViewedBook: (state) => (id) => state.viewedBooks.find(book => book.id == id)
   },
   mutations: {
     initializeStore: (state) => {
@@ -53,15 +55,26 @@ export default createStore({
       state.lovedBooks = state.lovedBooks.filter(item => item != id)
       localStorage.setItem('lovedBooks', JSON.stringify(state.lovedBooks))
     },
-    addViewedBook: (state, { id }) => {
-      const isContain = state.viewedBooks.some(item => item == id)
+    addViewedBook: (state, payload) => {
+      const isContain = state.viewedBooks.some(item => item.id == payload.id)
 
       if(!isContain) {
-        if(state.viewedBooks.length == 48) state.viewedBooks.pop(state.viewedBooks[47])
-        state.viewedBooks.unshift(id)
+        // if(state.viewedBooks.length == 48) state.viewedBooks.pop(state.viewedBooks[47])
+        state.viewedBooks.unshift(payload)
         localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
       }
-    }
+    },
+    updatePage: (state, payload) => {
+      state.viewedBooks = state.viewedBooks.map(book => {
+        if(book.id === payload.id) {
+          book.page = payload.page
+          return book
+        }
+        return book
+      })
+      
+      localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
+    },
   },
   actions: {
   },

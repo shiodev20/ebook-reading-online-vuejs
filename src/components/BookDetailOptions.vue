@@ -72,6 +72,7 @@ export default {
     const PDFFile = ref(getPDFFile(props.book.title));
     const PDFFilename = ref('ShioBook-' + slugify(props.book.title, { locale: 'vi'}))
     const bookSlug = ref(slugify(props.book.title, { lower: true, locale: 'vi'}))
+    
     const isBookLoved = computed(() => store.getters.isBookLoved(props.book.id));
 
     const addLovedBook = () => store.commit("addLovedBook", { id: props.book.id });

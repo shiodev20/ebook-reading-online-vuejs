@@ -183,10 +183,10 @@ export default {
         }
       },
       {
-        display: 'Sách Đã Xem',
+        display: 'Sách Đã Đọc',
         path: {
           name: 'collection',
-          params: { collection: 'sach-da-xem' },
+          params: { collection: 'sach-da-doc' },
           query: { page: 1 },
         }
       },

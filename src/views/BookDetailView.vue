@@ -120,7 +120,7 @@
       </SectionContainer>
 
       <SectionContainer>
-        <SectionTitle>Sách đã xem</SectionTitle>
+        <SectionTitle>Sách đã đọc</SectionTitle>
         <SectionBody>
           <Slider
             id="viewed-book"
@@ -221,7 +221,7 @@ export default {
     const viewedBooks = ref([]);
 
     const isLoading = computed(() => store.state.isLoading);
-    const viewedBooksId = computed(() => store.state.viewedBooks)
+    const viewedBooksId = computed(() => store.state.viewedBooks.map(book => book.id))
 
 
     const fetchData = () => {
@@ -268,7 +268,7 @@ export default {
     watch(route, (to, from) => {
       if (to.name == "book-detail") {
         initialPage();
-        store.commit('addViewedBook', { id: to.query.id })
+        // store.commit('addViewedBook', { id: to.query.id })
       }
     });
 

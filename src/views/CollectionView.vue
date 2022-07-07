@@ -83,9 +83,9 @@ export default {
           data.value = getBooksById(store.state.lovedBooks);
           break;
 
-        case "sach-da-xem":
-          title.value = "Sách Đã Xem";
-          data.value = getBooksById(store.state.viewedBooks);
+        case "sach-da-doc":
+          title.value = "Sách Đã Đọc";
+          data.value = getBooksById(store.state.viewedBooks.map(book => book.id));
           break;
 
         case "sach-hay-nen-doc":
