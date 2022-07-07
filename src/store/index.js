@@ -10,12 +10,22 @@ export default createStore({
     documentTitle: 'ShioBook | ',
     lovedBooks: [],
     viewedBooks: [],
+    breadcrumb: [
+      {
+        path: '/',
+        display: 'Trang chủ',
+      },
+    ],
   },
   getters: {
     isBookLoved: (state) => (id) => state.lovedBooks.some(book => book === id),
     isBookViewed: (state) => (id) => state.viewedBooks.some(book => book.id == id),
     getLovedBooks: (state) => (size = state.lovedBooks.length) => state.lovedBooks.slice(0, size),
-    getViewedBook: (state) => (id) => state.viewedBooks.find(book => book.id == id)
+    getViewedBook: (state) => (id) => state.viewedBooks.find(book => book.id == id),
+    getBreadcrumb: (state) => {
+      if(state.breadcrumb.length == 1) return []
+      return state.breadcrumb
+    }
   },
   mutations: {
     initializeStore: (state) => {
@@ -36,6 +46,12 @@ export default createStore({
     resetToggle: (state) => {
       state.isSidenav = false
       state.toast = false
+    },
+    resetBreadcrumb: (state) => {
+      state.breadcrumb = [{
+        path: '/',
+        display: 'Trang chủ',
+      }]
     },
     toggleLoading: (state, status) => state.isLoading = status,
     toggleSidenav: (state) => state.isSidenav = !state.isSidenav,
@@ -75,6 +91,13 @@ export default createStore({
       
       localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
     },
+    pushBreadcrumb: (state, payload) => {
+      console.log(payload);
+      state.breadcrumb.push({
+        path: payload.path,
+        display: payload.display,
+      })
+    }
   },
   actions: {
   },

@@ -1,0 +1,32 @@
+
+.breadcrumb {
+  margin: 2rem 0;
+  font-size: $subtitle-size;
+  color: $primary-color;
+  font-weight: bold;
+
+  i {
+    position: relative;
+    top: 4px;
+    font-size: 2rem;
+  }
+
+  &__item {
+    &.active {
+      color: $dark-color;
+
+      &:hover {
+        text-decoration: none;
+        cursor: default;
+      }
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  @include mobile {
+    font-size: $text-size;
+  }
+}
