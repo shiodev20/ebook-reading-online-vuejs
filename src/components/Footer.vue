@@ -137,23 +137,43 @@ export default {
     const authorsLink = ref([
       {
         display: "Nguyễn Nhật Ánh",
-        path: "/",
+        path: {
+          name: 'collection',
+          params: { collection: 'nguyen-nhat-anh'},
+          query: { page: 1 },
+        },
       },
       {
         display: "Agatha Christie",
-        path: "/",
+        path: {
+          name: 'collection',
+          params: { collection: 'agatha-christie'},
+          query: { page: 1 },
+        },
       },
       {
         display: "Higashino Keigo",
-        path: "/",
+        path: {
+          name: 'collection',
+          params: { collection: 'higashino-keigo'},
+          query: { page: 1 },
+        },
       },
       {
         display: "Minato Kanae",
-        path: "/",
+        path: {
+          name: 'collection',
+          params: { collection: 'minato-kanae'},
+          query: { page: 1 },
+        },
       },
       {
         display: "Brian Tracy",
-        path: "/",
+        path: {
+          name: 'collection',
+          params: { collection: 'brian-tracy'},
+          query: { page: 1 },
+        },
       },
     ]);
   

@@ -14,14 +14,10 @@
 
     <SectionContainer>
       <SectionBody>
-        <Pagination 
-          :pagination="currPagination" 
-          :page="currPage"
-        ></Pagination>
+        <Pagination :pagination="currPagination" :page="currPage"></Pagination>
       </SectionBody>
     </SectionContainer>
   </template>
-
 </template>
 
 <script>
@@ -55,7 +51,7 @@ export default {
     const store = useStore();
     const route = useRoute();
 
-    const { getBooksById, getRandomBooks } = useBook();
+    const { getBooks, getBooksById, getRandomBooks } = useBook();
 
     const flag = ref(route.params.collection);
     const title = ref("");
@@ -77,6 +73,8 @@ export default {
     );
 
     const initialPage = () => {
+      const books = getBooks();
+
       switch (flag.value) {
         case "sach-yeu-thich":
           title.value = "Sách Yêu Thích";
@@ -85,7 +83,9 @@ export default {
 
         case "sach-da-doc":
           title.value = "Sách Đã Đọc";
-          data.value = getBooksById(store.state.viewedBooks.map(book => book.id));
+          data.value = getBooksById(
+            store.state.viewedBooks.map((book) => book.id)
+          );
           break;
 
         case "sach-hay-nen-doc":
@@ -93,21 +93,52 @@ export default {
           data.value = getRandomBooks();
           break;
 
+        case "agatha-christie":
+          console.log('agatha');
+          title.value = "Agatha Christie";
+          data.value = books.filter((book) => book.author == "Agatha Christie");
+          break;
+
+        case "minato-kanae":
+          console.log('minato');
+          title.value = "Minato Kanae";
+          data.value = books.filter((book) => book.author == "Minato Kanae");
+          break;
+
+        case "higashino-keigo":
+          console.log('keigo');
+          title.value = "Higashino Keigo";
+          data.value = books.filter((book) => book.author == "Higashino Keigo");
+          break;
+
+        case "brian-tracy":
+          console.log('brian');
+          title.value = "Brian Tracy";
+          data.value = books.filter((book) => book.author == "Brian Tracy");
+          break;
+
+        case "nguyen-nhat-anh":
+          console.log('ng');
+          title.value = "Nguyễn Nhật Ánh";
+          data.value = books.filter((book) => book.author == "Nguyễn Nhật Ánh");
+          break;
+
         default:
           break;
       }
     };
 
-    store.commit('toggleLoading', true)
-    
+    store.commit("toggleLoading", true);
+
     setTimeout(() => {
       initialPage();
       store.commit("toggleLoading", false);
-    }, 1000)
+    }, 1000);
 
     watch(route, (to, from) => {
       if (to.name === "collection") {
-        currPage.value = to.query.page ? to.query.page : 1;
+        currPage.value = to.query.page ? Number(to.query.page) : 1;
+        flag.value = to.params.collection
         store.commit("toggleLoading", true);
 
         setTimeout(() => {
