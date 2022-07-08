@@ -1,5 +1,8 @@
 <template>
-  <div class="breadcrumb" v-if="!isLoading">
+  <div 
+    class="breadcrumb"
+    v-if="!isLoading && breadcrumb.length > 1"
+  >
     
     <template
       v-for="(item, idx) in breadcrumb"
@@ -26,6 +29,9 @@ import { useStore } from 'vuex';
 import { useRoute } from 'vue-router';
 import useCategory from '@/composables/useCategory';
 import useBook from '@/composables/useBook';
+
+import slugify from "slugify"
+
 export default {
   name: "Breadcrumb",
   setup() {
@@ -33,7 +39,7 @@ export default {
     const route = useRoute()
 
     const { getCategoryById } = useCategory()
-    const {} = useBook()
+    const { getBookById } = useBook()
 
     watch(route, (to, from) => {
 
@@ -42,6 +48,7 @@ export default {
       }
 
       if(to.name == 'category') {
+        store.commit('resetBreadcrumb')
         const category = getCategoryById(to.query.id)
         store.commit('pushBreadcrumb', {
           path: to.fullPath,
@@ -49,19 +56,55 @@ export default {
         })
       }
       
-      if(to.name == 'book-detail') {}
+      if(to.name == 'book-detail') {
+        store.commit('resetBreadcrumb')
 
-      if(to.name == 'about') {}
+        const book = getBookById(to.query.id)
+        const category = getCategoryById(book.categoryId)
 
-      if(to.name == 'collection') {}
+        store.commit('pushBreadcrumb', {
+          path: {
+            name: 'category',
+            params: { category: slugify(category.name, {lower: true, locale: 'vi'}) },
+            query: { id: category.id }
+          },
+          display: category.name,
+        })
+
+        store.commit('pushBreadcrumb', {
+          path: to.fullPath,
+          display: book.title,
+        })
+       
+      }
+
+      if(to.name == 'about') {
+        store.commit('resetBreadcrumb')
+        store.commit('pushBreadcrumb', {
+          path: to.fullPath,
+          display: 'Về ShioBook',
+        })
+      }
+
+      if(to.name == 'collection') {
+        store.commit('resetBreadcrumb')
+        let title = ''
+
+        if(to.params.collection == 'sach-yeu-thich') title = 'Sách Yêu Thích'
+        if(to.params.collection == 'sach-da-doc') title = 'Sách Đã Đọc'
+        if(to.params.collection == 'sach-hay-nen-doc') title = 'Sách Hay Nên Đọc'
+
+        store.commit('pushBreadcrumb', {
+          path: to.fullPath,
+          display: title
+        })
+      }
 
     })
 
 
     const breadcrumb = computed(() => store.getters.getBreadcrumb)
     const isLoading = computed(() => store.state.isLoading)
-
-    console.log(breadcrumb.value);
 
     return {
       breadcrumb,

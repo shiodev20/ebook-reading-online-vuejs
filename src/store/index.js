@@ -92,7 +92,6 @@ export default createStore({
       localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
     },
     pushBreadcrumb: (state, payload) => {
-      console.log(payload);
       state.breadcrumb.push({
         path: payload.path,
         display: payload.display,
