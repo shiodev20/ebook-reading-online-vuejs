@@ -93,6 +93,11 @@ export default {
         if(to.params.collection == 'sach-yeu-thich') title = 'Sách Yêu Thích'
         if(to.params.collection == 'sach-da-doc') title = 'Sách Đã Đọc'
         if(to.params.collection == 'sach-hay-nen-doc') title = 'Sách Hay Nên Đọc'
+        if(to.params.collection == 'nguyen-nhat-anh') title = 'Nguyễn Nhật Ánh'
+        if(to.params.collection == 'minato-kanae') title = 'Minato Kanae'
+        if(to.params.collection == 'higashino-keigo') title = 'Higashino Keigo'
+        if(to.params.collection == 'agatha-christie') title = 'Agatha Christie'
+        if(to.params.collection == 'brian-tracy') title = 'Brian Tracy'
 
         store.commit('pushBreadcrumb', {
           path: to.fullPath,

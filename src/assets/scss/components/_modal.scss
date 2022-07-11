@@ -24,45 +24,51 @@
 }
 
 .search-form {
-  position: relative;
-  color: $primary-color;
+
+  &__header {
+    position: relative;
+    color: $primary-color;
+    
+    .search-form__input {
+      width: 100%;
+      padding: 1rem 4.5rem;
+      font-size: $subtitle-size;
+      border: 2px solid $primary-color;
+      border-radius: 5px;
   
-  &__input {
-    width: 100%;
-    padding: 1rem 4.5rem;
-    font-size: $subtitle-size;
-    border: 2px solid $primary-color;
-    border-radius: 5px;
-
-    &:focus {
-      outline: none;
+      &:focus {
+        outline: none;
+      }
+  
+      @include mobile {
+        font-size: $text-size;
+      }
     }
-
-    @include mobile {
-      font-size: $text-size;
-    }
-  }
-
-  &__icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-    i {
-      font-size: $title-size;
-    }
-
-    &--search {
-      left: 1.5rem;
-    }
-
-    &--close {
-      right: 1.5rem;
-      border-radius: 50%;
-      color: $gray-color;
-      opacity: $opacity;
-      cursor: pointer;
+  
+    .search-form__icon {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+  
+      i {
+        font-size: $title-size;
+      }
+  
+      &--search {
+        left: 1.5rem;
+      }
+  
+      &--close {
+        right: 1.5rem;
+        border-radius: 50%;
+        color: $gray-color;
+        opacity: $opacity;
+        cursor: pointer;
+      }
     }
   }
-
+ 
+  &__body {
+    
+  }
 }

@@ -4,6 +4,7 @@ export default createStore({
   state: {
     isSidenav: false,
     isLoading: false,
+    modal: false,
     toast: false,
     activeCategoryItem: 0,
     windowWidth: 0,
@@ -43,22 +44,23 @@ export default createStore({
         localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
       }
     },
-    resetToggle: (state) => {
+    resetApp: (state) => {
       state.isSidenav = false
       state.toast = false
+      state.modal = false
     },
-    resetBreadcrumb: (state) => {
-      state.breadcrumb = [{
-        path: '/',
-        display: 'Trang chủ',
-      }]
-    },
+    
     toggleLoading: (state, status) => state.isLoading = status,
     toggleSidenav: (state) => state.isSidenav = !state.isSidenav,
     setActiveCategoryItem: (state, categoryId) => state.activeCategoryItem = categoryId,
     onWindowWidthChange: (state, innerWidth) => state.windowWidth = innerWidth,
+
     showToast: (state) => state.toast = true,
     closeToast: (state) => state.toast = false,
+
+    showModal: (state) => state.modal = true,
+    closeModal: (state) => state.modal = false,
+
     addLovedBook: (state, { id }) => {
       const isContain = state.lovedBooks.some(item => item == id)
 
@@ -71,16 +73,16 @@ export default createStore({
       state.lovedBooks = state.lovedBooks.filter(item => item != id)
       localStorage.setItem('lovedBooks', JSON.stringify(state.lovedBooks))
     },
+
     addViewedBook: (state, payload) => {
       const isContain = state.viewedBooks.some(item => item.id == payload.id)
 
       if(!isContain) {
-        // if(state.viewedBooks.length == 48) state.viewedBooks.pop(state.viewedBooks[47])
         state.viewedBooks.unshift(payload)
         localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
       }
     },
-    updatePage: (state, payload) => {
+    updateViewedBook: (state, payload) => {
       state.viewedBooks = state.viewedBooks.map(book => {
         if(book.id === payload.id) {
           book.page = payload.page
@@ -90,6 +92,13 @@ export default createStore({
       })
       
       localStorage.setItem('viewedBooks', JSON.stringify(state.viewedBooks))
+    },
+
+    resetBreadcrumb: (state) => {
+      state.breadcrumb = [{
+        path: '/',
+        display: 'Trang chủ',
+      }]
     },
     pushBreadcrumb: (state, payload) => {
       state.breadcrumb.push({

@@ -165,18 +165,19 @@
         params: { slug: todayBookSlug },
         query: { id: todayBook.id },
       }">
-        <div class="today-book">
-          <h1 class="today-book__title">Sách cho ngày mới</h1>
-          <div class="today-book__info">
+        
+        <div class="book-card__horizontal">
+          <h1 class="book-card__horizontal__title">Sách cho ngày mới</h1>
+          <div class="book-card__horizontal__info">
               <img 
-                class="today-book__info__image"
-                :src="getBookCover(todayBook.title)" 
-                :alt="todayBook.title" 
+                class="book-card__horizontal__info__image"
+                :src="getBookCover(todayBook.title)"
+                :alt="todayBook.title"
               >
-              <div class="today-book__info__meta">
-                <div class="today-book__info__meta__item">Tên sách: <span>{{  todayBook.title }}</span></div>
-                <div class="today-book__info__meta__item">Tác giả: <span>{{  todayBook.author }}</span></div>
-                <div class="today-book__info__meta__item">Thể loại: <span>{{  todayBookCategory.name }}</span></div>
+              <div class="book-card__horizontal__info__meta">
+                <div class="book-card__horizontal__info__meta__item">Tên sách: <span>{{  todayBook.title }}</span></div>
+                <div class="book-card__horizontal__info__meta__item">Tác giả: <span>{{  todayBook.author }}</span></div>
+                <div class="book-card__horizontal__info__meta__item">Thể loại: <span>{{  todayBookCategory.name }}</span></div>
 
               </div>
           </div>
@@ -302,60 +303,60 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/variable';
-@import '../assets/scss/mixin';
+// @import '../assets/scss/variable';
+// @import '../assets/scss/mixin';
 
-  .today-book {
-    &__title {
-      margin-bottom: 1.5rem;
-      font-size: $title-size;
-      font-style: italic;
-      color: $secondary-color;
-      text-decoration: underline;
+//   .today-book {
+//     &__title {
+//       margin-bottom: 1.5rem;
+//       font-size: $title-size;
+//       font-style: italic;
+//       color: $secondary-color;
+//       text-decoration: underline;
 
-      @include mobile {
-        font-size: $subtitle-size;
-      }
-    }
+//       @include mobile {
+//         font-size: $subtitle-size;
+//       }
+//     }
 
-    &__info {
-      display: flex;
+//     &__info {
+//       display: flex;
 
-      &__image {
-        flex-basis: 30%;
-        max-width: 120px;
-        max-height: 140px;
-        width: 100%;
-        height: 100%;
-        border-radius: $radius;
-        box-shadow: $box-shadow;
+//       &__image {
+//         flex-basis: 30%;
+//         max-width: 120px;
+//         max-height: 140px;
+//         width: 100%;
+//         height: 100%;
+//         border-radius: $radius;
+//         box-shadow: $box-shadow;
 
-        @include mobile {
-          max-width: 80px;
-          max-height: 100px;
-        }
-      }
+//         @include mobile {
+//           max-width: 80px;
+//           max-height: 100px;
+//         }
+//       }
 
-      &__meta {
-        flex-basis: 70%;
-        margin-left: 2rem;
+//       &__meta {
+//         flex-basis: 70%;
+//         margin-left: 2rem;
 
-        &__item {
-          margin: 1rem 0;
-          font-size: $subtitle-size;
-          font-weight: bold;
-          color: $gray-color;
+//         &__item {
+//           margin: 1rem 0;
+//           font-size: $subtitle-size;
+//           font-weight: bold;
+//           color: $gray-color;
 
-          @include mobile {
-            font-size: $text-size;
+//           @include mobile {
+//             font-size: $text-size;
 
-          }
-          span {
-            color: $primary-color;
-            font-weight: bold;
-          }
-        }
-      }
-    }
-  }
+//           }
+//           span {
+//             color: $primary-color;
+//             font-weight: bold;
+//           }
+//         }
+//       }
+//     }
+//   }
 </style>

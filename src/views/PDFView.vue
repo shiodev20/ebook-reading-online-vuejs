@@ -164,7 +164,7 @@ export default {
       if(specificNum < 1 || isNaN(specificNum) || specificNum > pageCount.value) return
 
       queueRenderPage(specificNum)
-      store.commit('updatePage', {id: book.value.id, page: specificNum})
+      store.commit('updateViewedBook', {id: book.value.id, page: specificNum})
     })
 
     onUpdated(async () => {

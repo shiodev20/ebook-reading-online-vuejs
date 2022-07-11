@@ -28,7 +28,7 @@ export default {
     
 
     router.beforeEach((to, from) => {
-      store.commit("resetToggle");
+      store.commit("resetApp");
     });
 
     watch(route, (to, from) => {

@@ -1,7 +1,7 @@
 
 .book-card {
   text-align: center;
-
+  
   &__image {
 
     img {
@@ -30,7 +30,62 @@
       color: $gray-color;
     }
   }
+
   &:hover img {
     transform: scale(1.04);
+  }
+}
+
+.book-card__horizontal {
+  &__title {
+    margin-bottom: 1.5rem;
+    font-size: $title-size;
+    font-style: italic;
+    color: $secondary-color;
+    text-decoration: underline;
+
+    @include mobile {
+      font-size: $subtitle-size;
+    }
+  }
+
+  &__info {
+    display: flex;
+
+    &__image {
+      flex-basis: 30%;
+      max-width: 120px;
+      max-height: 140px;
+      width: 100%;
+      height: 100%;
+      border-radius: $radius;
+      box-shadow: $box-shadow;
+
+      @include mobile {
+        max-width: 80px;
+        max-height: 100px;
+      }
+    }
+
+    &__meta {
+      flex-basis: 70%;
+      margin-left: 2rem;
+
+      &__item {
+        margin: 1rem 0;
+        font-size: $subtitle-size;
+        font-weight: bold;
+        color: $gray-color;
+
+        @include mobile {
+          font-size: $text-size;
+
+        }
+        span {
+          color: $primary-color;
+          font-weight: bold;
+        }
+      }
+    }
   }
 }
