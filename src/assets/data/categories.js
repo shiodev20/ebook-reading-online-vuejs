@@ -2,7 +2,7 @@ export default [
   {
     id: 1,
     name: "Tiểu thuyết",
-    quantity: 6
+    quantity: 10
   },
   {
     id: 2,

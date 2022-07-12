@@ -240,4 +240,32 @@ export default [
     uploadedAt: "2022-07-05T18:00:00",
     categoryId: 5,
   },
+  {
+    id: 35,
+    title: "Án Mạng Mười Một Chữ",
+    author: "Higashino Keigo",
+    uploadedAt: "2022-07-11T18:00:00",
+    categoryId: 1,
+  },
+  {
+    id: 36,
+    title: "Phía Sau Nghi Can X",
+    author: "Higashino Keigo",
+    uploadedAt: "2022-07-11T18:00:00",
+    categoryId: 1,
+  },
+  {
+    id: 37,
+    title: "Bạch Dạ Hành",
+    author: "Higashino Keigo",
+    uploadedAt: "2022-07-11T18:00:00",
+    categoryId: 1,
+  },
+  {
+    id: 38,
+    title: "Bí Mật Của Naoko",
+    author: "Higashino Keigo",
+    uploadedAt: "2022-07-11T18:00:00",
+    categoryId: 1,
+  },
 ]
