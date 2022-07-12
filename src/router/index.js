@@ -53,7 +53,10 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('../views/404View.vue')
+    meta: {
+      layout: 'default',
+    },
+    component: () => import('../views/NotFoundView.vue')
   }
 ]
 
