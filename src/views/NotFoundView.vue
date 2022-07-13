@@ -1,6 +1,6 @@
 <template>
   <div class="not-found-view">
-    <p class="not-found-view__title">Ooops</p>
+    <p class="not-found-view__title">404</p>
     <p class="not-found-view__desc">Trang bạn tìm kiếm không tồn tại!</p>
   </div>
 </template>

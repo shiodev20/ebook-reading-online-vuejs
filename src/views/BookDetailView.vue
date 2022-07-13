@@ -123,6 +123,7 @@
         <SectionTitle>Sách đã đọc</SectionTitle>
         <SectionBody>
           <Slider
+            v-if="viewedBooks.length"
             id="viewed-book"
             :seeMore="false"
             :auto="false"
@@ -161,6 +162,11 @@
               <BookCard :book="book"></BookCard>
             </SwiperSlide>
           </Slider>
+
+          <EmptyBox
+            v-else
+            :title="'Bạn chưa đọc sách nào hết.'"
+          ></EmptyBox>
         </SectionBody>
       </SectionContainer>
   </template>
@@ -185,6 +191,7 @@ import BookCard from "@/components/BookCard.vue";
 import Loading from "@/components/Loading.vue";
 import Slider from "@/components/Slider.vue";
 import { SwiperSlide } from "swiper/vue";
+import EmptyBox from "@/components/EmptyBox.vue";
 
 export default {
   name: "BookDetailView",
@@ -198,6 +205,7 @@ export default {
     SwiperSlide,
     Loading,
     BookDetailOptions,
+    EmptyBox,
   },
   setup() {
     const store = useStore();

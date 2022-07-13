@@ -5,10 +5,15 @@
     <SectionContainer>
       <SectionTitle>{{ title }}</SectionTitle>
       <SectionBody>
-        <Grid :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
+        <Grid v-if="collection.length" :smCol="2" :mdCol="3" :lgCol="4" :col="6" :gap="40">
           <BookCard v-for="book in collection" :key="book.id" :book="book">
           </BookCard>
         </Grid>
+
+        <EmptyBox
+          v-else
+          :title="'Không có sách nào trên kệ hết.'"
+        ></EmptyBox>
       </SectionBody>
     </SectionContainer>
 
@@ -34,6 +39,7 @@ import Grid from "@/components/Grid.vue";
 import BookCard from "@/components/BookCard.vue";
 import Pagination from "@/components/Pagination.vue";
 import Loading from "@/components/Loading.vue";
+import EmptyBox from "@/components/EmptyBox.vue";
 
 import { getBooksPerPage, getPagination } from "@/utils/pagination";
 
@@ -46,6 +52,7 @@ export default {
     BookCard,
     Pagination,
     Loading,
+    EmptyBox,
   },
   setup() {
     const store = useStore();
@@ -132,6 +139,7 @@ export default {
 
     setTimeout(() => {
       initialPage();
+      console.log(collection);
       store.commit("toggleLoading", false);
     }, 1000);
 

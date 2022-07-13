@@ -61,7 +61,6 @@
       <SectionBody>
         <Slider
           id="recommended-books"
-          :auto="false"
           :navigation="{
             0: false,
             768: true,
@@ -149,10 +148,11 @@
           </SwiperSlide>
         </Slider>
 
-        <div v-else class="empty-box">
-          <p class="empty-box__title">Hãy đặt sách mà bạn yêu thích lên kệ nhé!</p>
-          <img class="empty-box__image" src="../assets/empty.svg">
-        </div>
+        <EmptyBox 
+          v-else
+          :title="'Hãy đặt sách mà bạn yêu thích lên kệ nhé!'"
+        >
+        </EmptyBox>
 
       </SectionBody>
     </SectionContainer>
@@ -207,6 +207,7 @@ import SectionTitle from "@/components/SectionTitle.vue";
 import SectionBody from "@/components/SectionBody.vue";
 import Loading from "@/components/Loading.vue";
 import Toast from "@/components/Toast.vue";
+import EmptyBox from "@/components/EmptyBox.vue";
 
 import banners from "@/assets/data/banner"
 export default {
@@ -223,6 +224,7 @@ export default {
     Slider,
     Quote,
     Toast,
+    EmptyBox,
   },
   setup() {
     const store = useStore();
@@ -301,62 +303,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-// @import '../assets/scss/variable';
-// @import '../assets/scss/mixin';
-
-//   .today-book {
-//     &__title {
-//       margin-bottom: 1.5rem;
-//       font-size: $title-size;
-//       font-style: italic;
-//       color: $secondary-color;
-//       text-decoration: underline;
-
-//       @include mobile {
-//         font-size: $subtitle-size;
-//       }
-//     }
-
-//     &__info {
-//       display: flex;
-
-//       &__image {
-//         flex-basis: 30%;
-//         max-width: 120px;
-//         max-height: 140px;
-//         width: 100%;
-//         height: 100%;
-//         border-radius: $radius;
-//         box-shadow: $box-shadow;
-
-//         @include mobile {
-//           max-width: 80px;
-//           max-height: 100px;
-//         }
-//       }
-
-//       &__meta {
-//         flex-basis: 70%;
-//         margin-left: 2rem;
-
-//         &__item {
-//           margin: 1rem 0;
-//           font-size: $subtitle-size;
-//           font-weight: bold;
-//           color: $gray-color;
-
-//           @include mobile {
-//             font-size: $text-size;
-
-//           }
-//           span {
-//             color: $primary-color;
-//             font-weight: bold;
-//           }
-//         }
-//       }
-//     }
-//   }
-</style>
