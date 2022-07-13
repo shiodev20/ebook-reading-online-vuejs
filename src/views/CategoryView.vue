@@ -19,31 +19,6 @@
 
     <SectionContainer>
       <SectionBody>
-        <!-- <div class="pagination">
-              <div
-                class="pagination__item pagination__item--navigation"
-                @click="currPage = currPage - 1"
-              >
-                <i class="bx bx-chevron-left"></i>
-              </div>
-              
-                <div
-                  class="pagination__item"
-                  v-for="(page, idx) in currPagination"
-                  :key="idx"
-                  :class="[currPage == idx + 1 ? 'pagination__item--active' : '']"
-                  @click="currPage = page"
-                >
-                  {{ page }}
-                </div>
-
-              <div
-                class="pagination__item pagination__item--navigation"
-                @click="currPage = currPage + 1"
-              >
-                <i class="bx bx-chevron-right"></i>
-              </div>
-            </div> -->
         <Pagination 
           :pagination="currPagination"
           :page="currPage"
@@ -94,7 +69,7 @@ export default {
     const booksPerPage = ref([]);
 
     const totalPages = ref(0);
-    const pageSize = ref(2);
+    const pageSize = ref(24);
     const currPage = ref(1);
     const currPagination = ref([]);
 
