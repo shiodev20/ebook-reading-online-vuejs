@@ -119,7 +119,6 @@ export default {
     };
 
     watch(searchInput, (n, o) => {
-      console.log(typeof n);
       if (n == '' || n.length < 3) {
         searchResult.value = []
         return

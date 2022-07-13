@@ -31,22 +31,8 @@
     }
   }
 
-  &__more {
-    position: absolute;
-    bottom: .5rem;
-    right: 0rem;
-    padding-bottom: .2rem;
-    font-size: $text-size;
-    font-weight: bold;
-    color: $primary-color;
-    z-index: 15;
-  }
 
   .swiper-pagination {
-    @include mobile {
-      text-align: left;
-    }
-
     &-bullet-active {
       background: $primary-color;
     }
