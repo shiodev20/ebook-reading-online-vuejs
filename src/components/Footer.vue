@@ -121,7 +121,7 @@ export default {
         path: {
           name: 'category',
           params: { category: 'trinh-tham-hinh-su' },
-          query: { id: 7, page: 1 }
+          query: { id: 4, page: 1 }
         },
       },
       {

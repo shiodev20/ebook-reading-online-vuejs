@@ -66,14 +66,13 @@ export default {
 
     const category = ref({});
     const booksByCategory = ref([]);
-    const booksPerPage = ref([]);
-
-    const totalPages = ref(0);
     const pageSize = ref(24);
     const currPage = ref(1);
-    const currPagination = ref([]);
-
+    
     const isLoading = computed(() => store.state.isLoading);
+    const totalPages = computed(() => Math.ceil(booksByCategory.value.length / pageSize.value))
+    const currPagination = computed(() => getPagination(currPage.value, totalPages.value))
+    const booksPerPage = computed(() => getBooksPerPage(booksByCategory.value, currPage.value, pageSize.value))
 
     const fetchData = () => {
       return new Promise((resolve, reject) => {
