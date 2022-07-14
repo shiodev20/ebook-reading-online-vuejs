@@ -25,7 +25,8 @@
 </template>
 
 <script>
-import Backdrop from "./Backdrop.vue";
+// import Backdrop from "Backdrop.vue";
+import Backdrop from "@/components/element/Backdrop.vue";
 
 export default {
   components: { Backdrop },

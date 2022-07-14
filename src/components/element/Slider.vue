@@ -32,7 +32,7 @@ import { useStore } from 'vuex';
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper";
-import ProductCard from "./BookCard.vue";
+import ProductCard from "../BookCard.vue";
 
 import "swiper/css";
 import "swiper/css/navigation";

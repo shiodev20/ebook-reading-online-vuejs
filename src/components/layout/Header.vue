@@ -40,8 +40,8 @@
 import { computed, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 
-import Modal from "./Modal.vue";
-import SearchForm from "./SearchForm.vue";
+import Modal from "../element/Modal.vue";
+import SearchForm from "../SearchForm.vue";
 
 export default {
   name: "Header",

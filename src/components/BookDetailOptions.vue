@@ -58,7 +58,7 @@ import slugify from "slugify";
 
 import useBook from "@/composables/useBook";
 
-import Toast from "@/components/Toast.vue";
+import Toast from "@/components/element/Toast.vue";
 
 export default {
   props: {

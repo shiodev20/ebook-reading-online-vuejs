@@ -9,7 +9,7 @@ import { computed, onMounted, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
-import Loading from "@/components/Loading.vue";
+import Loading from "@/components/element/Loading.vue";
 
 export default {
   name: "App",

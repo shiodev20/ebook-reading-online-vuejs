@@ -51,9 +51,9 @@ import { useStore } from "vuex";
 
 import useBook from '@/composables/useBook';
 
-import SectionContainer from "@/components/SectionContainer.vue";
-import SectionBody from "@/components/SectionBody.vue";
-import Loading from "@/components/Loading.vue";
+import SectionContainer from "@/components/layout/SectionContainer.vue";
+import SectionBody from "@/components/layout/SectionBody.vue";
+import Loading from "@/components/element/Loading.vue";
 
 export default {
   porps: {},

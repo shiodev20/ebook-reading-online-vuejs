@@ -86,7 +86,7 @@ import useBook from "@/composables/useBook";
 import useCategory from "@/composables/useCategory";
 
 import BookCard from "@/components/BookCard.vue";
-import Loading from "@/components/Loading.vue";
+import Loading from "@/components/element/Loading.vue";
 
 export default {
   name: "SearchForm",

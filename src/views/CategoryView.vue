@@ -36,13 +36,13 @@ import { useStore } from "vuex";
 import useBook from "@/composables/useBook";
 import useCategory from "@/composables/useCategory";
 
-import Grid from "@/components/Grid.vue";
-import SectionContainer from "@/components/SectionContainer.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
-import SectionBody from "@/components/SectionBody.vue";
+import Grid from "@/components/layout/Grid.vue";
+import SectionContainer from "@/components/layout/SectionContainer.vue";
+import SectionTitle from "@/components/layout/SectionTitle.vue";
+import SectionBody from "@/components/layout/SectionBody.vue";
 import BookCard from "@/components/BookCard.vue";
-import Pagination from "@/components/Pagination.vue";
-import Loading from "@/components/Loading.vue";
+import Pagination from "@/components/element/Pagination.vue";
+import Loading from "@/components/element/Loading.vue";
 
 import { getPagination, getBooksPerPage } from "@/utils/pagination";
 

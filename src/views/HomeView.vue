@@ -197,17 +197,17 @@ import useBook from "@/composables/useBook";
 import useCategory from '@/composables/useCategory';
 
 import { SwiperSlide } from "swiper/vue";
-import Grid from "@/components/Grid.vue";
+import Grid from "@/components/layout/Grid.vue";
 import BookCard from "@/components/BookCard.vue";
 import CategoryCard from "@/components/CategoryCard.vue";
-import Slider from "@/components/Slider.vue";
-import Quote from "@/components/Quote.vue";
-import SectionContainer from "@/components/SectionContainer.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
-import SectionBody from "@/components/SectionBody.vue";
-import Loading from "@/components/Loading.vue";
-import Toast from "@/components/Toast.vue";
-import EmptyBox from "@/components/EmptyBox.vue";
+import Slider from "@/components/element/Slider.vue";
+import Quote from "@/components/element/Quote.vue";
+import SectionContainer from "@/components/layout/SectionContainer.vue";
+import SectionTitle from "@/components/layout/SectionTitle.vue";
+import SectionBody from "@/components/layout/SectionBody.vue";
+import Loading from "@/components/element/Loading.vue";
+import Toast from "@/components/element/Toast.vue";
+import EmptyBox from "@/components/element/EmptyBox.vue";
 
 import banners from "@/assets/data/banner"
 export default {

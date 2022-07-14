@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from 'vue-router';
 
 import useCategory from "@/composables/useCategory"
 
-import SidenavItem from "./SidenavItem.vue";
-import Backdrop from './Backdrop.vue'
+import SidenavItem from "@/components/layout/SidenavItem.vue";
+import Backdrop from "@/components/element/Backdrop.vue";
 
 export default {
   name: "Sidenav",

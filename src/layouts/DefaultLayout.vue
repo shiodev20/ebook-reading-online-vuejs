@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import Header from "@/components/Header.vue";
-import Footer from "@/components/Footer.vue";
-import Sidenav from "@/components/Sidenav.vue";
-import Breadcrump from "@/components/Breadcrumb.vue";
+import Header from "@/components/layout/Header.vue";
+import Footer from "@/components/layout/Footer.vue";
+import Sidenav from "@/components/layout/Sidenav.vue";
+import Breadcrump from "@/components/element/Breadcrumb.vue";
 
 export default {
   name: "DefaultLayout",

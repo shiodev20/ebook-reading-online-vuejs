@@ -183,15 +183,15 @@ import useBook from "@/composables/useBook";
 import useCategory from "@/composables/useCategory";
 
 import BookDetailOptions from "@/components/BookDetailOptions.vue";
-import Grid from "@/components/Grid.vue";
-import SectionContainer from "@/components/SectionContainer.vue";
-import SectionBody from "@/components/SectionBody.vue";
-import SectionTitle from "@/components/SectionTitle.vue";
+import Grid from "@/components/layout/Grid.vue";
+import SectionContainer from "@/components/layout/SectionContainer.vue";
+import SectionBody from "@/components/layout/SectionBody.vue";
+import SectionTitle from "@/components/layout/SectionTitle.vue";
 import BookCard from "@/components/BookCard.vue";
-import Loading from "@/components/Loading.vue";
-import Slider from "@/components/Slider.vue";
+import Loading from "@/components/element/Loading.vue";
+import Slider from "@/components/element/Slider.vue";
 import { SwiperSlide } from "swiper/vue";
-import EmptyBox from "@/components/EmptyBox.vue";
+import EmptyBox from "@/components/element/EmptyBox.vue";
 
 export default {
   name: "BookDetailView",
