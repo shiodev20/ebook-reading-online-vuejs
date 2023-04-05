@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
