@@ -11,7 +11,7 @@ export default {
     title: String,
     imgUrl: {
       type: String,
-      default: '/empty.svg'
+      default: './empty.svg'
     },
   },
 };
