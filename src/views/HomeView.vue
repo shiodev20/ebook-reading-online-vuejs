@@ -210,6 +210,7 @@ import Toast from "@/components/element/Toast.vue";
 import EmptyBox from "@/components/element/EmptyBox.vue";
 
 import banners from "@/assets/data/banner"
+
 export default {
   name: "HomeView",
   components: {
@@ -261,6 +262,7 @@ export default {
         }, 1000);
       });
     };
+
 
     const initialPage = () => {
       store.commit("toggleLoading", true);

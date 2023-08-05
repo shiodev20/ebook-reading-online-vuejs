@@ -11,7 +11,7 @@
               <img
                 class="book-detail__cover"
                 :src="bookCover" 
-                :alt="book.title" 
+                :alt="book.title"
               />
 
               <div class="book-detail__info">
