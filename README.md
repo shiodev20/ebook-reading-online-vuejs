@@ -1,19 +1,18 @@
-# free-ebook-downloader
+# ShioBook - Ứng dụng đọc và tải sách online
 
-## Project setup
-```
-npm install
-```
+## Một số hình ảnh ứng dụng
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Trang chủ
+![ShioBook-homepage](/markdown/homepage.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Chi tiết sách
+![ShioBook-homepage](/markdown/book-detail.png)
+
+
+### Đọc sách online
+![ShioBook-homepage](/markdown/read-online.png)
+
+
+### Tìm kiếm sách
+![ShioBook-homepage](/markdown/search.png)
