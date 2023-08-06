@@ -25,7 +25,6 @@ export default {
 
     store.commit("initializeStore");
     store.commit("onWindowWidthChange", window.innerWidth);
-    
 
     router.beforeEach((to, from) => {
       store.commit("resetApp");

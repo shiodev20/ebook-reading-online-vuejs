@@ -82,7 +82,8 @@ export default {
 
     const isBookViewed = computed(() => store.getters.isBookViewed(route.query.id))
     const isLoading = computed(() => store.state.isLoading)
-  
+    
+    
     const renderPage = (num) => {
       pageIsRendering.value = true;
 

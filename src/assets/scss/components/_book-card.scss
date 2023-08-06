@@ -43,7 +43,7 @@
     font-style: italic;
     color: $secondary-color;
     text-decoration: underline;
-
+ 
     @include mobile {
       font-size: $subtitle-size;
     }
